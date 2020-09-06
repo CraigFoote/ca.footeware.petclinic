@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand title">Shady Farms Pet Clinic</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Home</a></li>
+					<li class="active"><a href="/pets">Pets</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<section class="container">
+		<div class="left center">
+			<p th:if="${error}" th:text="${error}" />
+			<form th:if=${pet} action="#" th:action="@{/pets}" th:method="PUT" id="editPetForm">
+				<p>
+					<input id="id" class="form-control" type="text" name="id"
+						readonly="readonly"	th:value="${pet.id}" />
+				</p>
+				<p>
+					<input id="name" class="form-control" type="text" name="name"
+						required="required" autofocus="autofocus" placeholder="Name"
+						th:value="${pet.name}" />
+				</p>
+				<p th:if="${pet.species} == 'dog'">
+					<input type="radio" id="species" name="species" value="dog"
+						th:checked="checked"> <label for="species">Dog</label> <input
+						type="radio" id="species" name="species" value="cat"> <label
+						for="species">Cat</label>
+				</p>
+				<p th:if="${pet.species} == 'cat'">
+					<input type="radio" id="species" name="species" value="dog"
+						th:checked="checked"> <label for="species">Dog</label> <input
+						type="radio" id="species" checked="checked" name="species"
+						value="cat"> <label for="species">Cat</label>
+				</p>
+				<p>
+					<input id="breed" class="form-control" type="text" name="breed"
+						required="required" placeholder="Breed" th:value="${pet.breed}" />
+				</p>
+				<p>
+					<input id="weight" class="form-control" type="number" name="weight"
+						required="required" placeholder="Weight in kgs"
+						th:value="${pet.weight}" />
+				</p>
+
+				<p th:if="${#strings.toString(pet.gender) == 'MALE'}">
+					<input type="radio" id="gender" name="gender" th:value="MALE"
+						th:checked="checked"> <label for="gender">Male</label> <input
+						type="radio" id="gender" name="gender" value="FEMALE"> <label
+						for="gender">Female</label>
+				</p>
+				<p th:unless="${#strings.toString(pet.gender) == 'MALE'}">
+					<input type="radio" id="gender" name="gender" /> <label
+						for="gender">Male</label> <input type="radio" id="gender"
+						name="gender" th:value="FEMALE" th:checked="checked"> <label
+						for="gender">Female</label>
+				</p>
+
+
+				<p th:if="${pet.fixed}">
+					<input type="checkbox" id="fixed" name="fixed" th:checked="checked" />
+					<label for="fixed">Fixed</label>
+				</p>
+				<p th:unless="${pet.fixed}">
+					<input type="checkbox" id="fixed" name="fixed" /> <label
+						for="fixed">Fixed</label>
+				</p>
+
+				<p>
+					<input id="ownerName" class="form-control" type="text"
+						th:value="${pet.ownerName}" name="ownerName" required="required"
+						placeholder="Owner Name" />
+				</p>
+				<p>
+					<input id="ownerPhone" class="form-control" type="tel"
+						name="ownerPhone" required="required"
+						pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+						placeholder="Owner Phone ###-###-####"
+						th:value="${pet.ownerPhone}" />
+				</p>
+				<p class="right">
+					<a href="/pets" class="btn btn-warning" role="button">Cancel</a>
+					<a class="btn btn-primary" role="button" th:onclick="updatePet()">Update</a>
+					<a class="btn btn-danger" role="button" th:onclick="deletePet([[${pet.id}]])">Delete</a>
+				</p>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

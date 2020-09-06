@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand title">Shady Farms Pet Clinic</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Home</a></li>
+					<li class="active"><a href="/pets">Pets</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<section class="container">
+		<div class="left center">
+			<p th:if="${error}" th:text="${error}" />
+			<form action="#" th:action="@{/pets}" method="post">
+				<p>
+					<input id="name" class="form-control" type="text" name="name"
+						required="required" autofocus="autofocus" placeholder="Name" />
+				</p>
+				<p>
+					<input type="radio" id="species" name="species" value="dog">
+					<label for="species">Dog</label> <input type="radio" id="species"
+						name="species" value="cat"> <label for="species">Cat</label>
+				</p>
+				<p>
+					<input id="breed" class="form-control" type="text" name="breed"
+						required="required" placeholder="Breed" />
+				</p>
+				<p>
+					<input id="weight" class="form-control" type="number" name="weight"
+						required="required" placeholder="Weight in kgs" />
+				</p>
+				<p>
+					<input type="radio" id="gender" name="gender" value="MALE">
+					<label for="gender">Male</label> <input type="radio" id="gender"
+						name="gender" value="FEMALE"> <label for="gender">Female</label>
+				</p>
+				<p>
+					<input type="checkbox" id="fixed" name="fixed"> <label
+						for="fixed">Fixed</label>
+				</p>
+				<p>
+					<input id="ownerName" class="form-control" type="text"
+						name="ownerName" required="required" placeholder="Owner Name" />
+				</p>
+				<p>
+					<input id="ownerPhone" class="form-control" type="tel"
+						name="ownerPhone" required="required"
+						pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+						placeholder="Owner Phone ###-###-####" />
+				</p>
+				<p class="right">
+					<a href="/pets" class="btn btn-warning" role="button">Cancel</a> <input
+						type="submit" class="btn btn-primary" value="Submit" />
+				</p>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

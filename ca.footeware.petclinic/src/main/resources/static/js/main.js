@@ -6,9 +6,9 @@ function deletePet(id) {
 			success: function(result) {
 				window.location.href = window.location.protocol + "//" + window.location.hostname + "/" + window.location.port + "/pets";
 			},
-			error: function(request, msg, error) {
+			error: function(request, msg, error, status) {
 				alert(msg);
-				console.log("request=" + request + ", msg=" + msg, "error=" + error);
+				console.log("request=" + request + ", msg=" + msg, "error=" + error, " status=" + status);
 			}
 		});
 	}
@@ -26,9 +26,9 @@ function updatePet() {
 		success: function(result) {
 			window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/pets";
 		},
-		error: function(request, msg, error) {
+		error: function(request, msg, error, status) {
 			alert(msg);
-			console.log("request=" + request + ", msg=" + msg, "error=" + error);
+			console.log("request=" + request + ", msg=" + msg, "error=" + error, " status=" + status);
 		}
 	});
 }

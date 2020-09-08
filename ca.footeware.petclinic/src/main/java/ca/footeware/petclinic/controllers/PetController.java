@@ -105,7 +105,7 @@ public class PetController {
 			throw new LostPetException();
 		}
 		model.addAttribute("pets", petService.getPets());
-		return "/pets";
+		return "pets";
 	}
 
 }

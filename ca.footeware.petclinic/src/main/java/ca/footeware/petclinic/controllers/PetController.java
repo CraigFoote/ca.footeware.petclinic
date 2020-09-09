@@ -52,12 +52,13 @@ public class PetController {
 			@RequestParam("breed") String breed, @RequestParam("weight") int weight,
 			@RequestParam("gender") Pet.Gender gender,
 			@RequestParam(value = "fixed", defaultValue = "false") boolean fixed,
-			@RequestParam("ownerName") String ownerName, @RequestParam("ownerPhone") String ownerPhone, Model model) {
+			@RequestParam("ownerName") String ownerName, @RequestParam("ownerPhone") String ownerPhone,
+			@RequestParam("notes") String notes, Model model) {
 
 		String nextSequence = sequenceService.getNextSequence("customSequences");
 		Pet pet = switch (species) {
-		case "dog" -> new Dog(nextSequence, name, species, breed, weight, gender, fixed, ownerName, ownerPhone);
-		case "cat" -> new Cat(nextSequence, name, species, breed, weight, gender, fixed, ownerName, ownerPhone);
+		case "dog" -> new Dog(nextSequence, name, species, breed, weight, gender, fixed, ownerName, ownerPhone, notes);
+		case "cat" -> new Cat(nextSequence, name, species, breed, weight, gender, fixed, ownerName, ownerPhone, notes);
 		default -> throw new IllegalArgumentException("Unexpected value: " + species);
 		};
 
@@ -89,7 +90,8 @@ public class PetController {
 			@RequestParam("species") String species, @RequestParam("breed") String breed,
 			@RequestParam("weight") int weight, @RequestParam("gender") Pet.Gender gender,
 			@RequestParam(value = "fixed", defaultValue = "false") boolean fixed,
-			@RequestParam("ownerName") String ownerName, @RequestParam("ownerPhone") String ownerPhone, Model model) throws LostPetException {
+			@RequestParam("ownerName") String ownerName, @RequestParam("ownerPhone") String ownerPhone,
+			@RequestParam("notes") String notes, Model model) throws LostPetException {
 		Pet pet = petService.getPet(id);
 		pet.setId(id);
 		pet.setName(name);
@@ -100,8 +102,9 @@ public class PetController {
 		pet.setFixed(fixed);
 		pet.setOwnerName(ownerName);
 		pet.setOwnerPhone(ownerPhone);
+		pet.setNotes(notes);
 		Pet savedPet = petService.savePet(pet);
-		if(savedPet == null) {
+		if (savedPet == null) {
 			throw new LostPetException();
 		}
 		model.addAttribute("pets", petService.getPets());

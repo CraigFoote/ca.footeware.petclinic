@@ -25,10 +25,11 @@
 	<section class="container">
 		<div class="left center">
 			<p th:if="${error}" th:text="${error}" />
-			<form th:if=${pet} action="#" th:action="@{/pets}" th:method="PUT" id="editPetForm">
+			<form th:if=${pet} action="#" th:action="@{/pets}" th:method="PUT"
+				id="editPetForm">
 				<p>
 					<input id="id" class="form-control" type="text" name="id"
-						readonly="readonly"	th:value="${pet.id}" />
+						readonly="readonly" th:value="${pet.id}" />
 				</p>
 				<p>
 					<input id="name" class="form-control" type="text" name="name"
@@ -60,8 +61,8 @@
 				<p th:if="${#strings.toString(pet.gender) == 'MALE'}">
 					<input type="radio" id="male" name="gender" th:value="MALE"
 						th:checked="checked"> <label for="male">Male</label> <input
-						type="radio" id="female" name="gender" th:value="FEMALE"> <label
-						for="female">Female</label>
+						type="radio" id="female" name="gender" th:value="FEMALE">
+					<label for="female">Female</label>
 				</p>
 				<p th:unless="${#strings.toString(pet.gender) == 'MALE'}">
 					<input type="radio" id="female" name="gender" th:value="MALE" /> <label
@@ -92,10 +93,15 @@
 						placeholder="Owner Phone ###-###-####"
 						th:value="${pet.ownerPhone}" />
 				</p>
+				<p>
+					<textarea rows="5" cols="100" class="form-control" name="notes"
+						placeholder="notes" th:text="${pet.notes}"></textarea>
+				</p>
 				<p class="right">
-					<a href="/pets" class="btn btn-warning" role="button">Cancel</a>
-					<a class="btn btn-primary" role="button" th:onclick="updatePet()">Update</a>
-					<a class="btn btn-danger" role="button" th:onclick="deletePet([[${pet.id}]])">Delete</a>
+					<a href="/pets" class="btn btn-warning" role="button">Cancel</a> <a
+						class="btn btn-primary" role="button" th:onclick="updatePet()">Update</a>
+					<a class="btn btn-danger" role="button"
+						th:onclick="deletePet([[${pet.id}]])">Delete</a>
 				</p>
 			</form>
 		</div>

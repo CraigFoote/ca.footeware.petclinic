@@ -36,11 +36,13 @@
 					<th>Fixed</th>
 					<th>Owner Name</th>
 					<th>Owner Phone</th>
+					<th>Notes</th>
 				</thead>
 				<tbody>
 					<tr th:each="pet : ${pets}">
-						<td	th:text="${pet.id}"></td>
-						<td><a th:href="@{/pets/{id}(id=${pet.id})}" th:text="${pet.name}"></a></td>
+						<td th:text="${pet.id}"></td>
+						<td><a th:href="@{/pets/{id}(id=${pet.id})}"
+							th:text="${pet.name}"></a></td>
 						<td th:text="${pet.species}"></td>
 						<td th:text="${pet.breed}"></td>
 						<td th:text="${pet.weight}"></td>
@@ -48,12 +50,15 @@
 						<td th:text="${pet.fixed}"></td>
 						<td th:text="${pet.ownerName}"></td>
 						<td th:text="${pet.ownerPhone}"></td>
+						<td th:text="${pet.notes}"></td>
 					</tr>
 				</tbody>
 			</table>
 			<p class="right">
 				<a href="/pets/add" class="btn btn-primary" role="button">Add</a>
-			</p>
+			<div>
+				<img src="/images/nap.jpg" class="center bordered" alt="" />
+			</div>
 		</div>
 	</section>
 </body>

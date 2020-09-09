@@ -21,10 +21,11 @@ public class Cat extends Pet {
 	 * @param fixed
 	 * @param ownerName
 	 * @param ownerPhone
+	 * @param notes
 	 */
 	public Cat(String id, String name, String species, String breed, int weight, Gender gender, boolean fixed,
-			String ownerName, String ownerPhone) {
-		super(id, name, species, breed, weight, gender, fixed, ownerName, ownerPhone);
+			String ownerName, String ownerPhone, String notes) {
+		super(id, name, species, breed, weight, gender, fixed, ownerName, ownerPhone, notes);
 	}
 
 }

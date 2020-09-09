@@ -4,7 +4,7 @@ function deletePet(id) {
 			url: window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + '/pets/' + id,
 			type: 'DELETE',
 			success: function(result) {
-				window.location.href = window.location.protocol + "//" + window.location.hostname + "/" + window.location.port + "/pets";
+				window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/pets";
 			},
 			error: function(request, msg, error, status) {
 				alert(msg);

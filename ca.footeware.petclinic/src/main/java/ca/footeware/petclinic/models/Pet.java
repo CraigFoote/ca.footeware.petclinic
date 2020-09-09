@@ -25,6 +25,7 @@ public abstract class Pet {
 	boolean fixed;
 	String ownerName;
 	String ownerPhone;
+	String notes;
 
 	/**
 	 * Constructor.
@@ -38,9 +39,10 @@ public abstract class Pet {
 	 * @param fixed
 	 * @param ownerName
 	 * @param ownerPhone
+	 * @param notes
 	 */
 	public Pet(String id, String name, String species, String breed, int weight, Gender gender, boolean fixed,
-			String ownerName, String ownerPhone) {
+			String ownerName, String ownerPhone, String notes) {
 		this.id = id;
 		this.name = name;
 		this.species = species;
@@ -50,6 +52,7 @@ public abstract class Pet {
 		this.fixed = fixed;
 		this.ownerName = ownerName;
 		this.ownerPhone = ownerPhone;
+		this.notes = notes;
 	}
 
 	/**
@@ -170,6 +173,20 @@ public abstract class Pet {
 	 */
 	public void setBreed(String breed) {
 		this.breed = breed;
+	}
+
+	/**
+	 * @return the notes
+	 */
+	public String getNotes() {
+		return notes;
+	}
+
+	/**
+	 * @param notes the notes to set
+	 */
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 }

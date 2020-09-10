@@ -39,10 +39,10 @@
 					<th>Notes</th>
 				</thead>
 				<tbody>
-					<tr th:each="pet : ${pets}">
+					<tr th:each="pet : ${pets}" class="clickable-row"
+						th:data-href="@{/pets/{id}(id=${pet.id})}">
 						<td th:text="${pet.id}"></td>
-						<td><a th:href="@{/pets/{id}(id=${pet.id})}"
-							th:text="${pet.name}"></a></td>
+						<td th:text="${pet.name}"></td>
 						<td th:text="${pet.species}"></td>
 						<td th:text="${pet.breed}"></td>
 						<td th:text="${pet.weight}"></td>

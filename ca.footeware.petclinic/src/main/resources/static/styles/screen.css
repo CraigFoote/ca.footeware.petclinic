@@ -13,7 +13,7 @@
 html, body {
 	width: 100%;
 	height: 100%;
-	/* 	cursor: url("/images/foot.png"), default; */
+	cursor: url("/images/paw.png"), default;
 }
 
 body {
@@ -100,6 +100,10 @@ p {
 	padding: 2px;
 }
 
+.tolower {
+	text-transform: lowercase;
+}
+
 .narrow {
 	width: 700px;
 }
@@ -170,7 +174,7 @@ textarea#body {
 #pets {
 	border-collapse: collapse;
 	width: 100%;
-	margin:10px;
+	margin: 10px;
 	color: black;
 }
 

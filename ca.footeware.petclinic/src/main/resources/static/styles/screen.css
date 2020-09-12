@@ -87,8 +87,8 @@ section>div ul {
 	padding: 5px 50px 5px 70px;
 }
 
-input {
-	background-color: cornsilk;
+.yellow {
+	background-color: cornsilk !important;
 }
 
 img {

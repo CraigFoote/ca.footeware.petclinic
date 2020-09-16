@@ -33,10 +33,6 @@
 					<th>Breed</th>
 					<th>Weight (kg)</th>
 					<th>Gender</th>
-					<th>Fixed</th>
-					<th>Owner Name</th>
-					<th>Owner Phone</th>
-					<th>Notes</th>
 				</thead>
 				<tbody>
 					<tr th:each="pet : ${pets}" class="clickable-row"
@@ -47,10 +43,6 @@
 						<td th:text="${pet.breed}"></td>
 						<td th:text="${pet.weight}"></td>
 						<td th:text="${pet.gender}" class="tolower"></td>
-						<td th:text="${pet.fixed}"></td>
-						<td th:text="${pet.ownerName}"></td>
-						<td th:text="${pet.ownerPhone}"></td>
-						<td th:text="${pet.notes}"></td>
 					</tr>
 				</tbody>
 			</table>

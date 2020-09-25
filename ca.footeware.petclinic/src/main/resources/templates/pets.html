@@ -27,12 +27,14 @@
 			<table th:if="pets" id="pets"
 				style="border-bottom: medium; table-layout: auto; width: 100%; height: auto;">
 				<thead>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Species</th>
-					<th>Breed</th>
-					<th>Weight (kg)</th>
-					<th>Gender</th>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Species</th>
+						<th>Breed</th>
+						<th>Weight (kg)</th>
+						<th>Gender</th>
+					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="pet : ${pets}" class="clickable-row"

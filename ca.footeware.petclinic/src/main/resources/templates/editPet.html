@@ -28,53 +28,61 @@
 			<form th:if=${pet} action="#" th:action="@{/pets}" th:method="PUT"
 				id="editPetForm">
 				<p>
-					<input id="id" class="form-control yellow" type="text" name="id"
+					<Label for="id">ID</Label> <input id="id"
+						class="form-control yellow" type="text" name="id"
 						readonly="readonly" th:value="${pet.id}" />
 				</p>
 				<p>
-					<input id="name" class="form-control yellow" type="text" name="name"
+					<Label for="name">Name</Label> <input id="name"
+						class="form-control yellow" type="text" name="name"
 						required="required" autofocus="autofocus" placeholder="Name"
 						th:value="${pet.name}" />
 				</p>
 				<p th:if="${pet.species} == 'dog'">
 					<input type="radio" id="species" name="species" value="dog"
-						th:checked="checked" required="required"> <label for="species">Dog</label> <input
-						type="radio" id="species" name="species" value="cat" required="required" class="yellow"> <label
-						for="species">Cat</label>
+						th:checked="checked" required="required"> <label
+						for="species">Dog</label> <input type="radio" id="species"
+						name="species" value="cat" required="required" class="yellow">
+					<label for="species">Cat</label>
 				</p>
 				<p th:if="${pet.species} == 'cat'">
 					<input type="radio" id="species" name="species" value="dog"
-						th:checked="checked" required="required" class="yellow"> <label for="species">Dog</label> <input
-						type="radio" id="species" checked="checked" name="species"
-						value="cat" class="yellow"> <label for="species">Cat</label>
+						th:checked="checked" required="required" class="yellow"> <label
+						for="species">Dog</label> <input type="radio" id="species"
+						checked="checked" name="species" value="cat" class="yellow">
+					<label for="species">Cat</label>
 				</p>
 				<p>
-					<input id="breed" class="form-control yellow" type="text" name="breed"
-						required="required" placeholder="Breed" th:value="${pet.breed}"/>
+					<Label for="breed">Breed</Label> <input id="breed"
+						class="form-control yellow" type="text" name="breed"
+						required="required" placeholder="Breed" th:value="${pet.breed}" />
 				</p>
 				<p>
-					<input id="weight" class="form-control yellow" type="number" name="weight"
+					<Label for="weight">Weight</Label> <input id="weight"
+						class="form-control yellow" type="number" name="weight"
 						required="required" placeholder="Weight in kgs"
-						th:value="${pet.weight}"/>
+						th:value="${pet.weight}" />
 				</p>
 
 				<p th:if="${#strings.toString(pet.gender) == 'MALE'}">
 					<input type="radio" id="male" name="gender" th:value="MALE"
-						th:checked="checked" required="required" class="yellow"> <label for="male">Male</label> <input
-						type="radio" id="female" name="gender" th:value="FEMALE" required="required" class="yellow">
+						th:checked="checked" required="required" class="yellow"> <label
+						for="male">Male</label> <input type="radio" id="female"
+						name="gender" th:value="FEMALE" required="required" class="yellow">
 					<label for="female">Female</label>
 				</p>
 				<p th:unless="${#strings.toString(pet.gender) == 'MALE'}">
-					<input type="radio" id="female" name="gender" th:value="MALE" required="required" class="yellow"/> <label
-						for="female">Male</label> <input type="radio" id="female"
-						name="gender" th:value="FEMALE" th:checked="checked" required="required" class="yellow"> <label
+					<input type="radio" id="female" name="gender" th:value="MALE"
+						required="required" class="yellow" /> <label for="female">Male</label>
+					<input type="radio" id="female" name="gender" th:value="FEMALE"
+						th:checked="checked" required="required" class="yellow"> <label
 						for="female">Female</label>
 				</p>
 
 
 				<p th:if="${pet.fixed}">
-					<input type="checkbox" id="fixed" name="fixed" th:checked="checked" class="yellow" />
-					<label for="fixed">Fixed</label>
+					<input type="checkbox" id="fixed" name="fixed" th:checked="checked"
+						class="yellow" /> <label for="fixed">Fixed</label>
 				</p>
 				<p th:unless="${pet.fixed}">
 					<input type="checkbox" id="fixed" name="fixed" class="yellow" /> <label
@@ -82,20 +90,22 @@
 				</p>
 
 				<p>
-					<input id="ownerName" class="form-control yellow" type="text"
+					<Label for="ownerName">Owner Name</Label> <input id="ownerName"
+						class="form-control yellow" type="text"
 						th:value="${pet.ownerName}" name="ownerName" required="required"
 						placeholder="Owner Name" />
 				</p>
 				<p>
-					<input id="ownerPhone" class="form-control yellow" type="tel"
-						name="ownerPhone" required="required"
-						pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+					<Label for="ownerPhone">Owner Phone</Label> <input id="ownerPhone"
+						class="form-control yellow" type="tel" name="ownerPhone"
+						required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 						placeholder="Owner Phone ###-###-####"
 						th:value="${pet.ownerPhone}" />
 				</p>
 				<p>
-					<textarea rows="5" cols="100" class="form-control yellow" name="notes"
-						placeholder="notes" th:text="${pet.notes}"></textarea>
+					<Label for="notes">Notes</Label>
+					<textarea rows="5" cols="100" class="form-control yellow"
+						name="notes" placeholder="notes" th:text="${pet.notes}"></textarea>
 				</p>
 				<p class="right">
 					<a href="/pets" class="btn btn-warning" role="button">Cancel</a> <a

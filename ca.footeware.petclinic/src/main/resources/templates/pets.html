@@ -24,7 +24,7 @@
 	</nav>
 	<section class="container">
 		<div>
-			<table th:if="pets" id="pets"
+			<table th:if="pets" id="pets" title="Click a row to see its details."
 				style="border-bottom: medium; table-layout: auto; width: 100%; height: auto;">
 				<thead>
 					<tr>
@@ -32,8 +32,6 @@
 						<th>Name</th>
 						<th>Species</th>
 						<th>Breed</th>
-						<th>Weight (kg)</th>
-						<th>Gender</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,8 +41,6 @@
 						<td th:text="${pet.name}"></td>
 						<td th:text="${pet.species}"></td>
 						<td th:text="${pet.breed}"></td>
-						<td th:text="${pet.weight}"></td>
-						<td th:text="${pet.gender}" class="tolower"></td>
 					</tr>
 				</tbody>
 			</table>

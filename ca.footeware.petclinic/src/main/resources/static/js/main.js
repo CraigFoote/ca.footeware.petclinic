@@ -1,3 +1,7 @@
+
+/**
+ * Figure it out Sherlock.
+ */
 function deletePet(id) {
 	if (confirm("Are you sure you want to delete this poor helpless pet?")) {
 		$.ajax({

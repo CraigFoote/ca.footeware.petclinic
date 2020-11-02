@@ -12,8 +12,8 @@
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="nav">
-				<li class="nav-link active"><a href="/">Home</a></li>
-				<li class="nav-link"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/">Home</a></li>
+				<li class="nav-link active"><a href="/owners">Owners</a></li>
 				<li class="nav-link"><a href="/pets">Pets</a></li>
 				<li class="nav-link"><a href="/doctors">Doctors</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
@@ -22,23 +22,24 @@
 	</nav>
 	<section class="container-sm">
 		<div class="jumbotron">
-			<div class="row">
-				<div class="col col-sm-4">
-					<img src="/images/catndog.png" alt="cat and dog" />
+			<h2>Add a Species</h2>
+			<form action="/species/add" method="post">
+				<div class="row">
+					<div class="col-sm-8">
+						<input name="name" class="form-control" required="required"
+							placeholder="Species Name" autofocus="autofocus" />
+					</div>
+					<div class="col-sm-4">
+						<img src="/images/pig.png" alt="pig" />
+					</div>
 				</div>
-				<div class="col col-sm-8">
-					<form action="/owners" method="POST">
-						<div class="input-group">
-							<input type="text" placeholder="Owner Last Name" name="lastName"
-								required="required" maxlength="40" autofocus="autofocus"
-								class="form-control" />
-							<div class="input-group-append">
-								<button class="btn btn-success" type="submit">Search</button>
-							</div>
-						</div>
-					</form>
+				<div class="row">
+					<div class="col-sm-12">
+						<input type="submit" class="btn-primary float-right"
+							value="Add Species" />
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</section>
 </body>

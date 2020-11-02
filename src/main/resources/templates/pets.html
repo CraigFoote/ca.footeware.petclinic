@@ -3,51 +3,53 @@
 <head th:replace="fragments/head :: head">
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a href="#" class="navbar-brand title">Shady Farms Pet Clinic</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="/">Home</a></li>
-					<li class="active"><a href="/pets">Pets</a></li>
-				</ul>
-			</div>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
+		style="background-color: #008080 !important">
+		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="nav">
+				<li class="nav-link"><a href="/">Home</a></li>
+				<li class="nav-link"><a href="/owners">Owners</a></li>
+				<li class="nav-link active"><a href="/pets">Pets</a></li>
+				<li class="nav-link"><a href="/doctors">Doctors</a></li>
+				<li class="nav-link"><a href="/bookings">Bookings</a></li>
+			</ul>
 		</div>
 	</nav>
-	<section class="container">
-		<div>
-			<table th:if="pets" id="pets" title="Click a row to see its details."
-				style="border-bottom: medium; table-layout: auto; width: 100%; height: auto;">
-				<thead>
+	<section class="container-sm">
+		<div class="jumbotron">
+			<h2>Pets</h2>
+			<div th:if="${#sets.isEmpty(petSpeciesMap)}" class="row">
+				<span>No pets found.</span>
+			</div>
+			<table class="table table-striped table-hover"
+				title="Click a row to see its details."
+				th:unless="${#sets.isEmpty(petSpeciesMap)}">
+				<thead class="thead-dark">
 					<tr>
-						<th>ID</th>
 						<th>Name</th>
 						<th>Species</th>
-						<th>Breed</th>
+						<th>License</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="pet : ${pets}" class="clickable-row"
-						th:data-href="@{/pets/{id}(id=${pet.id})}">
-						<td th:text="${pet.id}"></td>
-						<td th:text="${pet.name}"></td>
-						<td th:text="${pet.species}"></td>
-						<td th:text="${pet.breed}"></td>
+					<tr th:each="petSpeciesMapItem : ${petSpeciesMap}" class="clickable-row"
+						th:data-href="@{/pets/{id}(id=${petSpeciesMapItem.key.id})}">
+						<td th:text="${petSpeciesMapItem.key.name}">Name</td>
+						<td th:text="${petSpeciesMapItem.value.name}">Species</td>
+						<td th:text="${petSpeciesMapItem.key.license}">License</td>
 					</tr>
 				</tbody>
 			</table>
-			<p class="right">
-				<a href="/pets/add" class="btn btn-primary" role="button">Add</a>
-			<div>
-				<img src="/images/nap.jpg" class="center bordered" alt="" />
+			<div class="row">
+				<div class="col-sm-12">
+					<button class="btn-primary float-right"
+						onclick="window.location='/pets/add'">Add a Pet</button>
+				</div>
 			</div>
 		</div>
 	</section>

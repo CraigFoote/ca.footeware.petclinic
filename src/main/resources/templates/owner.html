@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
+		style="background-color: #008080 !important">
+		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="nav">
+				<li class="nav-link"><a href="/">Home</a></li>
+				<li class="nav-link active"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/pets">Pets</a></li>
+				<li class="nav-link"><a href="/doctors">Doctors</a></li>
+				<li class="nav-link"><a href="/bookings">Bookings</a></li>
+			</ul>
+		</div>
+	</nav>
+	<section class="container-sm">
+		<div class="jumbotron">
+			<h2>Pet Owner</h2>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="list">
+						<span class="label">Name:&nbsp;</span><span
+							th:text="${owner.firstName}"></span>&nbsp;<span
+							th:text="${owner.lastName}"></span>
+					</div>
+					<div class="list">
+						<span class="label">Email:&nbsp;</span><a
+							th:href="'mailto:'+${owner.email}"><span
+							th:text="${owner.email}"></span></a>
+					</div>
+					<div class="list">
+						<span class="label">Phone:&nbsp;</span><a
+							th:href="'tel:'+${owner.phone}"><span
+							th:text="${owner.phone}"></span></a>
+					</div>
+					<div class="list">
+						<span class="label">Pets:&nbsp;</span>
+						<ul class="no-bullet">
+							<li th:each="pet : ${pets}"><a th:href="@{/pets/{id}(id=${pet.id})}"><span
+								th:text="${pet.name}">Chunky</span></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<img src="/images/dogChasingBird.png"
+						alt="Dog on leash chasing bird" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<a th:href="'/owners/'+${owner.id}+'/edit'">
+						<button class="btn-primary float-right">Edit Owner</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

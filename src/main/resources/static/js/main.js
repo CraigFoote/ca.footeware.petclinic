@@ -1,3 +1,6 @@
+/**
+ * Delete a pet.
+ */
 function deletePet(id) {
 	if (confirm("Are you sure you want to delete this poor helpless pet?")) {
 		$.ajax({
@@ -14,6 +17,9 @@ function deletePet(id) {
 	}
 }
 
+/**
+ * Update a pet.
+ */
 function updatePet() {
 	var form = window.document.getElementById("editPetForm");
 	const formData = new FormData(form);
@@ -33,6 +39,9 @@ function updatePet() {
 	});
 }
 
+/**
+ * Hook up a click listener to table rows.
+ */
 jQuery(document).ready(function($) {
 	$(".clickable-row").click(function() {
 		window.location = $(this).data("href");

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
+		style="background-color: #008080 !important">
+		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="nav">
+				<li class="nav-link"><a href="/">Home</a></li>
+				<li class="nav-link active"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/pets">Pets</a></li>
+				<li class="nav-link"><a href="/doctors">Doctors</a></li>
+				<li class="nav-link"><a href="/bookings">Bookings</a></li>
+			</ul>
+		</div>
+	</nav>
+	<section class="container-sm">
+		<div class="jumbotron">
+			<h2>Add an Owner</h2>
+			<form action="/owners/add" method="post">
+				<div class="row pb-2">
+					<input type="text" name="firstName" maxlength="40"
+						required="required" placeholder="First Name*" class="form-control" />
+				</div>
+				<div class="row pb-2">
+					<input type="text" name="lastName" maxlength="40"
+						required="required" placeholder="Last Name*" class="form-control" />
+				</div>
+				<div class="row pb-2">
+					<input type="email" name="email" placeholder="Email"
+						class="form-control" />
+				</div>
+				<div class="row pb-2">
+					<input type="text" name="phone" class="form-control" maxlength="12"
+						placeholder="Phone Number ###-###-####"
+						pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+				</div>
+				<div class="row pb-2" th:if="${availablePetsMap}">
+					<label for="pets">Available pets:</label> <select id="pets"
+						name="pets" multiple="multiple" size="10" title="CTRL+click to select multiple">
+						<optgroup th:each="speciesSet : ${availablePetsMap}" th:label="${speciesSet.key}">
+							<option th:each="pet : ${speciesSet.value}" th:text="${pet.name}"></option>
+						</optgroup>
+					</select>
+				</div>
+				<div class="row pb-2" th:unless="${availablePetsMap}">
+					<span>There are no pets from which to choose.</span>
+				</div>
+				<div class="row pb-2">
+					<div class="col-sm-12">
+						<input type="submit" class="btn-primary float-right" value="Add" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

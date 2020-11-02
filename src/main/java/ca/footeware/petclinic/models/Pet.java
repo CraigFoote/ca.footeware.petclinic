@@ -3,56 +3,38 @@
  */
 package ca.footeware.petclinic.models;
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 
 /**
  * @author Footeware.ca
  *
  */
-public abstract class Pet {
+public class Pet {
 
 	public enum Gender {
 		MALE, FEMALE
 	}
 
 	@Id
-	String id;
+	String id = UUID.randomUUID().toString();
 	String name;
-	String species;
-	String breed;
+	String speciesId;
 	int weight;
 	Gender gender;
-	boolean fixed;
-	String ownerName;
-	String ownerPhone;
-	String notes;
+	String license;
+	String ownerId;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param id
-	 * @param name
-	 * @param species
-	 * @param breed
-	 * @param weight
-	 * @param gender
-	 * @param fixed
-	 * @param ownerName
-	 * @param ownerPhone
-	 * @param notes
+	 * @param name      {@link String}
+	 * @param speciesId {@link String}
 	 */
-	public Pet(String id, String name, String species, String breed, int weight, Gender gender, boolean fixed,
-			String ownerName, String ownerPhone, String notes) {
-		this.id = id;
+	public Pet(String name, String speciesId) {
 		this.name = name;
-		this.species = species;
-		this.breed = breed;
-		this.weight = weight;
-		this.gender = gender;
-		this.fixed = fixed;
-		this.ownerName = ownerName;
-		this.ownerPhone = ownerPhone;
-		this.notes = notes;
+		this.speciesId = speciesId;
 	}
 
 	/**
@@ -60,62 +42,6 @@ public abstract class Pet {
 	 */
 	public Gender getGender() {
 		return gender;
-	}
-
-	/**
-	 * @param gender the gender to set
-	 */
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
-	/**
-	 * @return the fixed
-	 */
-	public boolean isFixed() {
-		return fixed;
-	}
-
-	/**
-	 * @param fixed the fixed to set
-	 */
-	public void setFixed(boolean fixed) {
-		this.fixed = fixed;
-	}
-
-	/**
-	 * @return the breed
-	 */
-	public String getSpecies() {
-		return species;
-	}
-
-	/**
-	 * @param breed the species to set
-	 */
-	public void setSpecies(String species) {
-		this.species = species;
-	}
-
-	/**
-	 * @return the weight
-	 */
-	public int getWeight() {
-		return weight;
-	}
-
-	/**
-	 * @param weight the weight to set
-	 */
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getId() {
@@ -127,31 +53,24 @@ public abstract class Pet {
 	}
 
 	/**
-	 * @return the ownerName
+	 * @return the ownerId
 	 */
-	public String getOwnerName() {
-		return ownerName;
+	public String getOwnerId() {
+		return ownerId;
 	}
 
 	/**
-	 * @param ownerName the ownerName to set
+	 * @return the weight
 	 */
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
+	public int getWeight() {
+		return weight;
 	}
 
 	/**
-	 * @return the ownerPhone
+	 * @param gender the gender to set
 	 */
-	public String getOwnerPhone() {
-		return ownerPhone;
-	}
-
-	/**
-	 * @param ownerPhone the ownerPhone to set
-	 */
-	public void setOwnerPhone(String ownerPhone) {
-		this.ownerPhone = ownerPhone;
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	/**
@@ -162,31 +81,52 @@ public abstract class Pet {
 	}
 
 	/**
-	 * @return the breed
+	 * @param name the name to set
 	 */
-	public String getBreed() {
-		return breed;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @param breed the breed to set
+	 * @param ownerId the ownerId to set
 	 */
-	public void setBreed(String breed) {
-		this.breed = breed;
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	/**
-	 * @return the notes
+	 * @param weight the weight to set
 	 */
-	public String getNotes() {
-		return notes;
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 
 	/**
-	 * @param notes the notes to set
+	 * @return the license
 	 */
-	public void setNotes(String notes) {
-		this.notes = notes;
+	public String getLicense() {
+		return license;
+	}
+
+	/**
+	 * @param license the license to set
+	 */
+	public void setLicense(String license) {
+		this.license = license;
+	}
+
+	/**
+	 * @return the speciesId
+	 */
+	public String getSpeciesId() {
+		return speciesId;
+	}
+
+	/**
+	 * @param speciesId the speciesId to set
+	 */
+	public void setSpeciesId(String speciesId) {
+		this.speciesId = speciesId;
 	}
 
 }

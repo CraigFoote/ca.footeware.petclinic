@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
+		style="background-color: #008080 !important">
+		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="nav">
+				<li class="nav-link"><a href="/">Home</a></li>
+				<li class="nav-link active"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/pets">Pets</a></li>
+				<li class="nav-link"><a href="/doctors">Doctors</a></li>
+				<li class="nav-link"><a href="/bookings">Bookings</a></li>
+			</ul>
+		</div>
+	</nav>
+	<section class="container-sm">
+		<div class="jumbotron">
+			<h2>Pet Owners</h2>
+			<div th:if="${#sets.isEmpty(owners)}" class="row">
+				<span th:if="${lastName}" th:text="'No owners found matching '+${lastName}"></span>
+			</div>
+			<div th:unless="${#sets.isEmpty(owners)}" class="row">
+				<table class="table table-striped table-hover"
+					title="Click a row to see its details.">
+					<caption th:if="${lastName}" th:text="'matching '+${lastName}"></caption>
+					<thead class="thead-dark">
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Phone Number</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="owner : ${owners}" class="clickable-row"
+							th:data-href="@{/owners/{id}(id=${owner.id})}">
+							<td th:text="${owner.firstName}">First Name</td>
+							<td th:text="${owner.lastName}">Last Name</td>
+							<td th:text="${owner.phone}">Phone Number</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<button class="btn-primary float-right"
+						onclick="window.location='/owners/add'">Add an Owner</button>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

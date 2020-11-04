@@ -45,7 +45,9 @@
 							th:text="${pet.license}"></span>
 					</div>
 					<div class="list">
-						<span class="label">Owner:&nbsp;</span><a th:href="@{/owners/{id}(id=${owner.id})}"><span
+						<span class="label">Owner:&nbsp;</span><a
+							th:if="${owner}"
+							th:href="'/owners/'+${owner.id}"><span
 							th:text="${owner.firstName}"></span>&nbsp;<span
 							th:text="${owner.lastName}"></span></a>
 					</div>

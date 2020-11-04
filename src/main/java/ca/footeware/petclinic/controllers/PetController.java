@@ -3,9 +3,9 @@
  */
 package ca.footeware.petclinic.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,8 +51,12 @@ public class PetController {
 
 	@GetMapping("/add")
 	public String getAddPetPage(Model model) {
-		model.addAttribute("owners", ownerService.getOwners());
-		model.addAttribute("species", speciesService.getAllSpecies());
+		List<Owner> owners = ownerService.getOwners();
+		owners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
+		model.addAttribute("owners", owners);
+		List<Species> allSpecies = speciesService.getAllSpecies();
+		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("species", allSpecies);
 		return "addPet";
 	}
 
@@ -72,8 +76,10 @@ public class PetController {
 		Pet pet = petService.getPet(id);
 		Owner owner = ownerService.getById(pet.getOwnerId());
 		List<Owner> allOwners = ownerService.getOwners();
+		allOwners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		Species species = speciesService.getSpecies(pet.getSpeciesId());
 		List<Species> allSpecies = speciesService.getAllSpecies();
+		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		model.addAttribute("pet", pet);
 		model.addAttribute("owner", owner);
 		model.addAttribute("allOwners", allOwners);
@@ -85,7 +91,8 @@ public class PetController {
 	@GetMapping
 	public String getPets(Model model) {
 		List<Pet> pets = petService.getPets();
-		Map<Pet, Species> petSpeciesMap = new HashMap<>();
+		pets.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		SortedMap<Pet, Species> petSpeciesMap = new TreeMap<>((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		for (Pet pet : pets) {
 			String speciesId = pet.getSpeciesId();
 			Species species = speciesService.getSpecies(speciesId);
@@ -98,29 +105,34 @@ public class PetController {
 	@PostMapping
 	public String savePet(@RequestParam("name") String name, @RequestParam("species") Species species,
 			@RequestParam(name = "weight", defaultValue = "-1") int weight, @RequestParam("gender") Pet.Gender gender,
+			@RequestParam(name = "license", required = false) String license,
 			@RequestParam(name = "ownerId", required = false) String ownerId, Model model) {
-		Owner owner = ownerService.getById(ownerId);
 		Pet pet = new Pet(name, species.getId());
 		pet.setWeight(weight);
 		pet.setGender(gender);
 		pet.setOwnerId(ownerId);
+		pet.setLicense(license);
 		Pet newPet = petService.savePet(pet);
-		owner.addPet(newPet.getId());
-		ownerService.updateOwner(owner);
+		if (ownerId != null) {
+			Owner owner = ownerService.getById(ownerId);
+			owner.addPet(newPet.getId());
+			ownerService.updateOwner(owner);
+		}
 		return getPets(model);
 	}
 
 	@PostMapping("/edit")
 	public String updatePet(@RequestParam("id") String id, @RequestParam("name") String name,
 			@RequestParam("species") Species species, @RequestParam("weight") int weight,
-			@RequestParam("gender") Pet.Gender gender, @RequestParam("ownerId") String ownerId, Model model)
-			throws LostPetException {
+			@RequestParam("gender") Pet.Gender gender, @RequestParam(name = "ownerId", required = false) String ownerId,
+			@RequestParam(name = "license", required = false) String license, Model model) throws LostPetException {
 		Pet pet = petService.getPet(id);
 		pet.setId(id);
 		pet.setName(name);
 		pet.setSpeciesId(species.getId());
 		pet.setWeight(weight);
 		pet.setGender(gender);
+		pet.setLicense(license);
 		pet.setOwnerId(ownerId);
 		Pet savedPet = petService.savePet(pet);
 		if (savedPet == null) {

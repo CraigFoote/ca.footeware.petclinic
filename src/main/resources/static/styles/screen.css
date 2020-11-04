@@ -93,7 +93,7 @@ div.list {
 	margin-bottom: 10px;
 }
 
-.label{
+.label {
 	font-style: italic;
 	color: #008080;
 }
@@ -106,3 +106,23 @@ select {
 	padding: 10px;
 }
 
+.optgroup {
+	font-weight: bolder;
+	font-style: italic;
+}
+
+.selected {
+	color: white;
+	background-color: #3685e1;
+	padding-left: 25px;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.unselected {
+	color: black;
+	background-color: white;
+	padding-left: 25px;
+	font-weight: normal;
+	font-style: normal;
+}

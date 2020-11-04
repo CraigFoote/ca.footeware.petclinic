@@ -47,3 +47,9 @@ jQuery(document).ready(function($) {
 		window.location = $(this).data("href");
 	});
 });
+
+function toggleSelected(elem){
+	console.log(elem.className);
+	elem.className = elem.className == "selected" ? "unselected" : "selected";
+	console.log(elem.className);
+}

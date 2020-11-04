@@ -3,11 +3,11 @@
  */
 package ca.footeware.petclinic.controllers;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +24,7 @@ import ca.footeware.petclinic.models.Pet;
 import ca.footeware.petclinic.models.Species;
 import ca.footeware.petclinic.services.OwnerService;
 import ca.footeware.petclinic.services.PetService;
+import ca.footeware.petclinic.services.SpeciesService;
 
 /**
  * @author Footeware.ca
@@ -39,16 +40,21 @@ public class OwnerController {
 	@Autowired
 	private PetService petService;
 
+	@Autowired
+	private SpeciesService speciesService;
+
 	@PostMapping
 	String searchByLastName(@RequestParam("lastName") String lastName, Model model) {
 		model.addAttribute("lastName", lastName);
-		model.addAttribute("owners", ownerService.getByLastName(lastName));
+		List<Owner> ownersByLastName = ownerService.getByLastName(lastName);
+		ownersByLastName.sort((o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName()));
+		model.addAttribute("owners", ownersByLastName);
 		return "owners";
 	}
 
 	@GetMapping("/add")
 	String getAddOwnerPage(Model model) {
-		Map<Species, Set<Pet>> petMap = petService.getOwnerlessPets();
+		Map<Species, List<Pet>> petMap = petService.getOwnerlessPets();
 		model.addAttribute("availablePetsMap", petMap);
 		return "addOwner";
 	}
@@ -67,14 +73,15 @@ public class OwnerController {
 	}
 
 	@GetMapping("{id}")
-	String getUser(@PathVariable String id, Model model) {
+	String getOwner(@PathVariable String id, Model model) {
 		Owner owner = ownerService.getById(id);
-		Set<String> petIds = owner.getPets();
-		Set<Pet> pets = new HashSet<>();
+		List<String> petIds = owner.getPets();
+		List<Pet> pets = new ArrayList<>();
 		for (String petId : petIds) {
 			Pet pet = petService.getPet(petId);
 			pets.add(pet);
 		}
+		pets.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		model.addAttribute("owner", owner);
 		model.addAttribute("pets", pets);
 		return "owner";
@@ -83,6 +90,7 @@ public class OwnerController {
 	@GetMapping
 	String getOwners(Model model) {
 		List<Owner> owners = ownerService.getOwners();
+		owners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		model.addAttribute("owners", owners);
 		return "owners";
 	}
@@ -91,21 +99,53 @@ public class OwnerController {
 	String editOwner(@PathVariable String id, Model model) {
 		Owner owner = ownerService.getById(id);
 		model.addAttribute("owner", owner);
-		Map<Species, Set<Pet>> petMap = petService.getOwnerlessPets();
-		model.addAttribute("availablePetsMap", petMap);
+		// Create a map of species to map of pets to a boolean indicating being owned.
+		List<Species> allSpecies = speciesService.getAllSpecies();
+		List<Pet> pets = petService.getPets();
+		pets.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		SortedMap<Species, SortedMap<Pet, Boolean>> petOwnerMap = new TreeMap<>(
+				(o1, o2) -> o1.getName().compareTo(o2.getName()));
+		// set species as key and map of pets to boolean owned as value
+		for (Species species : allSpecies) {
+			SortedMap<Pet, Boolean> petPownedMap = new TreeMap<>((o1, o2) -> o1.getName().compareTo(o2.getName()));
+			for (Pet pet : pets) {
+				if (pet.getSpeciesId().equals(species.getId())) {
+					boolean hasOwner = pet.getOwnerId() != null;
+					boolean ownedByCurrentOwner = (hasOwner && pet.getOwnerId().equals(owner.getId())) ? true : false;
+					if (!hasOwner || ownedByCurrentOwner) {
+						petPownedMap.put(pet, ownedByCurrentOwner);
+					}
+				}
+			}
+			petOwnerMap.put(species, petPownedMap);
+		}
+		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("petMap", petOwnerMap);
 		return "editOwner";
 	}
 
 	@PostMapping("/edit")
 	String updateOwner(@RequestParam("id") String id, @RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
-			@RequestParam("phone") String phone, Model model) {
+			@RequestParam("phone") String phone, @RequestParam(name = "petIds", required = false) List<String> petIds,
+			Model model) {
 		Owner owner = ownerService.getById(id);
 		owner.setFirstName(firstName);
 		owner.setLastName(lastName);
 		owner.setEmail(email);
 		owner.setPhone(phone);
+		owner.setPets(petIds);
 		ownerService.saveOwner(owner);
+		if (petIds != null) {
+			List<Pet> allPets = petService.getPets();
+			for (Pet pet : allPets) {
+				if (petIds.contains(pet.getId())) {
+					pet.setOwnerId(id);
+				} else {
+					pet.setOwnerId(null);
+				}
+			}
+		}
 		return getOwners(model);
 	}
 

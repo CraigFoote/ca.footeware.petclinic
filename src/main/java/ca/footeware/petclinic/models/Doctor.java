@@ -3,8 +3,8 @@
  */
 package ca.footeware.petclinic.models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Footeware.ca
@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class Doctor extends Person {
 
-	Set<String> procedureIds = new HashSet<>();
+	List<String> procedureIds = new ArrayList<>();
 
 	/**
 	 * Constructor.
@@ -26,7 +26,7 @@ public class Doctor extends Person {
 		super(firstName, lastName, email, phone);
 	}
 
-	public void addProcedures(Set<String> procedureIds) {
+	public void addProcedures(List<String> procedureIds) {
 		this.procedureIds.addAll(procedureIds);
 	}
 
@@ -34,7 +34,7 @@ public class Doctor extends Person {
 		this.procedureIds.add(procedureId);
 	}
 
-	public Set<String> getProcedures() {
+	public List<String> getProcedures() {
 		return this.procedureIds;
 	}
 

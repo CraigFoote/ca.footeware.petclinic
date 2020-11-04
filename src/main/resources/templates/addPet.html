@@ -51,7 +51,7 @@
 						</div>
 						<div class="row pb-2">
 							<label for="ownerId">Available Owners:</label> <select
-								name="ownerId" size="5" class="form-control" required="required">
+								name="ownerId" size="5" class="form-control">
 								<option th:each="owner : ${owners}"
 									th:title="${owner.email} ?: ${owner.phone}"
 									th:value="${owner.id}"

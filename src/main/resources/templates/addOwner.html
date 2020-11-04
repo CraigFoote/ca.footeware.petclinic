@@ -26,7 +26,8 @@
 			<form action="/owners/add" method="post">
 				<div class="row pb-2">
 					<input type="text" name="firstName" maxlength="40"
-						required="required" placeholder="First Name*" class="form-control" />
+						required="required" placeholder="First Name*" class="form-control"
+						autofocus="autofocus" />
 				</div>
 				<div class="row pb-2">
 					<input type="text" name="lastName" maxlength="40"
@@ -43,8 +44,10 @@
 				</div>
 				<div class="row pb-2" th:if="${availablePetsMap}">
 					<label for="pets">Available pets:</label> <select id="pets"
-						name="pets" multiple="multiple" size="10" title="CTRL+click to select multiple">
-						<optgroup th:each="speciesSet : ${availablePetsMap}" th:label="${speciesSet.key}">
+						name="pets" multiple="multiple" size="10"
+						title="CTRL+click to select multiple">
+						<optgroup th:each="speciesSet : ${availablePetsMap}"
+							th:label="${speciesSet.key}">
 							<option th:each="pet : ${speciesSet.value}" th:text="${pet.name}"></option>
 						</optgroup>
 					</select>
@@ -54,7 +57,10 @@
 				</div>
 				<div class="row pb-2">
 					<div class="col-sm-12">
-						<input type="submit" class="btn-primary float-right" value="Add" />
+						<button class="btn-warning float-right"
+							onclick="window.location='/pets/add'">Add a Pet</button>
+						<input type="submit" class="btn-primary float-right"
+							value="Add Owner" />
 					</div>
 				</div>
 			</form>

@@ -3,6 +3,7 @@
  */
 package ca.footeware.petclinic.repositories;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -17,6 +18,6 @@ public interface IOwnerRepository extends MongoRepository<Owner, String> {
 
 	Owner getById(String id);
 
-	Set<Owner> getByLastName(String lastName);
+	List<Owner> getByLastName(String lastName);
 
 }

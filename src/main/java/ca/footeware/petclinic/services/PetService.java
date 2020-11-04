@@ -1,10 +1,11 @@
 package ca.footeware.petclinic.services;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,19 +48,22 @@ public class PetService {
 	 * 
 	 * @return {@link Map} of {@link Species} to {@link Set} of {@link Pet}.
 	 */
-	public Map<Species, Set<Pet>> getOwnerlessPets() {
+	public Map<Species, List<Pet>> getOwnerlessPets() {
 		List<Pet> pets = getPets();
 		// get all species
-		Set<Species> speciesSet = new HashSet<>();
+		List<Species> speciesList = new ArrayList<>();
 		for (Pet pet : pets) {
 			String speciesId = pet.getSpeciesId();
 			Species species = speciesService.getSpecies(speciesId);
-			speciesSet.add(species);
+			speciesList.add(species);
 		}
-		Map<Species, Set<Pet>> petMap = new HashMap<>();
-		for (Species species : speciesSet) {
-			// for each species, create a set of pets
-			Set<Pet> petsOfSpecies = new HashSet<>();
+
+		// Iterate over species which will become keys in map. Sort map by keys.
+		SortedMap<Species, List<Pet>> petMap = new TreeMap<Species, List<Pet>>(
+				(o1, o2) -> o1.getName().compareTo(o2.getName()));
+		for (Species species : speciesList) {
+			// for each species, create a list of pets
+			List<Pet> petsOfSpecies = new ArrayList<>();
 			for (Pet pet : pets) {
 				// ignore owned pets
 				if (pet.getOwnerId() == null) {
@@ -69,8 +73,11 @@ public class PetService {
 					}
 				}
 			}
+			// sort list of pets by name
+			petsOfSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 			// put species and its pets in map
 			petMap.put(species, petsOfSpecies);
+			// sort map by keys
 		}
 		return petMap;
 	}

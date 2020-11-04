@@ -46,18 +46,25 @@
 								maxlength="12" placeholder="Phone Number ###-###-####"
 								pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:value="${owner.phone}" />
 						</div>
-						<div class="row pb-2" th:if="${availablePetsMap}">
-							<label for="pets">Available pets:</label> <select id="pets"
-								name="pets" multiple="multiple" size="10"
+						<div class="row pb-2" th:if="${petMap}">
+							<label for="pets">Pets:&nbsp;</label> <select id="petIds"
+								name="petIds" multiple="multiple" size="10"
 								title="CTRL+click to select multiple">
-								<optgroup th:each="speciesSet : ${availablePetsMap}"
-									th:label="${speciesSet.key}">
-									<option th:each="pet : ${speciesSet.value}"
-										th:text="${pet.name}"></option>
+								<optgroup th:each="speciesPetMap : ${petMap}"
+									th:label="${speciesPetMap.key}">
+									<div th:each="petOwnedMap : ${speciesPetMap.value}">
+										<option th:if="${petOwnedMap.value}"
+											th:value="${petOwnedMap.key.id}"
+											th:text="${petOwnedMap.key.name}" selected="selected"></option>
+
+										<option th:unless="${petOwnedMap.value}"
+											th:value="${petOwnedMap.key.id}"
+											th:text="${petOwnedMap.key.name}"></option>
+									</div>
 								</optgroup>
 							</select>
 						</div>
-						<div class="row pb-2" th:unless="${availablePetsMap}">
+						<div class="row pb-2" th:unless="${petMap}">
 							<span>There are no pets from which to choose.</span>
 						</div>
 					</div>

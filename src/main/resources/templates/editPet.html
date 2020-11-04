@@ -49,12 +49,24 @@
 								required="required"><label for="gender">Female</label>
 						</div>
 						<div class="row pb-2">
-							<label for="ownerId">Available Owners:&nbsp;</label><select
-								name="ownerId" size="5" class="form-control" required="required">
-								<option th:each="owner : ${allOwners}"
-									th:title="${owner.email} ?: ${owner.phone}"
-									th:value="${owner.id}"
-									th:text="${owner.firstName}+' '+${owner.lastName}"></option>
+							<input type="text" name="license" maxlength="40"
+								placeholder="License" class="form-control"
+								th:value="${pet.license}" />
+						</div>
+						<div class="row pb-2">
+							<label for="ownerId">Owner:&nbsp;</label><select name="ownerId"
+								size="5" class="form-control">
+								<div th:each="owner : ${allOwners}">
+									<option th:if="${owner.id == pet.ownerId}"
+										th:title="${owner.email} ?: ${owner.phone}"
+										th:value="${owner.id}"
+										th:text="${owner.firstName}+' '+${owner.lastName}"
+										selected="selected"></option>
+									<option th:unless="${owner.id == pet.ownerId}"
+										th:title="${owner.email} ?: ${owner.phone}"
+										th:value="${owner.id}"
+										th:text="${owner.firstName}+' '+${owner.lastName}"></option>
+								</div>
 							</select>
 						</div>
 					</div>

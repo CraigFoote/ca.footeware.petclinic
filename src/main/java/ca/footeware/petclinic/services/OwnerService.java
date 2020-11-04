@@ -30,7 +30,7 @@ public class OwnerService {
 		return repository.getById(id);
 	}
 
-	public Set<Owner> getByLastName(String lastName) {
+	public List<Owner> getByLastName(String lastName) {
 		return repository.getByLastName(lastName);
 	}
 

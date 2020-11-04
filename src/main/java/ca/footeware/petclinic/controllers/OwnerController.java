@@ -101,6 +101,7 @@ public class OwnerController {
 		model.addAttribute("owner", owner);
 		// Create a map of species to map of pets to a boolean indicating being owned.
 		List<Species> allSpecies = speciesService.getAllSpecies();
+		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		List<Pet> pets = petService.getPets();
 		pets.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		SortedMap<Species, SortedMap<Pet, Boolean>> petOwnerMap = new TreeMap<>(
@@ -112,6 +113,7 @@ public class OwnerController {
 				if (pet.getSpeciesId().equals(species.getId())) {
 					boolean hasOwner = pet.getOwnerId() != null;
 					boolean ownedByCurrentOwner = (hasOwner && pet.getOwnerId().equals(owner.getId())) ? true : false;
+					// add if ownerless or owned by current owner; ignore if owned by someone else
 					if (!hasOwner || ownedByCurrentOwner) {
 						petPownedMap.put(pet, ownedByCurrentOwner);
 					}
@@ -119,7 +121,6 @@ public class OwnerController {
 			}
 			petOwnerMap.put(species, petPownedMap);
 		}
-		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		model.addAttribute("petMap", petOwnerMap);
 		return "editOwner";
 	}

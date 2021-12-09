@@ -13,7 +13,7 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="nav">
 				<li class="nav-link active"><a href="/">Home</a></li>
-				<li class="nav-link"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/persons">Owners</a></li>
 				<li class="nav-link"><a href="/pets">Pets</a></li>
 				<li class="nav-link"><a href="/doctors">Doctors</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
@@ -27,9 +27,9 @@
 					<img src="/images/catndog.png" alt="cat and dog" />
 				</div>
 				<div class="col col-sm-8">
-					<form action="/owners" method="POST">
+					<form action="/pets/search" method="POST">
 						<div class="input-group">
-							<input type="text" placeholder="Owner Last Name" name="lastName"
+							<input type="text" placeholder="Pet Name" name="name"
 								required="required" maxlength="40" autofocus="autofocus"
 								class="form-control" />
 							<div class="input-group-append">

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.footeware.petclinic.exceptions.LostPetException;
-import ca.footeware.petclinic.models.Owner;
+import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.models.Pet;
 import ca.footeware.petclinic.models.Species;
 import ca.footeware.petclinic.services.OwnerService;
@@ -42,6 +42,21 @@ public class PetController {
 	@Autowired
 	private SpeciesService speciesService;
 
+	@PostMapping("/search")
+	String searchByName(@RequestParam("name") String name, Model model) {
+		model.addAttribute("name", name);
+		List<Pet> petsByName = petService.getByName(name);
+		petsByName.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		SortedMap<Pet, Species> petSpeciesMap = new TreeMap<>((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		for (Pet pet : petsByName) {
+			String speciesId = pet.getSpeciesId();
+			Species species = speciesService.getSpecies(speciesId);
+			petSpeciesMap.put(pet, species);
+		}
+		model.addAttribute("petSpeciesMap", petSpeciesMap);
+		return "pets";
+	}
+
 	@DeleteMapping("/{id}")
 	public String deletePet(@PathVariable("id") String id, Model model) {
 		Pet pet = petService.getPet(id);
@@ -51,7 +66,7 @@ public class PetController {
 
 	@GetMapping("/add")
 	public String getAddPetPage(Model model) {
-		List<Owner> owners = ownerService.getOwners();
+		List<Person> owners = ownerService.getOwners();
 		owners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		model.addAttribute("owners", owners);
 		List<Species> allSpecies = speciesService.getAllSpecies();
@@ -63,10 +78,13 @@ public class PetController {
 	@GetMapping("/{id}")
 	public String getPet(@PathVariable("id") String id, Model model) {
 		Pet pet = petService.getPet(id);
-		Owner owner = ownerService.getById(pet.getOwnerId());
 		Species species = speciesService.getSpecies(pet.getSpeciesId());
+		String ownerId = pet.getOwnerId();
+		if (ownerId != null) {
+			Person owner = ownerService.getById(ownerId);
+			model.addAttribute("owner", owner);
+		}
 		model.addAttribute("pet", pet);
-		model.addAttribute("owner", owner);
 		model.addAttribute("species", species);
 		return "pet";
 	}
@@ -74,14 +92,19 @@ public class PetController {
 	@GetMapping("/{id}/edit")
 	public String getEditPetPage(@PathVariable("id") String id, Model model) {
 		Pet pet = petService.getPet(id);
-		Owner owner = ownerService.getById(pet.getOwnerId());
-		List<Owner> allOwners = ownerService.getOwners();
+		Person owner = null;
+		if (pet.getOwnerId() != null) {
+			owner = ownerService.getById(pet.getOwnerId());
+		}
+		List<Person> allOwners = ownerService.getOwners();
 		allOwners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		Species species = speciesService.getSpecies(pet.getSpeciesId());
 		List<Species> allSpecies = speciesService.getAllSpecies();
 		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		model.addAttribute("pet", pet);
-		model.addAttribute("owner", owner);
+		if (owner != null) {
+			model.addAttribute("owner", owner);
+		}
 		model.addAttribute("allOwners", allOwners);
 		model.addAttribute("species", species);
 		model.addAttribute("allSpecies", allSpecies);
@@ -106,17 +129,14 @@ public class PetController {
 	public String savePet(@RequestParam("name") String name, @RequestParam("species") Species species,
 			@RequestParam(name = "weight", defaultValue = "-1") int weight, @RequestParam("gender") Pet.Gender gender,
 			@RequestParam(name = "license", required = false) String license,
-			@RequestParam(name = "ownerId", required = false) String ownerId, Model model) {
+			@RequestParam(name = "ownerId", required = false) String ownerId, Model model) throws LostPetException {
 		Pet pet = new Pet(name, species.getId());
 		pet.setWeight(weight);
 		pet.setGender(gender);
 		pet.setOwnerId(ownerId);
-		pet.setLicense(license);
 		Pet newPet = petService.savePet(pet);
-		if (ownerId != null) {
-			Owner owner = ownerService.getById(ownerId);
-			owner.addPet(newPet.getId());
-			ownerService.updateOwner(owner);
+		if (newPet == null) {
+			throw new LostPetException();
 		}
 		return getPets(model);
 	}
@@ -132,7 +152,6 @@ public class PetController {
 		pet.setSpeciesId(species.getId());
 		pet.setWeight(weight);
 		pet.setGender(gender);
-		pet.setLicense(license);
 		pet.setOwnerId(ownerId);
 		Pet savedPet = petService.savePet(pet);
 		if (savedPet == null) {

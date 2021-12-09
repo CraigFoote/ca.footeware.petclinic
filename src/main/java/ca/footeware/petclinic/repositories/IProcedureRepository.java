@@ -12,7 +12,4 @@ import ca.footeware.petclinic.models.Procedure;
  *
  */
 public interface IProcedureRepository extends MongoRepository<Procedure, String> {
-	
-	Procedure getById(String id);
-	
 }

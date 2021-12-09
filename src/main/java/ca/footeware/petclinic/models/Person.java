@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Id;
  * @author Footeware.ca
  *
  */
-public abstract class Person {
+public class Person {
 
 	@Id
 	String id = UUID.randomUUID().toString();
@@ -21,14 +21,14 @@ public abstract class Person {
 	String phone;
 
 	/**
-	 * COnstructor.
+	 * Constructor.
 	 * 
 	 * @param firstName {@link String}
 	 * @param lastName  {@link String}
 	 * @param email     {@link String}
 	 * @param phone     {@link String}
 	 */
-	Person(String firstName, String lastName, String email, String phone) {
+	public Person(String firstName, String lastName, String email, String phone) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

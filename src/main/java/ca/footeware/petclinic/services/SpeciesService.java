@@ -26,7 +26,7 @@ public class SpeciesService {
 	}
 
 	public Species getSpecies(String id) {
-		return repository.getById(id);
+		return repository.findById(id).get();
 	}
 
 	public void saveSpecies(Species species) {

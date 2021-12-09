@@ -23,7 +23,6 @@ public class Pet {
 	String speciesId;
 	int weight;
 	Gender gender;
-	String license;
 	String ownerId;
 
 	/**
@@ -99,20 +98,6 @@ public class Pet {
 	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
-	}
-
-	/**
-	 * @return the license
-	 */
-	public String getLicense() {
-		return license;
-	}
-
-	/**
-	 * @param license the license to set
-	 */
-	public void setLicense(String license) {
-		this.license = license;
 	}
 
 	/**

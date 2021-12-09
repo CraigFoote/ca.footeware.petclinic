@@ -13,7 +13,7 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="nav">
 				<li class="nav-link"><a href="/">Home</a></li>
-				<li class="nav-link"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/persons">Owners</a></li>
 				<li class="nav-link active"><a href="/pets">Pets</a></li>
 				<li class="nav-link"><a href="/doctors">Doctors</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
@@ -23,17 +23,16 @@
 	<section class="container-sm">
 		<div class="jumbotron">
 			<h2>Pets</h2>
-			<div th:if="${#sets.isEmpty(petSpeciesMap)}" class="row">
+			<div th:if="${#maps.isEmpty(petSpeciesMap)}" class="row">
 				<span>No pets found.</span>
 			</div>
 			<table class="table table-striped table-hover"
 				title="Click a row to see its details."
-				th:unless="${#sets.isEmpty(petSpeciesMap)}">
+				th:unless="${#maps.isEmpty(petSpeciesMap)}">
 				<thead class="thead-dark">
 					<tr>
 						<th>Name</th>
 						<th>Species</th>
-						<th>License</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,7 +40,6 @@
 						th:data-href="@{/pets/{id}(id=${petSpeciesMapItem.key.id})}">
 						<td th:text="${petSpeciesMapItem.key.name}">Name</td>
 						<td th:text="${petSpeciesMapItem.value.name}">Species</td>
-						<td th:text="${petSpeciesMapItem.key.license}">License</td>
 					</tr>
 				</tbody>
 			</table>

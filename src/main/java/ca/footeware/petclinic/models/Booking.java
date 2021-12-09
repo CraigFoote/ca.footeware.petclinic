@@ -16,7 +16,6 @@ public class Booking {
 
 	@Id
 	String id = UUID.randomUUID().toString();
-	String name;
 	String petId;
 	String doctorId;
 	LocalDateTime date;
@@ -24,13 +23,11 @@ public class Booking {
 	/**
 	 * Constructor.
 	 * 
-	 * @param name     {@link String}
 	 * @param petId    {@link String}
 	 * @param doctorId {@link String}
 	 * @param date     {@link LocalDateTime}
 	 */
-	public Booking(String name, String petId, String doctorId, LocalDateTime date) {
-		this.name = name;
+	public Booking(String petId, String doctorId, LocalDateTime date) {
 		this.petId = petId;
 		this.doctorId = doctorId;
 		this.date = date;
@@ -48,10 +45,6 @@ public class Booking {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public String getPetId() {
 		return petId;
 	}
@@ -66,10 +59,6 @@ public class Booking {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public void setPetId(String petId) {

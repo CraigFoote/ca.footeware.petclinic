@@ -12,5 +12,4 @@ import ca.footeware.petclinic.models.Booking;
  *
  */
 public interface IBookingRepository extends MongoRepository<Booking, String> {
-
 }

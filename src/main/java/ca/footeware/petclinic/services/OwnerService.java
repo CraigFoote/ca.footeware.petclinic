@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ca.footeware.petclinic.models.Owner;
+import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.repositories.IOwnerRepository;
 
 /**
@@ -21,27 +21,23 @@ public class OwnerService {
 	@Autowired
 	private IOwnerRepository repository;
 
-	public void deleteOwner(Owner owner) {
+	public void deleteOwner(Person owner) {
 		repository.delete(owner);
 	}
 
-	public Owner getById(String id) {
-		return repository.getById(id);
+	public Person getById(String id) {
+		return repository.findById(id).get();
 	}
 
-	public List<Owner> getByLastName(String lastName) {
-		return repository.getByLastName(lastName);
-	}
-
-	public Owner saveOwner(Owner owner) {
+	public Person saveOwner(Person owner) {
 		return repository.save(owner);
 	}
 
-	public Owner updateOwner(Owner owner) {
+	public Person updateOwner(Person owner) {
 		return repository.save(owner);
 	}
 
-	public List<Owner> getOwners() {
+	public List<Person> getOwners() {
 		return repository.findAll();
 	}
 

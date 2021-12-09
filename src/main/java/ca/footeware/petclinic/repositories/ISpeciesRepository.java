@@ -12,7 +12,4 @@ import ca.footeware.petclinic.models.Species;
  *
  */
 public interface ISpeciesRepository extends MongoRepository<Species, String> {
-	
-	Species getById(String id);
-	
 }

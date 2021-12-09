@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.footeware.petclinic.exceptions.LostPetException;
+import ca.footeware.petclinic.models.Owner;
 import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.models.Pet;
 import ca.footeware.petclinic.models.Species;
@@ -66,7 +67,7 @@ public class PetController {
 
 	@GetMapping("/add")
 	public String getAddPetPage(Model model) {
-		List<Person> owners = ownerService.getOwners();
+		List<Owner> owners = ownerService.getOwners();
 		owners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		model.addAttribute("owners", owners);
 		List<Species> allSpecies = speciesService.getAllSpecies();
@@ -96,14 +97,14 @@ public class PetController {
 		if (pet.getOwnerId() != null) {
 			owner = ownerService.getById(pet.getOwnerId());
 		}
-		List<Person> allOwners = ownerService.getOwners();
+		List<Owner> allOwners = ownerService.getOwners();
 		allOwners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		Species species = speciesService.getSpecies(pet.getSpeciesId());
 		List<Species> allSpecies = speciesService.getAllSpecies();
 		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		model.addAttribute("pet", pet);
 		if (owner != null) {
-			model.addAttribute("petowner", owner);
+			model.addAttribute("petOwner", owner);
 		}
 		model.addAttribute("allOwners", allOwners);
 		model.addAttribute("species", species);

@@ -13,7 +13,7 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="nav">
 				<li class="nav-link"><a href="/">Home</a></li>
-				<li class="nav-link active"><a href="/persons">Owners</a></li>
+				<li class="nav-link active"><a href="/owners">Owners</a></li>
 				<li class="nav-link"><a href="/pets">Pets</a></li>
 				<li class="nav-link"><a href="/doctors">Doctors</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
@@ -39,7 +39,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="owner : ${owners}" class="clickable-row"
-							th:data-href="@{/persons/{id}(id=${owner.id})}">
+							th:data-href="@{/owners/{id}(id=${owner.id})}">
 							<td th:text="${owner.firstName}">First Name</td>
 							<td th:text="${owner.lastName}">Last Name</td>
 							<td th:text="${owner.phone}">Phone Number</td>
@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<button class="btn-primary float-right"
-						onclick="window.location='/persons/addOwner'">Add an Owner</button>
+						onclick="window.location='/owners/addOwner'">Add an Owner</button>
 				</div>
 			</div>
 		</div>

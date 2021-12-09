@@ -15,18 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.footeware.petclinic.exceptions.LostPersonException;
+import ca.footeware.petclinic.models.Owner;
 import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.services.OwnerService;
-import ca.footeware.petclinic.services.PetService;
-import ca.footeware.petclinic.services.SpeciesService;
 
 /**
  * @author Footeware.ca
  *
  */
 @Controller
-@RequestMapping("/persons")
-public class PersonController {
+@RequestMapping("/owners")
+public class OwnerController {
 
 	@Autowired
 	private OwnerService ownerService;
@@ -35,17 +34,12 @@ public class PersonController {
 	public String getAddOwnerPage(Model model) {
 		return "addOwner";
 	}
-	
-	@GetMapping("/addDoctor")
-	public String getAddDoctorPage(Model model) {
-		return "addDoctor";
-	}
 
 	@PostMapping("/addOwner")
 	public String createOwner(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
 			@RequestParam("email") String email, @RequestParam("phone") String phone, Model model)
 			throws LostPersonException {
-		Person owner = new Person(firstName, lastName, email, phone);
+		Person owner = new Owner(firstName, lastName, email, phone);
 		Person savedOwner = ownerService.saveOwner(owner);
 		if (savedOwner == null) {
 			throw new LostPersonException("Saved owner not found.");

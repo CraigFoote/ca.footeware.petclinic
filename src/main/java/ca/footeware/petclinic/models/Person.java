@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Id;
  * @author Footeware.ca
  *
  */
-public class Person {
+public abstract class Person {
 
 	@Id
 	String id = UUID.randomUUID().toString();

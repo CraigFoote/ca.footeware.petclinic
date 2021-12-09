@@ -103,7 +103,7 @@ public class PetController {
 		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		model.addAttribute("pet", pet);
 		if (owner != null) {
-			model.addAttribute("owner", owner);
+			model.addAttribute("petowner", owner);
 		}
 		model.addAttribute("allOwners", allOwners);
 		model.addAttribute("species", species);

@@ -5,11 +5,11 @@ package ca.footeware.petclinic.repositories;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import ca.footeware.petclinic.models.Doctor;
+import ca.footeware.petclinic.models.Vet;
 
 /**
  * @author Footeware.ca
  *
  */
-public interface IDoctorRepository extends MongoRepository<Doctor, String> {
+public interface IVetRepository extends MongoRepository<Vet, String> {
 }

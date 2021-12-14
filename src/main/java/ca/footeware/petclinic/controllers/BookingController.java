@@ -51,25 +51,25 @@ public class BookingController {
 	}
 
 	@GetMapping("{id}")
-	String getDoctor(@PathVariable String id, Model model) {
-		Person doctor = doctorService.getById(id);
-		model.addAttribute("doctor", doctor);
-		return "doctor";
+	String getBooking(@PathVariable String id, Model model) {
+		Booking booking = bookingService.getById(id);
+		model.addAttribute("booking", booking);
+		return "booking";
 	}
 
 	@GetMapping
-	String getDoctors(Model model) {
-		List<Doctor> doctors = doctorService.getDoctors();
-		doctors.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
-		model.addAttribute("doctors", doctors);
-		return "doctors";
+	String getBookings(Model model) {
+		List<Booking> bookings = bookingService.getAll();
+		bookings.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+		model.addAttribute("bookings", bookings);
+		return "bookings";
 	}
 
 	@GetMapping("/{id}/edit")
-	String editDoctor(@PathVariable String id, Model model) {
-		Person doctor = doctorService.getById(id);
-		model.addAttribute("doctor", doctor);
-		return "editDoctor";
+	String editBooking(@PathVariable String id, Model model) {
+		Bookijg booking = bookingService.get(id);
+		model.addAttribute("booking", booking);
+		return "editBooking";
 	}
 
 	@PostMapping("/edit")

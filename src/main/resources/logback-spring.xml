@@ -15,7 +15,7 @@
 
 	<appender name="LOGFILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_HOME}/app.log</file>
+		<file>${LOG_HOME}/petclinic.log</file>
 		<encoder
 			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>${LOG_PATTERN}</Pattern>
@@ -23,7 +23,7 @@
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
 			<!-- roll-over daily -->
-			<fileNamePattern>${LOG_HOME}/archived/app.%d{yyyy-MM-dd}.%i.log
+			<fileNamePattern>${LOG_HOME}/archived/petclinic.%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 			<!-- each file should be at most 50MB, keep 7 days worth of history, but 
 				at most 10GB -->

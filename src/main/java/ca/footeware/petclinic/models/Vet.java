@@ -7,7 +7,7 @@ package ca.footeware.petclinic.models;
  * @author c<a href='http://Footeware.ca'>Footeware.ca</a>
  *
  */
-public class Doctor extends Person {
+public class Vet extends Person {
 
 	/**
 	 * @param firstName
@@ -15,7 +15,7 @@ public class Doctor extends Person {
 	 * @param email
 	 * @param phone
 	 */
-	public Doctor(String firstName, String lastName, String email, String phone) {
+	public Vet(String firstName, String lastName, String email, String phone) {
 		super(firstName, lastName, email, phone);
 	}
 

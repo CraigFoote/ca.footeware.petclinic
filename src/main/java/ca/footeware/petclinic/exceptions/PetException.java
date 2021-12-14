@@ -7,7 +7,7 @@ package ca.footeware.petclinic.exceptions;
  * @author Footeware.ca
  *
  */
-public class LostPetException extends Exception {
+public class PetException extends Exception {
 
 	/**
 	 * 
@@ -17,13 +17,13 @@ public class LostPetException extends Exception {
 	/**
 	 * 
 	 */
-	public LostPetException() {
+	public PetException() {
 	}
 
 	/**
 	 * @param message
 	 */
-	public LostPetException(String message) {
+	public PetException(String message) {
 		super(message);
 	}
 
@@ -31,7 +31,7 @@ public class LostPetException extends Exception {
 	 * @param message
 	 * @param cause
 	 */
-	public LostPetException(String message, Throwable cause) {
+	public PetException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
@@ -41,14 +41,14 @@ public class LostPetException extends Exception {
 	 * @param enableSuppression
 	 * @param writableStackTrace
 	 */
-	public LostPetException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public PetException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
 	/**
 	 * @param cause
 	 */
-	public LostPetException(Throwable cause) {
+	public PetException(Throwable cause) {
 		super(cause);
 	}
 

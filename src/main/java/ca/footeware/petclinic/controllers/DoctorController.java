@@ -73,7 +73,7 @@ public class DoctorController {
 	@PostMapping("/edit")
 	String updateDoctor(@RequestParam("id") String id, @RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
-			@RequestParam("phone") String phone, @RequestParam(name = "petIds", required = false) List<String> petIds,
+			@RequestParam("phone") String phone,
 			Model model) {
 		Doctor doctor = doctorService.getById(id);
 		doctor.setFirstName(firstName);

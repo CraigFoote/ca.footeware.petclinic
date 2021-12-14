@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ca.footeware.petclinic.exceptions.LostPersonException;
 import ca.footeware.petclinic.models.Doctor;
 import ca.footeware.petclinic.models.Person;
-import ca.footeware.petclinic.services.DoctorService;
+import ca.footeware.petclinic.services.BookingService;
 
 /**
  * @author Footeware.ca

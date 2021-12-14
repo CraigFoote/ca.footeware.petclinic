@@ -49,7 +49,5 @@ jQuery(document).ready(function($) {
 });
 
 function toggleSelected(elem){
-	console.log(elem.className);
 	elem.className = elem.className == "selected" ? "unselected" : "selected";
-	console.log(elem.className);
 }

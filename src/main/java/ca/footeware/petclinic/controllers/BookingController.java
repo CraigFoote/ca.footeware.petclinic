@@ -67,13 +67,13 @@ public class BookingController {
 
 	@GetMapping("/{id}/edit")
 	String editBooking(@PathVariable String id, Model model) {
-		Bookijg booking = bookingService.get(id);
+		Booking booking = bookingService.get(id);
 		model.addAttribute("booking", booking);
 		return "editBooking";
 	}
 
 	@PostMapping("/edit")
-	String updateDoctor(@RequestParam("id") String id, @RequestParam("firstName") String firstName,
+	String updateBooking(@RequestParam("id") String id, @RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
 			@RequestParam("phone") String phone, @RequestParam(name = "petIds", required = false) List<String> petIds,
 			Model model) {

@@ -24,28 +24,30 @@ import ca.footeware.petclinic.services.DoctorService;
  *
  */
 @Controller
-@RequestMapping("/doctors")
-public class DoctorController {
+@RequestMapping("/bookings")
+public class BookingController {
 
 	@Autowired
-	private DoctorService doctorService;
+	private BookingService bookingService;
 
-	@GetMapping("/addDoctor")
-	public String getAddDoctorPage(Model model) {
-		return "addDoctor";
+	@GetMapping("/add")
+	public String getAddBookingPage(Model model) {
+		return "addBooking";
 	}
 
-	@PostMapping("/addDoctor")
-	public String createDoctor(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-			@RequestParam("email") String email, @RequestParam("phone") String phone, Model model)
-			throws LostPersonException {
-		Doctor doctor = new Doctor(firstName, lastName, email, phone);
-		Doctor savedDoctor = doctorService.saveDoctor(doctor);
-		if (savedDoctor == null) {
-			throw new LostPersonException("Saved doctor not found.");
+	@PostMapping("/add")
+	public String createBooking(@RequestParam("petId") String petId, @RequestParam("doctorId") String doctorId,
+			@RequestParam("procedureId") String procedureId, @RequestParam("date") String date, Model model)
+	{
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); 
+	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+	    Booking booking = new Booking(petId, doctorId, procedureId, dateTime);
+	    Booking savedBooking = bookingService.save(booking);
+		if (savedBooking == null) {
+			throw new BookingException("Saved booking not found.");
 		}
-		model.addAttribute("doctors", doctorService.getDoctors());
-		return "doctors";
+		model.addAttribute("bookings", bookingService.getBookings());
+		return "bookings";
 	}
 
 	@GetMapping("{id}")

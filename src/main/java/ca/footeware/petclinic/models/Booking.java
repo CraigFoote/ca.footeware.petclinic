@@ -15,10 +15,11 @@ import org.springframework.data.annotation.Id;
 public class Booking {
 
 	@Id
-	String id = UUID.randomUUID().toString();
-	String petId;
-	String doctorId;
-	LocalDateTime date;
+	private String id = UUID.randomUUID().toString();
+	private String petId;
+	private String doctorId;
+	private String procedureId;
+	private LocalDateTime date;
 
 	/**
 	 * Constructor.
@@ -27,9 +28,10 @@ public class Booking {
 	 * @param doctorId {@link String}
 	 * @param date     {@link LocalDateTime}
 	 */
-	public Booking(String petId, String doctorId, LocalDateTime date) {
+	public Booking(String petId, String doctorId, String procedureId, LocalDateTime date) {
 		this.petId = petId;
 		this.doctorId = doctorId;
+		this.procedureId 
 		this.date = date;
 	}
 
@@ -42,7 +44,6 @@ public class Booking {
 	}
 
 	public String getId() {
-		return id;
 	}
 
 	public String getPetId() {
@@ -55,7 +56,7 @@ public class Booking {
 
 	public void setDoctorId(String doctorId) {
 		this.doctorId = doctorId;
-	}
+	};
 
 	public void setId(String id) {
 		this.id = id;
@@ -64,5 +65,12 @@ public class Booking {
 	public void setPetId(String petId) {
 		this.petId = petId;
 	}
+	
+	public void setProcedureId(String procedureId) {
+	    this.procedureId = procedureId;
+	}
+	
+	public String getProcedureId() {
+	    return procedureId;
 
 }

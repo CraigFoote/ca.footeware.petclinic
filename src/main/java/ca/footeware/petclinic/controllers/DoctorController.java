@@ -30,12 +30,12 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 
-	@GetMapping("/addDoctor")
+	@GetMapping("/add")
 	public String getAddDoctorPage(Model model) {
 		return "addDoctor";
 	}
 
-	@PostMapping("/addDoctor")
+	@PostMapping("/add")
 	public String createDoctor(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
 			@RequestParam("email") String email, @RequestParam("phone") String phone, Model model)
 			throws LostPersonException {

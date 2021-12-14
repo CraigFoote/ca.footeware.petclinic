@@ -15,15 +15,15 @@
 				<li class="nav-link"><a href="/">Home</a></li>
 				<li class="nav-link"><a href="/owners">Owners</a></li>
 				<li class="nav-link"><a href="/pets">Pets</a></li>
-				<li class="nav-link active"><a href="/doctors">Doctors</a></li>
+				<li class="nav-link active"><a href="/vets">Vets</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
 			</ul>
 		</div>
 	</nav>
 	<section class="container-sm">
 		<div class="jumbotron">
-			<h2>Add a Doctor</h2>
-			<form action="/doctors/add" method="post">
+			<h2>Add a Vet</h2>
+			<form action="/vets/add" method="post">
 				<div class="row pb-2">
 					<input type="text" name="firstName" maxlength="40"
 						required="required" placeholder="First Name*" class="form-control"
@@ -44,10 +44,8 @@
 				</div>
 				<div class="row pb-2">
 					<div class="col-sm-12">
-						<button class="btn-warning float-right"
-							onclick="window.location='/doctors/add'">Add a Pet</button>
 						<input type="submit" class="btn-primary float-right"
-							value="Add Doctor" />
+							value="Add Vet" />
 					</div>
 				</div>
 			</form>

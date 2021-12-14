@@ -15,36 +15,36 @@
 				<li class="nav-link"><a href="/">Home</a></li>
 				<li class="nav-link active"><a href="/owners">Owners</a></li>
 				<li class="nav-link"><a href="/pets">Pets</a></li>
-				<li class="nav-link"><a href="/doctors">Doctors</a></li>
+				<li class="nav-link"><a href="/vets">Vets</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
 			</ul>
 		</div>
 	</nav>
 	<section class="container-sm">
 		<div class="jumbotron">
-			<h2>Edit Doctor</h2>
-			<form action="/doctors/edit" method="post">
+			<h2>Edit Vet</h2>
+			<form action="/vets/edit" method="post">
 				<div class="row">
 					<div class="col-sm-8">
 						<div class="row pb-2">
-							<input type="hidden" name="id" th:value="${doctor.id}" /> <input
+							<input type="hidden" name="id" th:value="${vet.id}" /> <input
 								type="text" name="firstName" maxlength="40" required="required"
 								placeholder="First Name*" class="form-control"
-								th:value="${doctor.firstName}" />
+								th:value="${vet.firstName}" />
 						</div>
 						<div class="row pb-2">
 							<input type="text" name="lastName" maxlength="40"
 								required="required" placeholder="Last Name*"
-								class="form-control" th:value="${doctor.lastName}" />
+								class="form-control" th:value="${vet.lastName}" />
 						</div>
 						<div class="row pb-2">
 							<input type="email" name="email" placeholder="Email"
-								class="form-control" th:value="${doctor.email}" />
+								class="form-control" th:value="${vet.email}" />
 						</div>
 						<div class="row pb-2">
 							<input type="text" name="phone" class="form-control"
 								maxlength="12" placeholder="Phone Number ###-###-####"
-								pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:value="${doctor.phone}" />
+								pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:value="${vet.phone}" />
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -54,7 +54,7 @@
 				<div class="row pb-2">
 					<div class="col-sm-12">
 						<input type="submit" class="btn-primary float-right"
-							value="Update Doctor" />
+							value="Update Vet" />
 					</div>
 				</div>
 			</form>

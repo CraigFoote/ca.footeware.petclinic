@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.footeware.petclinic.exceptions.PersonException;
-import ca.footeware.petclinic.models.Doctor;
+import ca.footeware.petclinic.models.Vet;
 import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.services.VetService;
 
@@ -42,7 +42,7 @@ public class VetController {
 		Vet vet = new Vet(firstName, lastName, email, phone);
 		Vet savedVet = vetService.save(vet);
 		if (savedVet == null) {
-			throw new LostPersonException("Saved vet not found.");
+			throw new PersonException("Saved vet not found.");
 		}
 		model.addAttribute("vets", vetService.getAll());
 		return "vets";

@@ -14,11 +14,11 @@ public class PetService {
 	@Autowired
 	private IPetRepository repository;
 
-	public void deletePet(Pet pet) {
+	public void delete(Pet pet) {
 		repository.delete(pet);
 	}
 
-	public Pet getPet(String id) {
+	public Pet get(String id) {
 		return repository.findById(id).get();
 	}
 
@@ -31,7 +31,7 @@ public class PetService {
 	}
 
 	public Pet update(Pet pet) {
-		return repository.insert(pet);
+		return repository.save(pet);
 	}
 
 	public List<Pet> getByName(String name) {

@@ -17,7 +17,6 @@ public class Owner extends Person {
 	 */
 	public Owner(String firstName, String lastName, String email, String phone) {
 		super(firstName, lastName, email, phone);
-		// TODO Auto-generated constructor stub
 	}
 
 }

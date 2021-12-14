@@ -33,7 +33,7 @@ public class SpeciesController {
 	@PostMapping("/add")
 	String createSpecies(@RequestParam("name") String name, Model model) {
 		speciesService.saveSpecies(new Species(name));
-		model.addAttribute("species", speciesService.getAllSpecies());
+		model.addAttribute("species", speciesService.getAll());
 		return "addPet";
 	}
 }

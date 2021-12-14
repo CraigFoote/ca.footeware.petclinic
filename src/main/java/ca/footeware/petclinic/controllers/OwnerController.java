@@ -40,11 +40,11 @@ public class OwnerController {
 			@RequestParam("email") String email, @RequestParam("phone") String phone, Model model)
 			throws LostPersonException {
 		Owner owner = new Owner(firstName, lastName, email, phone);
-		Owner savedOwner = ownerService.saveOwner(owner);
+		Owner savedOwner = ownerService.save(owner);
 		if (savedOwner == null) {
 			throw new LostPersonException("Saved owner not found.");
 		}
-		model.addAttribute("owners", ownerService.getOwners());
+		model.addAttribute("owners", ownerService.getAll());
 		return "owners";
 	}
 
@@ -57,7 +57,7 @@ public class OwnerController {
 
 	@GetMapping
 	String getOwners(Model model) {
-		List<Owner> owners = ownerService.getOwners();
+		List<Owner> owners = ownerService.getAll();
 		owners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		model.addAttribute("owners", owners);
 		return "owners";
@@ -65,7 +65,7 @@ public class OwnerController {
 
 	@GetMapping("/{id}/edit")
 	String editOwner(@PathVariable String id, Model model) {
-		Person owner = ownerService.getById(id);
+		Person owner = ownerService.get(id);
 		model.addAttribute("owner", owner);
 		return "editOwner";
 	}
@@ -75,12 +75,12 @@ public class OwnerController {
 			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
 			@RequestParam("phone") String phone, @RequestParam(name = "petIds", required = false) List<String> petIds,
 			Model model) {
-		Owner owner = ownerService.getById(id);
+		Owner owner = ownerService.get(id);
 		owner.setFirstName(firstName);
 		owner.setLastName(lastName);
 		owner.setEmail(email);
 		owner.setPhone(phone);
-		ownerService.saveOwner(owner);
+		ownerService.save(owner);
 		return getOwners(model);
 	}
 

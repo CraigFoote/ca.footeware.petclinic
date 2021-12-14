@@ -21,15 +21,15 @@ public class SpeciesService {
 	@Autowired
 	private ISpeciesRepository repository;
 
-	public List<Species> getAllSpecies() {
+	public List<Species> getAll() {
 		return repository.findAll();
 	}
 
-	public Species getSpecies(String id) {
+	public Species get(String id) {
 		return repository.findById(id).get();
 	}
 
-	public void saveSpecies(Species species) {
+	public void save(Species species) {
 		repository.save(species);
 	}
 

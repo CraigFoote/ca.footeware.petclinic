@@ -73,17 +73,19 @@ public class BookingController {
 	}
 
 	@PostMapping("/edit")
-	String updateBooking(@RequestParam("id") String id, @RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
-			@RequestParam("phone") String phone, @RequestParam(name = "petIds", required = false) List<String> petIds,
+	String updateBooking(@RequestParam("id") String id, @RequestParam("petId") String petId,
+			@RequestParam("doctorId") String doctorId, @RequestParam("procedureId") String procedureId,
+			@RequestParam("date") String date,
 			Model model) {
-		Doctor doctor = doctorService.getById(id);
-		doctor.setFirstName(firstName);
-		doctor.setLastName(lastName);
-		doctor.setEmail(email);
-		doctor.setPhone(phone);
-		doctorService.saveDoctor(doctor);
-		return getDoctors(model);
+		Booking booking = bookingService.get(id);
+		booking.setPetId(petId);
+		booking.setDoctorId(doctorId);
+		booking.setEmail(email);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); 
+	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+		booking.setDate(dateTime);
+		bookingService.save(booking);
+		return getBookings(model);
 	}
 
 }

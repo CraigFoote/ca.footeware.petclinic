@@ -21,15 +21,15 @@ public class DoctorService {
 	@Autowired
 	private IDoctorRepository repository;
 
-	public Doctor getById(String id) {
+	public Doctor get(String id) {
 		return repository.findById(id).get();
 	}
 
-	public Doctor saveDoctor(Doctor doctor) {
+	public Doctor save(Doctor doctor) {
 		return repository.save(doctor);
 	}
 
-	public List<Doctor> getDoctors() {
+	public List<Doctor> getAll() {
 		return repository.findAll();
 	}
 

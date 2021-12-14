@@ -19,7 +19,7 @@ public class ProcedureService {
 	@Autowired
 	private IProcedureRepository repository;
 
-	public Procedure getById(String id) {
+	public Procedure get(String id) {
 		return repository.findById(id).get();
 	}
 

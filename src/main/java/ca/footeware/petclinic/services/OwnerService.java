@@ -21,23 +21,23 @@ public class OwnerService {
 	@Autowired
 	private IOwnerRepository repository;
 
-	public void deleteOwner(Owner owner) {
+	public void delete(Owner owner) {
 		repository.delete(owner);
 	}
 
-	public Owner getById(String id) {
+	public Owner get(String id) {
 		return repository.findById(id).get();
 	}
 
-	public Owner saveOwner(Owner owner) {
+	public Owner save(Owner owner) {
 		return repository.save(owner);
 	}
 
-	public Owner updateOwner(Owner owner) {
+	public Owner update(Owner owner) {
 		return repository.save(owner);
 	}
 
-	public List<Owner> getOwners() {
+	public List<Owner> getAll() {
 		return repository.findAll();
 	}
 

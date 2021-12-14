@@ -22,15 +22,15 @@ public class PetService {
 		return repository.findById(id).get();
 	}
 
-	public List<Pet> getPets() {
+	public List<Pet> getAll() {
 		return repository.findAll();
 	}
 
-	public Pet savePet(Pet pet) {
+	public Pet save(Pet pet) {
 		return repository.save(pet);
 	}
 
-	public Pet updatePet(Pet pet) {
+	public Pet update(Pet pet) {
 		return repository.insert(pet);
 	}
 

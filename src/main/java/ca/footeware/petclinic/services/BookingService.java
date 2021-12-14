@@ -19,7 +19,7 @@ public class BookingService {
 	@Autowired
 	private IBookingRepository repository;
 
-	public Booking getById(String id) {
+	public Booking get(String id) {
 		return repository.findById(id).get();
 	}
 

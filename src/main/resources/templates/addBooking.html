@@ -46,14 +46,14 @@
                         </select>
                     </div>
                     <div class="col-sm-8">
-                        <span th:if="${#lists.isEmpty(pets)}">No vets found.</span>
+                        <span th:if="${#lists.isEmpty(vets)}">No vets found.</span>
                         <label th:unless="${#lists.isEmpty=(vets)}" for="vetId">Available Vets:</label>
                         <select name="vetId" size="5" class="form-control">
                             <option th:for="vet : ${vets}" th:value="${vet.id}" th:text="${vet.firstName+' '+vet.lastName}">vet</option>
                         </select>
                     </div>
                     <div class="col-sm-8">
-                        <span th:if="${#lists.isEmpty(pets)}">No procedures found.</span>
+                        <span th:if="${#lists.isEmpty(procedures)}">No procedures found.</span>
                         <label th:unless="${#lists.isEmpty=(procedures)}" for="procedureId">Available Procedures:</label>
                         <select name="procedureId" size="5" class="form-control">
                             <option th:for="procedure : ${procedures}" th:value="${procedure.id}" th:text="${procedure.name}" th:title="${procedure.cost}">procedure</option>

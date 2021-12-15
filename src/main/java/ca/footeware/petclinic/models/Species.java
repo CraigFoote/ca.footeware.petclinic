@@ -15,8 +15,8 @@ import org.springframework.data.annotation.Id;
 public class Species {
 
 	@Id
-	String id = UUID.randomUUID().toString();
-	String name;
+	private String id = UUID.randomUUID().toString();
+	private String name;
 
 	/**
 	 * Constructor.

@@ -14,11 +14,11 @@ import org.springframework.data.annotation.Id;
 public abstract class Person {
 
 	@Id
-	String id = UUID.randomUUID().toString();
-	String firstName;
-	String lastName;
-	String email;
-	String phone;
+	private String id = UUID.randomUUID().toString();
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String phone;
 
 	/**
 	 * Constructor.

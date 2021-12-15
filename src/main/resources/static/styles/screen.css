@@ -102,27 +102,12 @@ ul.no-bullet {
 	list-style: none;
 }
 
-select {
-	padding: 10px;
-}
-
-.optgroup {
-	font-weight: bolder;
-	font-style: italic;
-}
-
 .selected {
 	color: white;
 	background-color: #3685e1;
-	padding-left: 25px;
-	font-weight: normal;
-	font-style: normal;
 }
 
 .unselected {
 	color: black;
 	background-color: white;
-	padding-left: 25px;
-	font-weight: normal;
-	font-style: normal;
 }

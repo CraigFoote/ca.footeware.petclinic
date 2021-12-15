@@ -18,12 +18,12 @@ public class Pet {
 	}
 
 	@Id
-	String id = UUID.randomUUID().toString();
-	String name;
-	String speciesId;
-	int weight;
-	Gender gender;
-	String ownerId;
+	private String id = UUID.randomUUID().toString();
+	private String name;
+	private String speciesId;
+	private int weight;
+	private Gender gender;
+	private String ownerId;
 
 	/**
 	 * Constructor.

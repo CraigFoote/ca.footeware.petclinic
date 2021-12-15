@@ -2,27 +2,34 @@ package ca.footeware.petclinic.models;
 
 public class BookingDTO {
     private String bookingId;
-    private String petId;
-    private String vetId;
-    private String procedureId;
-    private String petName;
+    private Pet pet;
+    private Vet vet;
+    private Procedure procedure;
     private LocalDateTime date;
-    private Map<String, String> petIdToNameMap;
-    private String vetName;
-    private Map<String, String> vetIdToNameMap;
-    private String procedureName;
-    private Map<String, String> procedureIdToNameMap;
+    private List<Pet> pets;
+    private List<Vet> vets;
+    private List<Procedure> procedures;
     
     /**
-     * Constructor displaying bookings.
+     * Constructor for displaying bookings.
      */
-    public BookingDTO(String bookingId, String petId, String vetId, String procedureId, String petName, String vetName, String procedureName){
+    public BookingDTO(String bookingId, Pet pet, Vet vet, Procedure procedure){
         this.bookingId = bookingId;
-        this.petId = petId;
-        this.vetId = vetId;
-        this.procedureId = procedureId;
-        this petNme = petName;
-        this.vetName = vetName;
-        this.procedureName = procedureName;
+        this.pet = pet;
+        this.vet = vet;
+        this.procedure = procedure;
     }
+    
+      /**
+         * Constructor for editing bookings.
+         */
+        public BookingDTO(String bookingId, Pet pet, Vet vet, Procedure procedure, List<Pet> pets, List<Vet> vets, List<Procedure> procedures){
+            this.bookingId = bookingId;
+            this.pet = pet;
+            this.vet = vet;
+            this.procedure = procedure;
+            this.pets = pets;
+            this.vets = vets;
+            this procedures = procedures;
+        }
 }

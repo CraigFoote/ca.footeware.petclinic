@@ -46,8 +46,7 @@ public class BookingController {
 		if (savedBooking == null) {
 			throw new BookingException("Saved booking not found.");
 		}
-		model.addAttribute("bookings", bookingService.getAll());
-		return "bookings";
+		return getBookings(model);
 	}
 
 	@GetMapping("{id}")
@@ -59,8 +58,15 @@ public class BookingController {
 
 	@GetMapping
 	String getBookings(Model model) {
-		List<Booking> bookings = bookingService.getAll();
+		List<Booking> rawBookings = bookingService.getAll();
 		bookings.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+		List<BookingDTO> bookings = new ArrayList<>();
+		for(Booking booking : bookings){
+		    Pet pet = petService.get(booking.getPetId());
+		    Vet vet = vetService.get(booking.getVetId());
+		    Procedure procedure = procedureService.get(booking.getProcedureId());
+		    BookingDTO bookingDTO = new BookingDTO(booking, pet, vet, procedure);
+		}
 		model.addAttribute("bookings", bookings);
 		return "bookings";
 	}

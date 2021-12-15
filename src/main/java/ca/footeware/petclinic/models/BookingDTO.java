@@ -1,11 +1,10 @@
 package ca.footeware.petclinic.models;
 
 public class BookingDTO {
-    private String bookingId;
+    private Booking booking;
     private Pet pet;
     private Vet vet;
     private Procedure procedure;
-    private LocalDateTime date;
     private List<Pet> pets;
     private List<Vet> vets;
     private List<Procedure> procedures;
@@ -13,7 +12,7 @@ public class BookingDTO {
     /**
      * Constructor for displaying bookings.
      */
-    public BookingDTO(String bookingId, Pet pet, Vet vet, Procedure procedure){
+    public BookingDTO(Bokking booking, Pet pet, Vet vet, Procedure procedure){
         this.bookingId = bookingId;
         this.pet = pet;
         this.vet = vet;
@@ -23,8 +22,8 @@ public class BookingDTO {
       /**
          * Constructor for editing bookings.
          */
-        public BookingDTO(String bookingId, Pet pet, Vet vet, Procedure procedure, List<Pet> pets, List<Vet> vets, List<Procedure> procedures){
-            this.bookingId = bookingId;
+        public BookingDTO(Booking booking, Pet pet, Vet vet, Procedure procedure, List<Pet> pets, List<Vet> vets, List<Procedure> procedures){
+            this.booking = booking;
             this.pet = pet;
             this.vet = vet;
             this.procedure = procedure;

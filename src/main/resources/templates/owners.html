@@ -23,10 +23,10 @@
 	<section class="container-sm">
 		<div class="jumbotron">
 			<h2>Pet Owners</h2>
-			<div th:if="${#sets.isEmpty(owners)}" class="row">
+			<div th:if="${#lists.isEmpty(owners)}" class="row">
 				<span>No owners found.</span>
 			</div>
-			<div th:unless="${#sets.isEmpty(owners)}" class="row">
+			<div th:unless="${#lists.isEmpty(owners)}" class="row">
 				<table class="table table-striped table-hover"
 					title="Click a row to see its details.">
 					<thead class="thead-dark">

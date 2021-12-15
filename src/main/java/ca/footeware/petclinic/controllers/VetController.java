@@ -77,7 +77,7 @@ public class VetController {
 			Model model) {
 		Vet vet = vetService.get(id);
 		vet.setFirstName(firstName);
-		vet .setLastName(lastName);
+		vet.setLastName(lastName);
 		vet.setEmail(email);
 		vet.setPhone(phone);
 		vetService.save(vet);

@@ -16,22 +16,22 @@ public class Booking {
 
 	@Id
 	private String id = UUID.randomUUID().toString();
-	private String petId;
-	private String vetId;
-	private String procedureId;
+	private Pet pet;
+	private Vet vet;
+	private Procedure procedure;
 	private LocalDateTime date;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param petId    {@link String}
-	 * @param vetId {@link String}
+	 * @param pet    {@link Pet}
+	 * @param vet {@link Vet}
 	 * @param date     {@link LocalDateTime}
 	 */
-	public Booking(String petId, String vetId, String procedureId, LocalDateTime date) {
-		this.petId = petId;
-		this.vetId = vetId;
-		this.procedureId 
+	public Booking(Pet pet, Vet vet, Procedure procedure, LocalDateTime date) {
+		this.pet = pet;
+		this.vet = vet;
+		this.procedure = procedure;
 		this.date = date;
 	}
 
@@ -39,38 +39,39 @@ public class Booking {
 		return date;
 	}
 
-	public String getVetId() {
-		return vetId;
+	public Vet getVet() {
+		return vet;
 	}
 
 	public String getId() {
 	}
 
-	public String getPetId() {
-		return petId;
+	public Pet getPet() {
+		return pet;
 	}
 
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 
-	public void setVetId(String vetId) {
-		this.vetId = vetId;
+	public void setVet(Vet vet) {
+		this.vet = vet;
 	};
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	public void setPetId(String petId) {
-		this.petId = petId;
+	public void setPet(Pet pet) {
+		this.pet = pet;
 	}
 	
-	public void setProcedureId(String procedureId) {
-	    this.procedureId = procedureId;
+	public void setProcedure(Procedure procedure) {
+	    this.procedure = procedure;
 	}
 	
-	public String getProcedureId() {
-	    return procedureId;
+	public Procedure getProcedure() {
+	    return procedure;
+	}
 
 }

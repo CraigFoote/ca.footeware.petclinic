@@ -30,10 +30,6 @@ public class PetService {
 		return repository.save(pet);
 	}
 
-	public Pet update(Pet pet) {
-		return repository.save(pet);
-	}
-
 	public List<Pet> getByName(String name) {
 		return repository.findAllByName(name);
 	}

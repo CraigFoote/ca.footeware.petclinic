@@ -46,15 +46,9 @@ public class PetController {
 	@PostMapping("/search")
 	String searchByName(@RequestParam("name") String name, Model model) {
 		model.addAttribute("name", name);
-		List<Pet> petsByName = petService.getByName(name);
-		petsByName.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
-		SortedMap<Pet, Species> petSpeciesMap = new TreeMap<>((o1, o2) -> o1.getName().compareTo(o2.getName()));
-		for (Pet pet : petsByName) {
-			String speciesId = pet.getSpeciesId();
-			Species species = speciesService.get(speciesId);
-			petSpeciesMap.put(pet, species);
-		}
-		model.addAttribute("petSpeciesMap", petSpeciesMap);
+		List<Pet> pets = petService.getByName(name);
+		pets.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("pets", pets);
 		return "pets";
 	}
 
@@ -72,42 +66,26 @@ public class PetController {
 		model.addAttribute("owners", owners);
 		List<Species> allSpecies = speciesService.getAll();
 		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
-		model.addAttribute("species", allSpecies);
+		model.addAttribute("allSpecies", allSpecies);
 		return "addPet";
 	}
 
 	@GetMapping("/{id}")
 	public String getPet(@PathVariable("id") String id, Model model) {
 		Pet pet = petService.getPet(id);
-		Species species = speciesService.getSpecies(pet.getSpeciesId());
-		String ownerId = pet.getOwnerId();
-		if (ownerId != null) {
-			Person owner = ownerService.get(ownerId);
-			model.addAttribute("owner", owner);
-		}
 		model.addAttribute("pet", pet);
-		model.addAttribute("species", species);
 		return "pet";
 	}
 
 	@GetMapping("/{id}/edit")
 	public String getEditPetPage(@PathVariable("id") String id, Model model) {
 		Pet pet = petService.get(id);
-		Person owner = null;
-		if (pet.getOwnerId() != null) {
-			owner = ownerService.get(pet.getOwnerId());
-		}
 		List<Owner> allOwners = ownerService.getAll();
 		allOwners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
-		Species species = speciesService.get(pet.getSpeciesId());
 		List<Species> allSpecies = speciesService.getAll();
 		allSpecies.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 		model.addAttribute("pet", pet);
-		if (owner != null) {
-			model.addAttribute("petOwner", owner);
-		}
 		model.addAttribute("allOwners", allOwners);
-		model.addAttribute("species", species);
 		model.addAttribute("allSpecies", allSpecies);
 		return "editPet";
 	}
@@ -116,45 +94,37 @@ public class PetController {
 	public String getPets(Model model) {
 		List<Pet> pets = petService.getAll();
 		pets.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
-		SortedMap<Pet, Species> petSpeciesMap = new TreeMap<>((o1, o2) -> o1.getName().compareTo(o2.getName()));
-		for (Pet pet : pets) {
-			String speciesId = pet.getSpeciesId();
-			Species species = speciesService.get(speciesId);
-			petSpeciesMap.put(pet, species);
-		}
-		model.addAttribute("petSpeciesMap", petSpeciesMap);
+		model.addAttribute("pets", pets);
 		return "pets";
 	}
 
 	@PostMapping
-	public String savePet(@RequestParam("name") String name, @RequestParam("species") Species species,
+	public String savePet(@RequestParam("name") String name, @RequestParam("speciesId") String speciesId,
 			@RequestParam(name = "weight", required = true) int weight, @RequestParam("gender") Pet.Gender gender,
 			@RequestParam(name = "ownerId", required = false) String ownerId, Model model) throws LostPetException {
-		Pet pet = new Pet(name, species.getId());
-		pet.setWeight(weight);
-		pet.setGender(gender);
-		pet.setOwnerId(ownerId);
+		Species species = speciesService.get(speciesId);
+		Owner owner = ownerService.get(ownerId);
+		Pet pet = new Pet(name, species, weight, gender, owner);
 		Pet newPet = petService.save(pet);
 		if (newPet == null) {
-			throw new LostPetException();
+			throw new PetException("Saved pet not found.");
 		}
 		return getPets(model);
 	}
 
 	@PostMapping("/edit")
 	public String updatePet(@RequestParam("id") String id, @RequestParam("name") String name,
-			@RequestParam("species") Species species, @RequestParam("weight") int weight,
+			@RequestParam("speciesId") String speciesId, @RequestParam("weight") int weight,
 			@RequestParam("gender") Pet.Gender gender, @RequestParam(name = "ownerId", required = false) String ownerId, Model model) throws PetException {
 		Pet pet = petService.get(id);
-		pet.setId(id);
 		pet.setName(name);
-		pet.setSpeciesId(species.getId());
+		pet.setSpecies(speciesService.get(species.getId()));
 		pet.setWeight(weight);
 		pet.setGender(gender);
-		pet.setOwnerId(ownerId);
+		pet.setOwner(OwnerService.get(ownerId));
 		Pet savedPet = petService.save(pet);
 		if (savedPet == null) {
-			throw new PetException();
+			throw new PetException("Saved pet not found.");
 		}
 		return getPets(model);
 	}

@@ -33,10 +33,6 @@ public class OwnerService {
 		return repository.save(owner);
 	}
 
-	public Owner update(Owner owner) {
-		return repository.save(owner);
-	}
-
 	public List<Owner> getAll() {
 		return repository.findAll();
 	}

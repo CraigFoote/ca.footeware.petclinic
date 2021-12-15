@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ca.footeware.petclinic.exceptions.LostPersonException;
+import ca.footeware.petclinic.exceptions.PersonException;
 import ca.footeware.petclinic.models.Owner;
 import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.services.OwnerService;
@@ -42,7 +42,7 @@ public class OwnerController {
 		Owner owner = new Owner(firstName, lastName, email, phone);
 		Owner savedOwner = ownerService.save(owner);
 		if (savedOwner == null) {
-			throw new LostPersonException("Saved owner not found.");
+			throw new PersonException("Saved owner not found.");
 		}
 		model.addAttribute("owners", ownerService.getAll());
 		return "owners";

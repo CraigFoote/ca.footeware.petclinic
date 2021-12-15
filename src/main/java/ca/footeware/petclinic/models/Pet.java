@@ -20,20 +20,23 @@ public class Pet {
 	@Id
 	private String id = UUID.randomUUID().toString();
 	private String name;
-	private String speciesId;
+	private Species species;
 	private int weight;
 	private Gender gender;
-	private String ownerId;
+	private Owner owner;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param name      {@link String}
-	 * @param speciesId {@link String}
+	 * @param species {@link Species}
 	 */
-	public Pet(String name, String speciesId) {
+	public Pet(String name, Species species, int weight, Gender gender, Owner owner) {
 		this.name = name;
-		this.speciesId = speciesId;
+		this.species = species;
+		this.weight = weight;
+		this.gender = gender;
+		this.owner = owner;
 	}
 
 	/**
@@ -52,10 +55,10 @@ public class Pet {
 	}
 
 	/**
-	 * @return the ownerId
+	 * @return the owner
 	 */
-	public String getOwnerId() {
-		return ownerId;
+	public Owner getOwner() {
+		return owner;
 	}
 
 	/**
@@ -87,10 +90,10 @@ public class Pet {
 	}
 
 	/**
-	 * @param ownerId the ownerId to set
+	 * @param owner the owner to set
 	 */
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
+	public void setOwner(Owner owner) {
+		this.owner = owner;
 	}
 
 	/**
@@ -101,17 +104,17 @@ public class Pet {
 	}
 
 	/**
-	 * @return the speciesId
+	 * @return the species
 	 */
-	public String getSpeciesId() {
-		return speciesId;
+	public Species getSpecies() {
+		return species;
 	}
 
 	/**
-	 * @param speciesId the speciesId to set
+	 * @param species the species to set
 	 */
-	public void setSpeciesId(String speciesId) {
-		this.speciesId = speciesId;
+	public void setSpecies(Species species) {
+		this.species = species;
 	}
 
 }

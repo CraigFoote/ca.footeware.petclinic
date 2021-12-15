@@ -31,10 +31,10 @@
 								required="required" autofocus="autofocus" placeholder="Name*" />
 						</div>
 						<div class="row pb-2">
-							<span th:if="${#lists.isEmpty(species)}">No species found.</span>
-							<select th:unless="${#lists.isEmpty(species)}" name="species"
+							<span th:if="${#lists.isEmpty(allSpecies)}">No species found.</span>
+							<select th:unless="${#lists.isEmpty(allSpecies)}" name="species"
 								class="form-control" required="required">
-								<option th:each="sp : ${species}" th:value="${sp.id}"
+								<option th:each="species : ${allSpecies}" th:value="${species.id}"
 									th:text="${sp.name}"></option>
 							</select>
 						</div>

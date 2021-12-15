@@ -44,10 +44,29 @@
                         <select name="petId" size="5" class="form-control">
                             <option th:for="pet : ${pets}" th:value="${pet.id}" th:text="${pet.name}" th:title="${pet.owner.firstName+' '+pet.owner.lastName}">pet</option>
                         </select>
-                        
+                    </div>
+                    <div class="col-sm-8">
+                        <span th:if="${#lists.isEmpty(pets)}">No vets found.</span>
+                        <label th:unless="${#lists.isEmpty=(vets)}" for="vetId">Available Vets:</label>
+                        <select name="vetId" size="5" class="form-control">
+                            <option th:for="vet : ${vets}" th:value="${vet.id}" th:text="${vet.firstName+' '+vet.lastName}">vet</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8">
+                        <span th:if="${#lists.isEmpty(pets)}">No procedures found.</span>
+                        <label th:unless="${#lists.isEmpty=(procedures)}" for="procedureId">Available Procedures:</label>
+                        <select name="procedureId" size="5" class="form-control">
+                            <option th:for="procedure : ${procedures}" th:value="${procedure.id}" th:text="${procedure.name}" th:title="${procedure.cost}">procedure</option>
+                        </select>
                     </div>
                     <div class="col-sm-12">
-                        <input type="submit" class="btn-primary float-right" value="Add Species" />
+                        <button class="btn-warning float-right" type="button"
+							onclick="window.location.href='/pets/add'">Add a Pet</button>
+							<button class="btn-warning float-right" type="button"
+							onclick="window.location.href='/vets/add'">Add a Vet</button>
+							<button class="btn-warning float-right" type="button"
+							onclick="window.location.href='/procedures/add'">Add a Procedure</button>
+                        <input type="submit" class="btn-primary float-right" value="Add Booking" />
                     </div>
                 </div>
             </form>

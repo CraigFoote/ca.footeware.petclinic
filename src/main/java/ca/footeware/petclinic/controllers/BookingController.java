@@ -39,9 +39,12 @@ public class BookingController {
 	public String createBooking(@RequestParam("petId") String petId, @RequestParam("doctorId") String vetId,
 			@RequestParam("procedureId") String procedureId, @RequestParam("date") String date, Model model)
 	{
+	    Pet pet = petService.get(petId);
+	    Vet vet = vetService.get(vetId);
+	    Procedure procedure = procedureService.get(procedureId);
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); 
 	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-	    Booking booking = new Booking(petId, vetId, procedureId, dateTime);
+	    Booking booking = new Booking(pet, vet, procedure, dateTime);
 	    Booking savedBooking = bookingService.save(booking);
 		if (savedBooking == null) {
 			throw new BookingException("Saved booking not found.");
@@ -58,31 +61,23 @@ public class BookingController {
 
 	@GetMapping
 	String getBookings(Model model) {
-		List<Booking> rawBookings = bookingService.getAll();
+		List<Booking> bookings = bookingService.getAll();
 		// TODO Collections.reverseOrder()
 		bookings.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
-		List<BookingDTO> bookingDTOs = new ArrayList<>();
-		for(Booking booking : bookings){
-		    Pet pet = petService.get(booking.getPetId());
-		    Vet vet = vetService.get(booking.getVetId());
-		    Procedure procedure = procedureService.get(booking.getProcedureId());
-		    BookingDTO bookingDTO = new BookingDTO(booking, pet, vet, procedure);
-		}
-		model.addAttribute("bookingDTOs", bookingDTOs);
+		model.addAttribute("bookings", bookings);
 		return "bookings";
 	}
 
 	@GetMapping("/{id}/edit")
 	String editBooking(@PathVariable String id, Model model) {
 		Booking booking = bookingService.get(id);
-		Pet pet = petService.get(booking.getPetId());
-		Vet vet = vetService.get(booking.getVetId());
-		Procedure procedure = procedureService.get(booking.getProcedureId());
 		List<Pet> pets = petService.getAll();
 		List<Vet> vets = vetService.getAll();
 		List<Procedure> procedures = procedureService.getAll();
-		BookingDTO bookingDTO = new BookingDTO(booking, pet, vet, procedure, pets, vets, procedures);
-		model.addAttribute("bookingDTO", bookingDTO);
+		model.addAttribute("booking", booking);
+		model.addAttribute("pets", pets);
+		model.addAttribute("vets", vets);
+		model.addAttribute("procedures", procedures);
 		return "editBooking";
 	}
 
@@ -92,9 +87,9 @@ public class BookingController {
 			@RequestParam("date") String date,
 			Model model) {
 		Booking booking = bookingService.get(id);
-		booking.setPetId(petId);
-		booking.setVetId(vetId);
-		booking.setEmail(email);
+		booking.setPet(petService.get(petId));
+		booking.setVet(vetService.get(vetId));
+		booking.setProcedure(procedureService.get(procedureId));
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); 
 	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
 		booking.setDate(dateTime);

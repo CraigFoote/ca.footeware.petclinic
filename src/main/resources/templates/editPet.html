@@ -33,8 +33,8 @@
 						</div>
 						<div class="row pb-2">
 							<select name="species" class="form-control" required="required">
-								<option th:each="sp : ${allSpecies}" th:value="${sp.id}"
-									th:text="${sp.name}"></option>
+								<option th:each="species : ${allSpecies}" th:value="${species.id}"
+									th:text="${species.name}"></option>
 							</select>
 						</div>
 						<div class="row pb-2">
@@ -50,18 +50,18 @@
 						</div>
 						<div class="row pb-2">
 							<label for="ownerId">Owner:&nbsp;</label> 
-							<select name="ownerId" size="5" class="form-control" th:if="${petOwner == null}">
+							<select name="ownerId" size="5" class="form-control" th:if="${pet.owner == null}">
 								<option th:each="owner : ${allOwners}"
 									th:title="${owner.email}+','+${owner.phone}"
 									th:value="${owner.id}"
 									th:text="${owner.firstName}+' '+${owner.lastName}"></option>
 							</select>
-							<select name="ownerId" size="5" class="form-control" th:if="${petOwner != null}">
+							<select name="ownerId" size="5" class="form-control" th:if="${pet.owner != null}">
 								<option th:each="owner : ${allOwners}"
 									th:title="${owner.email}+','+${owner.phone}"
 									th:value="${owner.id}"
 									th:text="${owner.firstName}+' '+${owner.lastName}"
-									th:selected="${petOwner.id == owner.id}"></option>
+									th:selected="${pet.owner.id == owner.id}"></option>
 							</select>
 						</div>
 					</div>

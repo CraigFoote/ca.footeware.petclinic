@@ -35,7 +35,7 @@
 							<select th:unless="${#lists.isEmpty(allSpecies)}" name="species"
 								class="form-control" required="required">
 								<option th:each="species : ${allSpecies}" th:value="${species.id}"
-									th:text="${sp.name}"></option>
+									th:text="${species.name}"></option>
 							</select>
 						</div>
 						<div class="row pb-2">
@@ -68,7 +68,7 @@
 						<button class="btn-warning float-right" type="button"
 							onclick="window.location.href='/species/add'">Add a
 							Species</button>
-						<input th:unless="${#sets.isEmpty(species)}" type="submit"
+						<input th:unless="${#lists.isEmpty(species)}" type="submit"
 							class="btn-primary float-right" value="Add Pet" />
 					</div>
 				</div>

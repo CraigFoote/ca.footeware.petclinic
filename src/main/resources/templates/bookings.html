@@ -23,12 +23,12 @@
     <section class="container-sm">
         <div class="jumbotron">
             <h2>Bookings</h2>
-            <div th:if="${#lists.isEmpty(bookingDTOs)}" class="row">
+            <div th:if="${#lists.isEmpty(bookings)}" class="row">
 				<span>No bookings found.</span>
 			</div>
 			<table class="table table-striped table-hover"
 				title="Click a row to see its details."
-				th:unless="${#lists.isEmpty(bookingDTOs)}">
+				th:unless="${#lists.isEmpty(bookings)}">
 				<thead class="thead-dark">
 					<tr>
 						<th>Pet</th>
@@ -38,12 +38,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="bookingDTO : ${bookingDTOs}" class="clickable-row"
-						th:data-href="@{/bookings/{id}(id=${bookingDTO.booking.id})}">
-					    <td th:text="${bookingDTO.pet.name}">Pet</td>
-						<td th:text="${bookingDTO.vet.name}">Vet</td>
-						<td th:text="${bookingDTO.procedure.name}">Procedure</td>
-						<td th:text="${bookingDTO.booking.date}">Date</td>
+					<tr th:each="booking : ${bookings}" class="clickable-row"
+						th:data-href="@{/bookings/{id}(id=${booking.booking.id})}">
+					    <td th:text="${booking.pet.name}">Pet</td>
+						<td th:text="${booking.vet.name}">Vet</td>
+						<td th:text="${booking.procedure.name}">Procedure</td>
+						<td th:text="${booking.booking.date}">Date</td>
 					</tr>
 				</tbody>
 			</table>

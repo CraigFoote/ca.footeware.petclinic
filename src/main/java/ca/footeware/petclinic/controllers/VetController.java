@@ -35,7 +35,7 @@ public class VetController {
 		return "addVet";
 	}
 
-	@PostMapping("/add")
+	@PostMapping!=
 	public String createVet(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
 			@RequestParam("email") String email, @RequestParam("phone") String phone, Model model)
 			throws LostPersonException {

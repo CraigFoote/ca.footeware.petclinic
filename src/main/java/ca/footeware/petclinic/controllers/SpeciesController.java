@@ -30,7 +30,7 @@ public class SpeciesController {
 		return "addSpecies";
 	}
 
-	@PostMapping("/add")
+	@PostMapping
 	String createSpecies(@RequestParam("name") String name, Model model) {
 		speciesService.saveSpecies(new Species(name));
 		model.addAttribute("species", speciesService.getAll());

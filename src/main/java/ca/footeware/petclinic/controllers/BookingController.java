@@ -59,28 +59,36 @@ public class BookingController {
 	@GetMapping
 	String getBookings(Model model) {
 		List<Booking> rawBookings = bookingService.getAll();
+		// TODO Collections.reverseOrder()
 		bookings.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
-		List<BookingDTO> bookings = new ArrayList<>();
+		List<BookingDTO> bookingDTOs = new ArrayList<>();
 		for(Booking booking : bookings){
 		    Pet pet = petService.get(booking.getPetId());
 		    Vet vet = vetService.get(booking.getVetId());
 		    Procedure procedure = procedureService.get(booking.getProcedureId());
 		    BookingDTO bookingDTO = new BookingDTO(booking, pet, vet, procedure);
 		}
-		model.addAttribute("bookings", bookings);
+		model.addAttribute("bookingDTOs", bookingDTOs);
 		return "bookings";
 	}
 
 	@GetMapping("/{id}/edit")
 	String editBooking(@PathVariable String id, Model model) {
 		Booking booking = bookingService.get(id);
-		model.addAttribute("booking", booking);
+		Pet pet = petService.get(booking.getPetId());
+		Vet vet = vetService.get(booking.getVetId());
+		Procedure procedure = procedureService.get(booking.getProcedureId());
+		List<Pet> pets = petService.getAll();
+		List<Vet> vets = vetService.getAll();
+		List<Procedure> procedures = procedureService.getAll();
+		BookingDTO bookingDTO = new BookingDTO(booking, pet, vet, procedure, pets, vets, procedures);
+		model.addAttribute("bookingDTO", bookingDTO);
 		return "editBooking";
 	}
 
 	@PostMapping("/edit")
 	String updateBooking(@RequestParam("id") String id, @RequestParam("petId") String petId,
-			@RequestParam("vetId") String doctorId, @RequestParam("procedureId") String procedureId,
+			@RequestParam("vetId") String vetId, @RequestParam("procedureId") String procedureId,
 			@RequestParam("date") String date,
 			Model model) {
 		Booking booking = bookingService.get(id);
@@ -90,7 +98,10 @@ public class BookingController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); 
 	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
 		booking.setDate(dateTime);
-		bookingService.save(booking);
+		Booking savedBooking = bookingService.save(booking);
+		if(savedBooking == null){
+		    throw new BookingException("Saved booking not found.");
+		}
 		return getBookings(model);
 	}
 

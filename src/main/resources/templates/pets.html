@@ -23,13 +23,13 @@
 	<section class="container-sm">
 		<div class="jumbotron">
 			<h2>Pets</h2>
-			<div th:if="${#maps.isEmpty(petSpeciesMap)}" class="row">
+			<div th:if="${#lists.isEmpty(pets)}" class="row">
 				<span th:if="${name}" th:text="'No pets found matching '${name}'."></span>
 				<span th:unless="${name}" th:text="No pets found."></span>
 			</div>
 			<table class="table table-striped table-hover"
 				title="Click a row to see its details."
-				th:unless="${#maps.isEmpty(petSpeciesMap)}">
+				th:unless="${#lists.isEmpty(pets)}">
 				<thead class="thead-dark">
 					<tr>
 						<th>Name</th>
@@ -37,10 +37,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="petSpeciesMapItem : ${petSpeciesMap}" class="clickable-row"
-						th:data-href="@{/pets/{id}(id=${petSpeciesMapItem.key.id})}">
-						<td th:text="${petSpeciesMapItem.key.name}">Name</td>
-						<td th:text="${petSpeciesMapItem.value.name}">Species</td>
+					<tr th:each="pet : ${pets}" class="clickable-row"
+						th:data-href="@{/pets/{id}(id=${pet.id})}">
+						<td th:text="${pet.name}">Name</td>
+						<td th:text="${pet.species.name}">Species</td>
 					</tr>
 				</tbody>
 			</table>

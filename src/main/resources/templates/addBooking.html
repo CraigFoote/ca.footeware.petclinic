@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+
+<body>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" style="background-color: #008080 !important">
+        <a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="nav">
+                <li class="nav-link"><a href="/">Home</a></li>
+                <li class="nav-link"><a href="/owners">Owners</a></li>
+                <li cla activess="nav-link"><a href="/pets">Pets</a></li>
+                <li class="nav-link"><a href="/vets">Vets</a></li>
+                <li class="nav-link active"><a href="/bookings">Bookings</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="container-sm">
+        <div class="jumbotron">
+            <h2>Add a Booking</h2>
+            <form action="/bookings" method="post">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <span th:if="${#lists.isEmpty(pets)}">No pets found.</span>
+                        <label th:unless="${#lists.isEmpty=(pets)}" for="petId">Available Pets:</label>
+                        <select name="petId" size="5" class="form-control">
+                            <option th:for="pet : ${pets}" th:value="${pet.id}" th:text="${pet.name}" th:title="${pet.owner.firstName+' '+pet.owner.lastName}">pet</option>
+                        </select>
+                        
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn-primary float-right" value="Add Species" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

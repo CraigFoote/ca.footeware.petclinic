@@ -36,9 +36,14 @@ public class OwnerController {
 	}
 
 	@PostMapping("/addOwner")
-	public String createOwner(@RequestParam(name = "firstName", required = true) String firstName, @RequestParam("lastName") String lastName,
-			@RequestParam(name = "email", required = true) String email, @RequestParam(name = "phone", required = true) String phone, Model model)
-			throws LostPersonException {
+	public String createOwner(
+	    @RequestParam(name = "firstName", required = true) String firstName, 
+	    @RequestParam(name = "lastName", required = true) String lastName,
+		@RequestParam(name = "email", required = true) String email, 
+		@RequestParam(name = "phone", required = true) String phone, 
+		Model model)
+			throws LostPersonException 
+	{
 		Owner owner = new Owner(firstName, lastName, email, phone);
 		Owner savedOwner = ownerService.save(owner);
 		if (savedOwner == null) {
@@ -71,16 +76,23 @@ public class OwnerController {
 	}
 
 	@PostMapping("/edit")
-	String updateOwner(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "firstName", required = true) String firstName,
-			@RequestParam(name = "lastName", required = true) String lastName, @RequestParam(name = "email", required = true) String email,
-			@RequestParam(name = "phone", required = true) String phone,
-			Model model) {
+	String updateOwner(
+	    @RequestParam(name = "id", required = true) String id, 
+	    @RequestParam(name = "firstName", required = true) String firstName,
+		@RequestParam(name = "lastName", required = true) String lastName, 
+		@RequestParam(name = "email", required = true) String email,
+		@-RequestParam(name = "phone", required = true) String phone,
+		Model model) 
+	{
 		Owner owner = ownerService.get(id);
 		owner.setFirstName(firstName);
 		owner.setLastName(lastName);
 		owner.setEmail(email);
 		owner.setPhone(phone);
-		ownerService.save(owner);
+		Owner savedOwner = ownerService.save(owner);
+		if (savedOwner == null){
+		    throw new PersonException("Saved owner not found.");
+		}
 		return getOwners(model);
 	}
 

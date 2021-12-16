@@ -24,17 +24,17 @@
         <div class="jumbotron">
             <h2>Add a Booking</h2>
             <form action="/bookings" method="post">
-                <div class="row">
-                    <div th:if="${#lists.isEmpty(pets)}" class="col-sm-8">
+                <div class="col-sm-8">
+                    <div th:if="${#lists.isEmpty(pets)}" class="row pb-2">
                         <span>No pets found.</span>
                     </div>
-                    <div th:unless="${#lists.isEmpty=(pets)}" class="col-sm-8">
+                    <div th:unless="${#lists.isEmpty=(pets)}" class="row pb-2">
                         <label for="petId" class="form-label">Available Pets:</label>
                         <select name="petId" size="5" class="form-control" required="required">
                             <option th:for="pet : ${pets}" th:value="${pet.id}" th:text="${pet.name}" th:title="${pet.owner.firstName+' '+pet.owner.lastName}">pet</option>
                         </select>
                     </div>
-                    <div th:if="${#lists.isEmpty(vets)}" class="col-sm-8">
+                    <div th:if="${#lists.isEmpty(vets)}" class="row pb-2">
                         <span>No vets found.</span>
                     </div>
                     <div th:unless="${#lists.isEmpty=(vets)}" class="col-sm-8">
@@ -43,22 +43,27 @@
                             <option th:for="vet : ${vets}" th:value="${vet.id}" th:text="${vet.firstName+' '+vet.lastName}">vet</option>
                         </select>
                     </div>
-                    <div th:if="${#lists.isEmpty(procedures)}" class="col-sm-8">
+                    <div th:if="${#lists.isEmpty(procedures)}" class="row pb-2">
                         <span>No procedures found.</span>
                     </div>
-                    <div th:unless="${#lists.isEmpty=(procedures)}" class="col-sm-8" required="required">
+                    <div th:unless="${#lists.isEmpty=(procedures)}" class="row pb-2" required="required">
                         <label for="procedureId" class="form-label">Available Procedures:</label>
                         <select name="procedureId" size="5" class="form-control">
                             <option th:for="procedure : ${procedures}" th:value="${procedure.id}" th:text="${procedure.name}" th:title="${procedure.cost}">procedure</option>
                         </select>
                     </div>
+                    <div class="col-sm-4">
+                        image
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-12 btn-grp">
                         <button class="btn-warning float-right" type="button"
-							onclick="window.location.href='/pets/add'">Add a Pet</button>
+							    onclick="window.location.href='/pets/add'">Add a Pet</button>
 						<button class="btn-warning float-right" type="button"
-							onclick="window.location.href='/vets/add'">Add a Vet</button>
+							    onclick="window.location.href='/vets/add'">Add a Vet</button>
 						<button class="btn-warning float-right" type="button"
-							onclick="window.location.href='/procedures/add'">Add a Procedure</button>
+							    onclick="window.location.href='/procedures/add'">Add a Procedure</button>
                         <input type="submit" class="btn-primary float-right" value="Add Booking" />
                     </div>
                 </div>

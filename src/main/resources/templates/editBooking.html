@@ -53,7 +53,7 @@
                     </div>
                     <div th:unless="${#lists.isEmpty=(procedures)}" class="row pb-2" required="required">
                         <label for="procedureId" class="form-label">Available Procedures:</label>
-                        <select name="procedureId" size="5" class="form-control">
+                        <select name="procedureId" size="5" class="form-control" required="required">
                             <option th:for="procedure : ${procedures}" th:value="${procedure.id}" 
                                 th:text="${procedure.name}" th:selected="${procedure.id == booking.procedure.id}" 
                                 th:title="${procedure.cost}">procedure</option>
@@ -61,7 +61,8 @@
                     </div>
                     <div class="row pb-2">
                         <label for="date" class="form-label">Date:</label>
-                        <input name="date" type="datetime-local" th:value="procedure.date" />
+                        <input name="date" type="datetime-local" 
+                            th:value="procedure.date" required="required" />
                     </div>
                 </div>
                 <div class="col-sm-4">

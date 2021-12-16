@@ -13,32 +13,39 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="nav">
 				<li class="nav-link"><a href="/">Home</a></li>
-				<li class="nav-link active"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/owners">Owners</a></li>
 				<li class="nav-link"><a href="/pets">Pets</a></li>
 				<li class="nav-link"><a href="/vets">Vets</a></li>
-				<li class="nav-link"><a href="/bookings">Bookings</a></li>
+				<li class="nav-link active"><a href="/bookings">Bookings</a></li>
 			</ul>
 		</div>
 	</nav>
 	<section class="container-sm">
 		<div class="jumbotron">
-			<h2>Owner</h2>
+			<h2>Booking</h2>
 			<div class="row">
 				<div class="col-sm-8">
 					<div class="row pb-2">
-						<span class="label">Name:&nbsp;</span><span
-							th:text="${owner.firstName}"></span>&nbsp;<span
-							th:text="${owner.lastName}"></span>
+						<span class="label">Pet:&nbsp;</span>
+						<a th:href="${booking.pet.id}">
+						    <span th:text="${booking.pet.name}">Pet</span>
+						</a>
 					</div>
 					<div class="row pb-2">
-						<span class="label">Email:&nbsp;</span><a
-							th:href="'mailto:'+${owner.email}"><span
-							th:text="${owner.email}"></span></a>
+						<span class="label">Vet:&nbsp;</span>
+						<a th:href="${booking.vet.id}">
+						    <span th:text="${booking.vet.firstName+' '+booking.vet.lastName}">Vet</span>
+						</a>
 					</div>
 					<div class="row pb-2">
-						<span class="label">Phone:&nbsp;</span><a
-							th:href="'tel:'+${owner.phone}"><span
-							th:text="${owner.phone}"></span></a>
+						<span class="label">Procedure:&nbsp;</span>
+						<a th:href="${booking.procedure.id}">
+						    <span th:text="${booking.procedure.name}">Procedure</span>
+						</a>
+					</div>
+					<div class="row pb-2">
+					    <span class="label">Date:&nbsp;</span>
+					    <span th:text="${booking.date}">Date</span>
 					</div>
 				</div>
 				<div class="col-sm-4">
@@ -48,8 +55,8 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<a th:href="'/owners/'+${owner.id}+'/edit'">
-						<button class="btn-primary float-right">Edit Owner</button>
+					<a th:href="'/bookings/'+${booking.id}+'/edit'">
+						<button class="btn-primary float-right">Edit Booking</button>
 					</a>
 				</div>
 			</div>

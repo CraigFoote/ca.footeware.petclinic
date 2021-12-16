@@ -32,7 +32,7 @@
 								placeholder="Name*" class="form-control" th:value="${pet.name}" />
 						</div>
 						<div class="row pb-2">
-						    <label for="species">Species:&nbsp;</label>
+						    <label for="species" class="form-label" class="form-label">Species:&nbsp;</label>
 							<select name="species" class="form-control" required="required">
 								<option th:each="species : ${allSpecies}" th:value="${species.id}"
 									th:text="${species.name}"></option>
@@ -50,7 +50,7 @@
 								required="required"><label for="gender">Female</label>
 						</div>
 						<div class="row pb-2">
-							<label for="ownerId">Owner:&nbsp;</label> 
+							<label for="ownerId" class="form-label">Owner:&nbsp;</label> 
 							<select name="ownerId" size="5" required="required" class="form-control" th:if="${pet.owner == null}">
 								<option th:each="owner : ${allOwners}"
 									th:title="${owner.email}+','+${owner.phone}"

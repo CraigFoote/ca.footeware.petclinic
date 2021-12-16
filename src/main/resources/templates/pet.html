@@ -24,23 +24,23 @@
 		<div class="jumbotron">
 			<h2>Pet</h2>
 			<div class="row">
-				<div class="col-sm-6">
-					<div class="list">
+				<div class="col-sm-8">
+					<div class="row pb-2">
 						<span class="label">Name:&nbsp;</span><span th:text="${pet.name}"></span>
 					</div>
-					<div class="list">
+					<div class="row pb-2">
 						<span class="label">Species:&nbsp;</span><span
 							th:text="${species.name}"></span>
 					</div>
-					<div class="list">
+					<div class="row pb-2">
 						<span class="label">Weight:&nbsp;</span><span
 							th:text="${pet.weight}"></span>
 					</div>
-					<div class="list">
+					<div class="row pb-2">
 						<span class="label">Gender:&nbsp;</span><span class="tolower"
 							th:text="${pet.gender}"></span>
 					</div>
-					<div class="list">
+					<div class="row pb-2">
 						<span class="label">Owner:&nbsp;</span><a
 							th:if="${owner}"
 							th:href="'/owners/'+${owner.id}"><span
@@ -48,7 +48,7 @@
 							th:text="${owner.lastName}"></span></a>
 					</div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<img src="/images/dogChasingBird.png"
 						alt="Dog on leash chasing bird" />
 				</div>

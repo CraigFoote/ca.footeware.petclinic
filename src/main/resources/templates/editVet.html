@@ -38,11 +38,11 @@
 								class="form-control" th:value="${vet.lastName}" />
 						</div>
 						<div class="row pb-2">
-							<input type="email" name="email" placeholder="Email"
+							<input type="email" name="email" placeholder="Email" required="required"
 								class="form-control" th:value="${vet.email}" />
 						</div>
 						<div class="row pb-2">
-							<input type="text" name="phone" class="form-control"
+							<input type="text" name="phone" class="form-control" required="required"
 								maxlength="12" placeholder="Phone Number ###-###-####"
 								pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:value="${vet.phone}" />
 						</div>

@@ -24,24 +24,24 @@
 		<div class="jumbotron">
 			<h2>Pet Owner</h2>
 			<div class="row">
-				<div class="col-sm-6">
-					<div class="list">
+				<div class="col-sm-8">
+					<div class="row pb-2">
 						<span class="label">Name:&nbsp;</span><span
 							th:text="${owner.firstName}"></span>&nbsp;<span
 							th:text="${owner.lastName}"></span>
 					</div>
-					<div class="list">
+					<div class="row pb-2">
 						<span class="label">Email:&nbsp;</span><a
 							th:href="'mailto:'+${owner.email}"><span
 							th:text="${owner.email}"></span></a>
 					</div>
-					<div class="list">
+					<div class="row pb-2">
 						<span class="label">Phone:&nbsp;</span><a
 							th:href="'tel:'+${owner.phone}"><span
 							th:text="${owner.phone}"></span></a>
 					</div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<img src="/images/dogChasingBird.png"
 						alt="Dog on leash chasing bird" />
 				</div>

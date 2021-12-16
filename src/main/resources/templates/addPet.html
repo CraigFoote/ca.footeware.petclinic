@@ -44,14 +44,14 @@
 						</div>
 						<div class="row pb-2 form-check">
 							<input type="radio" name="gender" value="MALE"
-								class="form-check-input" required="required" checked="checked"><label
+								class="form-check-input" required="required"><label
 								for="gender">Male</label>&nbsp;&nbsp;&nbsp;<input type="radio"
 								name="gender" value="FEMALE" class="form-check-input"
 								required="required"><label for="gender">Female</label>
 						</div>
 						<div class="row pb-2">
 							<label for="ownerId">Available Owners:</label> <select
-								name="ownerId" size="5" class="form-control">
+								name="ownerId" size="5" class="form-control" required="required">
 								<option th:each="owner : ${owners}"
 									th:title="${owner.email} ?: ${owner.phone}"
 									th:value="${owner.id}"
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-sm-12 btn-grp">
 						<button class="btn-warning float-right" type="button"
 							onclick="window.location.href='/species/add'">Add a
 							Species</button>

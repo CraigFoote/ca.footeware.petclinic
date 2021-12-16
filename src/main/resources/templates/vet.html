@@ -24,24 +24,24 @@
 		<div class="jumbotron">
 			<h2>Vet</h2>
 			<div class="row">
-				<div class="col-sm-6">
-					<div class="list">
+				<div class="col-sm-8">
+					<div class="row pb-2">
 						<span class="label">Name:&nbsp;</span><span
 							th:text="${vet.firstName}"></span>&nbsp;<span
 							th:text="${vet.lastName}"></span>
 					</div>
-					<div class="list">
+					<div class="row pb-2">
 						<span class="label">Email:&nbsp;</span><a
 							th:href="'mailto:'+${vet.email}"><span
 							th:text="${vet.email}"></span></a>
 					</div>
-					<div class="list">
+					<div class="row pb-2">
 						<span class="label">Phone:&nbsp;</span><a
 							th:href="'tel:'+${vet.phone}"><span
 							th:text="${vet.phone}"></span></a>
 					</div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<img src="/images/vet.png"
 						alt="Veterinarian" />
 				</div>

@@ -32,25 +32,26 @@
 								placeholder="Name*" class="form-control" th:value="${pet.name}" />
 						</div>
 						<div class="row pb-2">
+						    <label for="species">Species:&nbsp;</label>
 							<select name="species" class="form-control" required="required">
 								<option th:each="species : ${allSpecies}" th:value="${species.id}"
 									th:text="${species.name}"></option>
 							</select>
 						</div>
 						<div class="row pb-2">
-							<input class="form-control" type="number" name="weight"
+							<input class="form-control" type="number" name="weight" required="required"
 								placeholder="Weight in kgs" th:value="${pet.weight}" />
 						</div>
 						<div class="row pb-2 form-check">
 							<input type="radio" name="gender" value="MALE"
-								class="form-check-input" required="required" checked="checked"><label
+								class="form-check-input" required="required" checked="${pet.gender == 'MALE'}"><label
 								for="gender">Male</label>&nbsp;&nbsp;&nbsp;<input type="radio"
-								name="gender" value="FEMALE" class="form-check-input"
+								name="gender" value="FEMALE" class="form-check-input" checked="${pet.gender == 'FEMALE'}"
 								required="required"><label for="gender">Female</label>
 						</div>
 						<div class="row pb-2">
 							<label for="ownerId">Owner:&nbsp;</label> 
-							<select name="ownerId" size="5" class="form-control" th:if="${pet.owner == null}">
+							<select name="ownerId" size="5" required="required" class="form-control" th:if="${pet.owner == null}">
 								<option th:each="owner : ${allOwners}"
 									th:title="${owner.email}+','+${owner.phone}"
 									th:value="${owner.id}"

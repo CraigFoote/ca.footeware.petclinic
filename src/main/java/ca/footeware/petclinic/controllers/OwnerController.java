@@ -36,8 +36,8 @@ public class OwnerController {
 	}
 
 	@PostMapping("/addOwner")
-	public String createOwner(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-			@RequestParam("email") String email, @RequestParam("phone") String phone, Model model)
+	public String createOwner(@RequestParam(name = "firstName", required = true) String firstName, @RequestParam("lastName") String lastName,
+			@RequestParam(name = "email", required = true) String email, @RequestParam(name = "phone", required = true) String phone, Model model)
 			throws LostPersonException {
 		Owner owner = new Owner(firstName, lastName, email, phone);
 		Owner savedOwner = ownerService.save(owner);
@@ -71,9 +71,9 @@ public class OwnerController {
 	}
 
 	@PostMapping("/edit")
-	String updateOwner(@RequestParam("id") String id, @RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
-			@RequestParam("phone") String phone, @RequestParam(name = "petIds", required = false) List<String> petIds,
+	String updateOwner(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "firstName", required = true) String firstName,
+			@RequestParam(name = "lastName", required = true) String lastName, @RequestParam(name = "email", required = true) String email,
+			@RequestParam(name = "phone", required = true) String phone,
 			Model model) {
 		Owner owner = ownerService.get(id);
 		owner.setFirstName(firstName);

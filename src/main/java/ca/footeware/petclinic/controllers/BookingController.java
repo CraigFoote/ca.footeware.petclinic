@@ -36,8 +36,8 @@ public class BookingController {
 	}
 
 	@PostMapping("/add")
-	public String createBooking(@RequestParam("petId") String petId, @RequestParam("doctorId") String vetId,
-			@RequestParam("procedureId") String procedureId, @RequestParam("date") String date, Model model)
+	public String createBooking(@RequestParam(name = "petId", required = true) String petId, @RequestParam(name = "vetId", required = true) String vetId,
+			@RequestParam(name = "procedureId", required = true) String procedureId, @RequestParam(name = "date", required = true) String date, Model model)
 	{
 	    Pet pet = petService.get(petId);
 	    Vet vet = vetService.get(vetId);
@@ -82,9 +82,9 @@ public class BookingController {
 	}
 
 	@PostMapping("/edit")
-	String updateBooking(@RequestParam("id") String id, @RequestParam("petId") String petId,
-			@RequestParam("vetId") String vetId, @RequestParam("procedureId") String procedureId,
-			@RequestParam("date") String date,
+	String updateBooking(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "petId", required = true) String petId,
+			@RequestParam(name = "vetId", required = true) String vetId, @RequestParam(name = "procedureId", required = true) String procedureId,
+			@RequestParam(name = "date", required = true) String date,
 			Model model) {
 		Booking booking = bookingService.get(id);
 		booking.setPet(petService.get(petId));

@@ -44,7 +44,7 @@ public class PetController {
 	private SpeciesService speciesService;
 
 	@PostMapping("/search")
-	String searchByName(@RequestParam("name") String name, Model model) {
+	String searchByName(@RequestParam(name = "name", required = true) String name, Model model) {
 		model.addAttribute("name", name);
 		List<Pet> pets = petService.getByName(name);
 		pets.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
@@ -99,9 +99,9 @@ public class PetController {
 	}
 
 	@PostMapping
-	public String savePet(@RequestParam("name") String name, @RequestParam("speciesId") String speciesId,
-			@RequestParam(name = "weight", required = true) int weight, @RequestParam("gender") Pet.Gender gender,
-			@RequestParam(name = "ownerId", required = false) String ownerId, Model model) throws LostPetException {
+	public String savePet(@RequestParam(name = "name", required = true) String name, @RequestParam(name = "speciesId", required = true) String speciesId,
+			@RequestParam(name = "weight", required = true) int weight, @RequestParam(name = "gender", required = true) Pet.Gender gender,
+			@RequestParam(name = "ownerId", required = true) String ownerId, Model model) throws PetException {
 		Species species = speciesService.get(speciesId);
 		Owner owner = ownerService.get(ownerId);
 		Pet pet = new Pet(name, species, weight, gender, owner);
@@ -113,9 +113,9 @@ public class PetController {
 	}
 
 	@PostMapping("/edit")
-	public String updatePet(@RequestParam("id") String id, @RequestParam("name") String name,
-			@RequestParam("speciesId") String speciesId, @RequestParam("weight") int weight,
-			@RequestParam("gender") Pet.Gender gender, @RequestParam(name = "ownerId", required = false) String ownerId, Model model) throws PetException {
+	public String updatePet(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "name", required = true) String name,
+			@RequestParam(name = "speciesId", required = true) String speciesId, @RequestParam(name = "weight", required = true) int weight,
+			@RequestParam(name = "gender", required = true) Pet.Gender gender, @RequestParam(name = "ownerId", required = true) String ownerId, Model model) throws PetException {
 		Pet pet = petService.get(id);
 		pet.setName(name);
 		pet.setSpecies(speciesService.get(species.getId()));

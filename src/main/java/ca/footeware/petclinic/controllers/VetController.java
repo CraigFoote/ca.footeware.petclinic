@@ -35,9 +35,9 @@ public class VetController {
 		return "addVet";
 	}
 
-	@PostMapping!=
-	public String createVet(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-			@RequestParam("email") String email, @RequestParam("phone") String phone, Model model)
+	@PostMapping
+	public String createVet(@RequestParam(name = "firstName", required = true) String firstName, @RequestParam(name = "lastName", required = true) String lastName,
+			@RequestParam(name = "email", required = true) String email, @RequestParam(name = "phone", required = true) String phone, Model model)
 			throws LostPersonException {
 		Vet vet = new Vet(firstName, lastName, email, phone);
 		Vet savedVet = vetService.save(vet);
@@ -71,9 +71,9 @@ public class VetController {
 	}
 
 	@PostMapping("/edit")
-	String updateVet(@RequestParam("id") String id, @RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
-			@RequestParam("phone") String phone,
+	String updateVet(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "firstName", required = true) String firstName,
+			@RequestParam(name = "lastName", required = true) String lastName, @RequestParam(name = "email", required = true) String email,
+			@RequestParam(name = "phone", required = true) String phone,
 			Model model) {
 		Vet vet = vetService.get(id);
 		vet.setFirstName(firstName);

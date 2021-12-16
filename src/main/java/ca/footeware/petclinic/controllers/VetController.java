@@ -74,13 +74,16 @@ public class VetController {
 	String updateVet(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "firstName", required = true) String firstName,
 			@RequestParam(name = "lastName", required = true) String lastName, @RequestParam(name = "email", required = true) String email,
 			@RequestParam(name = "phone", required = true) String phone,
-			Model model) {
+			Model model) throws PersonException {
 		Vet vet = vetService.get(id);
 		vet.setFirstName(firstName);
 		vet.setLastName(lastName);
 		vet.setEmail(email);
 		vet.setPhone(phone);
-		vetService.save(vet);
+		Vet savedVet = vetService.save(vet);
+		if (savedVet == null){
+		    throw new PersonException("Saved vet not found.");
+		}
 		return getVets(model);
 	}
 

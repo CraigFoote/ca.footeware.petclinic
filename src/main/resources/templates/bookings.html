@@ -32,18 +32,14 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>Pet</th>
-						<th>Vet</th>
 						<th>Procedure</th>
-						<th>Date</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="booking : ${bookings}" class="clickable-row"
-						th:data-href="@{/bookings/{id}(id=${booking.booking.id})}">
+						th:data-href="@{/bookings/{id}(id=${booking.id})}">
 					    <td th:text="${booking.pet.name}">Pet</td>
-						<td th:text="${booking.vet.name}">Vet</td>
 						<td th:text="${booking.procedure.name}">Procedure</td>
-						<td th:text="${booking.booking.date}">Date</td>
 					</tr>
 				</tbody>
 			</table>

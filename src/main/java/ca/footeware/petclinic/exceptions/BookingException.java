@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.exceptions;
 
@@ -10,12 +10,12 @@ package ca.footeware.petclinic.exceptions;
 public class BookingException extends Exception {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
+	 *
 	 */
 	public BookingException() {
 	}

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.models;
 
@@ -22,7 +22,7 @@ public abstract class Person {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param firstName {@link String}
 	 * @param lastName  {@link String}
 	 * @param email     {@link String}

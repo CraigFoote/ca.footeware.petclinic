@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.models;
 
@@ -27,7 +27,7 @@ public class Pet {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param name      {@link String}
 	 * @param species {@link Species}
 	 */

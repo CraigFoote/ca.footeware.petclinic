@@ -25,23 +25,23 @@
 			<h2>Pet</h2>
 			<div class="row">
 				<div class="col-sm-8">
-					<div class="row pb-2">
+					<div class="row-fluid pb-2">
 						<span class="label">Name:&nbsp;</span>
 						<span th:text="${pet.name}"></span>
 					</div>
-					<div class="row pb-2">
+					<div class="row-fluid pb-2">
 						<span class="label">Species:&nbsp;</span><span
-							th:text="${species.name}"></span>
+							th:text="${pet.species.name}"></span>
 					</div>
-					<div class="row pb-2">
+					<div class="row-fluid pb-2">
 						<span class="label">Weight:&nbsp;</span><span
 							th:text="${pet.weight}"></span>
 					</div>
-					<div class="row pb-2">
+					<div class="row-fluid pb-2">
 						<span class="label">Gender:&nbsp;</span><span class="tolower"
 							th:text="${pet.gender}"></span>
 					</div>
-					<div class="row pb-2">
+					<div class="row-fluid pb-2">
 						<span class="label">Owner:&nbsp;</span><a
 							th:if="${owner}"
 							th:href="'/owners/'+${owner.id}"><span

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.controllers;
 
@@ -35,14 +35,14 @@ public class OwnerController {
 		return "addOwner";
 	}
 
-	@PostMapping("/addOwner")
+	@PostMapping
 	public String createOwner(
-	    @RequestParam(name = "firstName", required = true) String firstName, 
+	    @RequestParam(name = "firstName", required = true) String firstName,
 	    @RequestParam(name = "lastName", required = true) String lastName,
-		@RequestParam(name = "email", required = true) String email, 
-		@RequestParam(name = "phone", required = true) String phone, 
+		@RequestParam(name = "email", required = true) String email,
+		@RequestParam(name = "phone", required = true) String phone,
 		Model model)
-			throws LostPersonException 
+			throws PersonException
 	{
 		Owner owner = new Owner(firstName, lastName, email, phone);
 		Owner savedOwner = ownerService.save(owner);
@@ -55,7 +55,7 @@ public class OwnerController {
 
 	@GetMapping("{id}")
 	String getOwner(@PathVariable String id, Model model) {
-		Person owner = ownerService.getById(id);
+		Person owner = ownerService.get(id);
 		model.addAttribute("owner", owner);
 		return "owner";
 	}
@@ -77,12 +77,12 @@ public class OwnerController {
 
 	@PostMapping("/edit")
 	String updateOwner(
-	    @RequestParam(name = "id", required = true) String id, 
+	    @RequestParam(name = "id", required = true) String id,
 	    @RequestParam(name = "firstName", required = true) String firstName,
-		@RequestParam(name = "lastName", required = true) String lastName, 
+		@RequestParam(name = "lastName", required = true) String lastName,
 		@RequestParam(name = "email", required = true) String email,
-		@-RequestParam(name = "phone", required = true) String phone,
-		Model model) 
+		@RequestParam(name = "phone", required = true) String phone,
+		Model model) throws PersonException
 	{
 		Owner owner = ownerService.get(id);
 		owner.setFirstName(firstName);

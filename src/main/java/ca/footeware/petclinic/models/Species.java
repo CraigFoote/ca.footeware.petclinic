@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.models;
 
@@ -20,7 +20,7 @@ public class Species {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param name {@link String}
 	 */
 	public Species(String name) {
@@ -65,10 +65,7 @@ public class Species {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		Species other = (Species) obj;

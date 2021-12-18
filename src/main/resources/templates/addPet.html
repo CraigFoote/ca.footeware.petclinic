@@ -26,32 +26,33 @@
 			<form action="#" th:action="@{/pets}" method="post">
 				<div class="row">
 					<div class="col-sm-8">
-						<div class="row pb-2">
+						<div class="row-fluid pb-2">
 							<input id="name" class="form-control" type="text" name="name"
 								required="required" autofocus="autofocus" placeholder="Name*" />
 						</div>
-						<div class="row pb-2">
-							<span th:if="${#lists.isEmpty(allSpecies)}">No species found.</span>
-							<select th:unless="${#lists.isEmpty(allSpecies)}" name="species"
-								class="form-control" required="required">
-								<option th:each="species : ${allSpecies}" th:value="${species.id}"
-									th:text="${species.name}"></option>
+						<div class="row-fluid pb-2">
+							<span th:if="${#lists.isEmpty(allSpecies)}">No species
+								found.</span> <select th:unless="${#lists.isEmpty(allSpecies)}"
+								name="speciesId" class="form-control" required="required">
+								<option th:each="species : ${allSpecies}"
+									th:value="${species.id}" th:text="${species.name}"></option>
 							</select>
 						</div>
-						<div class="row pb-2">
+						<div class="row-fluid pb-2">
 							<input class="form-control" type="number" name="weight"
 								placeholder="Weight in kgs" />
 						</div>
-						<div class="row pb-2 form-check">
+						<div class="row-fluid pb-2 form-check">
 							<input type="radio" name="gender" value="MALE"
 								class="form-check-input" required="required"><label
 								for="gender">Male</label>&nbsp;&nbsp;&nbsp;<input type="radio"
 								name="gender" value="FEMALE" class="form-check-input"
 								required="required"><label for="gender">Female</label>
 						</div>
-						<div class="row pb-2">
-							<label for="ownerId" class="form-label">Available Owners:</label> <select
-								name="ownerId" size="5" class="form-control" required="required">
+						<div class="row-fluid pb-2">
+							<label for="ownerId" class="form-label">Available Owners:</label>
+							<select name="ownerId" size="5" class="form-control"
+								required="required">
 								<option th:each="owner : ${owners}"
 									th:title="${owner.email} ?: ${owner.phone}"
 									th:value="${owner.id}"
@@ -68,7 +69,7 @@
 						<button class="btn-warning float-right" type="button"
 							onclick="window.location.href='/species/add'">Add a
 							Species</button>
-						<input th:unless="${#lists.isEmpty(species)}" type="submit"
+						<input th:unless="${#lists.isEmpty(allSpecies)}" type="submit"
 							class="btn-primary float-right" value="Add Pet" />
 					</div>
 				</div>

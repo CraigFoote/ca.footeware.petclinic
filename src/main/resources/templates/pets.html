@@ -24,8 +24,8 @@
 		<div class="jumbotron">
 			<h2>Pets</h2>
 			<div th:if="${#lists.isEmpty(pets)}" class="row">
-				<span th:if="${name}" th:text="'No pets found matching '${name}'."></span>
-				<span th:unless="${name}" th:text="No pets found."></span>
+				<span th:if="${name}" th:text="'No pets found matching \'' + ${name} + '\'.'"></span>
+				<span th:unless="${name}">No pets found.</span>
 			</div>
 			<table class="table table-striped table-hover"
 				title="Click a row to see its details."

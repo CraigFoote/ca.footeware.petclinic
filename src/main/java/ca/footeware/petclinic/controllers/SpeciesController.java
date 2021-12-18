@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.controllers;
 
@@ -32,7 +32,7 @@ public class SpeciesController {
 
 	@PostMapping
 	String createSpecies(@RequestParam(name = "name", required = true) String name, Model model) {
-		speciesService.saveSpecies(new Species(name));
+		speciesService.save(new Species(name));
 		model.addAttribute("species", speciesService.getAll());
 		return "addPet";
 	}

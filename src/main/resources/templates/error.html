@@ -5,27 +5,30 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" style="background-color: #008080 !important">
-        <a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="nav">
-                <li class="nav-link"><a href="/">Home</a></li>
-                <li class="nav-link"><a href="/owners">Owners</a></li>
-                <li class="nav-link"><a href="/pets">Pets</a></li>
-                <li class="nav-link"><a href="/vets">Vets</a></li>
-                <li class="nav-link"><a href="/bookings">Bookings</a></li>
-            </ul><li></li>
-        </div>
-    </nav>
-    <section class="container-sm">
-        <div class="jumbotron">
-            <h2>Oops! Something bad happened.</h2>
-            <div class="row pb-2" th:text="Status: ${status}"></div>
-            <div class="row pb-2" th:text="Error: ${error}"></div>
-        </div>
-    </section>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
+		style="background-color: #008080 !important">
+		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="nav">
+				<li class="nav-link"><a href="/">Home</a></li>
+				<li class="nav-link"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/pets">Pets</a></li>
+				<li class="nav-link"><a href="/vets">Vets</a></li>
+				<li class="nav-link"><a href="/bookings">Bookings</a></li>
+			</ul>
+			<li></li>
+		</div>
+	</nav>
+	<section class="container-sm">
+		<div class="jumbotron">
+			<h2>Oops! Something bad happened.</h2>
+			<div class="row pb-2" th:text="'Status: '+${status}"></div>
+			<div class="row pb-2" th:text="'Error: '+${error}"></div>
+		</div>
+	</section>
 </body>
 </html>

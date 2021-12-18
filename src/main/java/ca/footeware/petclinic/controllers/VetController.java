@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.controllers;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.footeware.petclinic.exceptions.PersonException;
-import ca.footeware.petclinic.models.Vet;
 import ca.footeware.petclinic.models.Person;
+import ca.footeware.petclinic.models.Vet;
 import ca.footeware.petclinic.services.VetService;
 
 /**
@@ -36,9 +36,10 @@ public class VetController {
 	}
 
 	@PostMapping
-	public String createVet(@RequestParam(name = "firstName", required = true) String firstName, @RequestParam(name = "lastName", required = true) String lastName,
-			@RequestParam(name = "email", required = true) String email, @RequestParam(name = "phone", required = true) String phone, Model model)
-			throws LostPersonException {
+	public String createVet(@RequestParam(name = "firstName", required = true) String firstName,
+			@RequestParam(name = "lastName", required = true) String lastName,
+			@RequestParam(name = "email", required = true) String email,
+			@RequestParam(name = "phone", required = true) String phone, Model model) throws PersonException {
 		Vet vet = new Vet(firstName, lastName, email, phone);
 		Vet savedVet = vetService.save(vet);
 		if (savedVet == null) {
@@ -57,7 +58,7 @@ public class VetController {
 
 	@GetMapping
 	String getVets(Model model) {
-		List<Doctor> vets = vetService.getAll();
+		List<Vet> vets = vetService.getAll();
 		vets.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		model.addAttribute("vets", vets);
 		return "vets";
@@ -71,18 +72,19 @@ public class VetController {
 	}
 
 	@PostMapping("/edit")
-	String updateVet(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "firstName", required = true) String firstName,
-			@RequestParam(name = "lastName", required = true) String lastName, @RequestParam(name = "email", required = true) String email,
-			@RequestParam(name = "phone", required = true) String phone,
-			Model model) throws PersonException {
+	String updateVet(@RequestParam(name = "id", required = true) String id,
+			@RequestParam(name = "firstName", required = true) String firstName,
+			@RequestParam(name = "lastName", required = true) String lastName,
+			@RequestParam(name = "email", required = true) String email,
+			@RequestParam(name = "phone", required = true) String phone, Model model) throws PersonException {
 		Vet vet = vetService.get(id);
 		vet.setFirstName(firstName);
 		vet.setLastName(lastName);
 		vet.setEmail(email);
 		vet.setPhone(phone);
 		Vet savedVet = vetService.save(vet);
-		if (savedVet == null){
-		    throw new PersonException("Saved vet not found.");
+		if (savedVet == null) {
+			throw new PersonException("Saved vet not found.");
 		}
 		return getVets(model);
 	}

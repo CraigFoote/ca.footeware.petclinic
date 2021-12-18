@@ -1,8 +1,10 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.controllers;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ca.footeware.petclinic.exceptions.PersonException;
+import ca.footeware.petclinic.exceptions.BookingException;
+import ca.footeware.petclinic.models.Booking;
+import ca.footeware.petclinic.models.Pet;
+import ca.footeware.petclinic.models.Procedure;
 import ca.footeware.petclinic.models.Vet;
-import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.services.BookingService;
+import ca.footeware.petclinic.services.PetService;
+import ca.footeware.petclinic.services.ProcedureService;
+import ca.footeware.petclinic.services.VetService;
 
 /**
  * @author Footeware.ca
@@ -29,6 +36,15 @@ public class BookingController {
 
 	@Autowired
 	private BookingService bookingService;
+	
+	@Autowired
+	private PetService petService;
+	
+	@Autowired
+	private ProcedureService procedureService;
+	
+	@Autowired
+	private VetService vetService;
 
 	@GetMapping("/add")
 	public String getAddBookingPage(Model model) {
@@ -37,16 +53,16 @@ public class BookingController {
 
 	@PostMapping("/add")
 	public String createBooking(
-	    @RequestParam(name = "petId", required = true) String petId, 
+	    @RequestParam(name = "petId", required = true) String petId,
 	    @RequestParam(name = "vetId", required = true) String vetId,
-		@RequestParam(name = "procedureId", required = true) String procedureId, 
-		@RequestParam(name = "date", required = true) String date, 
-		Model model)
+		@RequestParam(name = "procedureId", required = true) String procedureId,
+		@RequestParam(name = "date", required = true) String date,
+		Model model) throws BookingException
 	{
 	    Pet pet = petService.get(petId);
 	    Vet vet = vetService.get(vetId);
 	    Procedure procedure = procedureService.get(procedureId);
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); 
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
 	    Booking booking = new Booking(pet, vet, procedure, dateTime);
 	    Booking savedBooking = bookingService.save(booking);
@@ -87,18 +103,18 @@ public class BookingController {
 
 	@PostMapping("/edit")
 	String updateBooking(
-	    @RequestParam(name = "id", required = true) String id, 
+	    @RequestParam(name = "id", required = true) String id,
 	    @RequestParam(name = "petId", required = true) String petId,
-		@RequestParam(name = "vetId", required = true) String vetId, 
+		@RequestParam(name = "vetId", required = true) String vetId,
 		@RequestParam(name = "procedureId", required = true) String procedureId,
 		@RequestParam(name = "date", required = true) String date,
-		Model model) 
+		Model model) throws BookingException
 	{
 		Booking booking = bookingService.get(id);
 		booking.setPet(petService.get(petId));
 		booking.setVet(vetService.get(vetId));
 		booking.setProcedure(procedureService.get(procedureId));
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); 
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
 		booking.setDate(dateTime);
 		Booking savedBooking = bookingService.save(booking);
@@ -107,3 +123,5 @@ public class BookingController {
 		}
 		return getBookings(model);
 	}
+}
+

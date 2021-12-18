@@ -1,5 +1,5 @@
 /**
- *
+ * 
  */
 package ca.footeware.petclinic.services;
 
@@ -16,21 +16,21 @@ import ca.footeware.petclinic.repositories.IVetRepository;
  *
  */
 @Service
-public class DoctorService {
+public class VetService {
 
 	@Autowired
 	private IVetRepository repository;
 
-	public Vet get(String id) {
-		return repository.findById(id).get();
-	}
-
-	public Vet save(Vet vet) {
-		return repository.save(vet);
+	public Vet get(String vetId) {
+		return repository.findById(vetId).get();
 	}
 
 	public List<Vet> getAll() {
 		return repository.findAll();
+	}
+
+	public Vet save(Vet vet) {
+		return repository.save(vet);
 	}
 
 }

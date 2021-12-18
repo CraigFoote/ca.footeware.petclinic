@@ -1,7 +1,9 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.services;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,10 @@ public class ProcedureService {
 
 	public Procedure get(String id) {
 		return repository.findById(id).get();
+	}
+
+	public List<Procedure> getAll() {
+		return repository.findAll();
 	}
 
 }

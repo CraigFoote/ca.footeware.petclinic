@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.models;
 
@@ -23,7 +23,7 @@ public class Booking {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param pet    {@link Pet}
 	 * @param vet {@link Vet}
 	 * @param date     {@link LocalDateTime}
@@ -44,6 +44,7 @@ public class Booking {
 	}
 
 	public String getId() {
+		return id;
 	}
 
 	public Pet getPet() {
@@ -56,7 +57,7 @@ public class Booking {
 
 	public void setVet(Vet vet) {
 		this.vet = vet;
-	};
+	}
 
 	public void setId(String id) {
 		this.id = id;
@@ -65,11 +66,11 @@ public class Booking {
 	public void setPet(Pet pet) {
 		this.pet = pet;
 	}
-	
+
 	public void setProcedure(Procedure procedure) {
 	    this.procedure = procedure;
 	}
-	
+
 	public Procedure getProcedure() {
 	    return procedure;
 	}

@@ -1,11 +1,9 @@
 /**
- * 
+ *
  */
 package ca.footeware.petclinic.controllers;
 
 import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ca.footeware.petclinic.exceptions.LostPetException;
+import ca.footeware.petclinic.exceptions.PetException;
 import ca.footeware.petclinic.models.Owner;
-import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.models.Pet;
 import ca.footeware.petclinic.models.Species;
 import ca.footeware.petclinic.services.OwnerService;
@@ -56,7 +53,7 @@ public class PetController {
 	@DeleteMapping("/{id}")
 	public String deletePet(@PathVariable("id") String id, Model model) {
 		Pet pet = petService.get(id);
-		petService.deletePet(pet);
+		petService.delete(pet);
 		return getPets(model);
 	}
 
@@ -73,7 +70,7 @@ public class PetController {
 
 	@GetMapping("/{id}")
 	public String getPet(@PathVariable("id") String id, Model model) {
-		Pet pet = petService.getPet(id);
+		Pet pet = petService.get(id);
 		model.addAttribute("pet", pet);
 		return "pet";
 	}
@@ -101,13 +98,13 @@ public class PetController {
 
 	@PostMapping
 	public String savePet(
-	    @RequestParam(name = "name", required = true) String name, 
+	    @RequestParam(name = "name", required = true) String name,
 	    @RequestParam(name = "speciesId", required = true) String speciesId,
-		@RequestParam(name = "weight", required = true) int weight, 
+		@RequestParam(name = "weight", required = true) int weight,
 		@RequestParam(name = "gender", required = true) Pet.Gender gender,
-		@RequestParam(name = "ownerId", required = true) String ownerId, 
-		Model model) 
-		    throws PetException 
+		@RequestParam(name = "ownerId", required = true) String ownerId,
+		Model model)
+		    throws PetException
     {
 		Species species = speciesService.get(speciesId);
 		Owner owner = ownerService.get(ownerId);
@@ -121,21 +118,21 @@ public class PetController {
 
 	@PostMapping("/edit")
 	public String updatePet(
-	    @RequestParam(name = "id", required = true) String id, 
+	    @RequestParam(name = "id", required = true) String id,
 	    @RequestParam(name = "name", required = true) String name,
-		@RequestParam(name = "speciesId", required = true) String speciesId, 
+		@RequestParam(name = "speciesId", required = true) String speciesId,
 		@RequestParam(name = "weight", required = true) int weight,
-		@RequestParam(name = "gender", required = true) Pet.Gender gender, 
-		@RequestParam(name = "ownerId", required = true) String ownerId, 
-		Model model) 
-		    throws PetException 
+		@RequestParam(name = "gender", required = true) Pet.Gender gender,
+		@RequestParam(name = "ownerId", required = true) String ownerId,
+		Model model)
+		    throws PetException
     {
 		Pet pet = petService.get(id);
 		pet.setName(name);
-		pet.setSpecies(speciesService.get(species.getId()));
+		pet.setSpecies(speciesService.get(speciesId));
 		pet.setWeight(weight);
 		pet.setGender(gender);
-		pet.setOwner(OwnerService.get(ownerId));
+		pet.setOwner(ownerService.get(ownerId));
 		Pet savedPet = petService.save(pet);
 		if (savedPet == null) {
 			throw new PetException("Saved pet not found.");

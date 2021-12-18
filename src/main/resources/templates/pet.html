@@ -43,10 +43,9 @@
 					</div>
 					<div class="row-fluid pb-2">
 						<span class="label">Owner:&nbsp;</span><a
-							th:if="${owner}"
-							th:href="'/owners/'+${owner.id}"><span
-							th:text="${owner.firstName}"></span>&nbsp;<span
-							th:text="${owner.lastName}"></span></a>
+							th:href="'/owners/'+${pet.owner.id}"><span
+							th:text="${pet.owner.firstName}"></span>&nbsp;<span
+							th:text="${pet.owner.lastName}"></span></a>
 					</div>
 				</div>
 				<div class="col-sm-4">

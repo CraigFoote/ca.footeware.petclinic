@@ -48,10 +48,16 @@ public class BookingController {
 
 	@GetMapping("/add")
 	public String getAddBookingPage(Model model) {
+		List<Pet> pets = petService.getAll();
+		List<Vet> vets = vetService.getAll();
+		List<Procedure> procedures = procedureService.getAll();
+		model.addAttribute("pets", pets);
+		model.addAttribute("vets", vets);
+		model.addAttribute("procedures", procedures);
 		return "addBooking";
 	}
 
-	@PostMapping("/add")
+	@PostMapping
 	public String createBooking(
 	    @RequestParam(name = "petId", required = true) String petId,
 	    @RequestParam(name = "vetId", required = true) String vetId,

@@ -22,21 +22,27 @@
 	</nav>
 	<section class="container-sm">
 		<div class="jumbotron">
-			<h2>Add a Species</h2>
-			<form action="/species" method="post">
-				<div class="row">
-					<div class="col-sm-8">
+			<h2>Add a Procedure</h2>
+			<form action="/procedures" method="post">
+				<div class="col-sm-8">
+					<div class="row-fluid pb-2">
+						<label for="name" class="label form-label">Procedure Name:</label>
 						<input name="name" type="text" class="form-control" required="required"
-							placeholder="Species Name" autofocus="autofocus" />
+							placeholder="Procedure Name" autofocus="autofocus" />
 					</div>
-					<div class="col-sm-4">
-						<img src="/images/pig.png" alt="pig" />
+					<div class="row-fluid pb-2">
+						<label for="cost" class="label form-label">Procedure Cost:</label>
+						<input name="cost" type="number" class="form-control" required="required"
+							placeholder="Procedure Cost" autofocus="autofocus" />
 					</div>
+				</div>
+				<div class="col-sm-4">
+					<img src="/images/pig.png" alt="pig" />
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
 						<input type="submit" class="btn-primary float-right"
-							value="Add Species" />
+							value="Add Procedure" />
 					</div>
 				</div>
 			</form>

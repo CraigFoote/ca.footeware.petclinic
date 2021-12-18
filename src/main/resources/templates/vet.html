@@ -15,7 +15,7 @@
 				<li class="nav-link"><a href="/">Home</a></li>
 				<li class="nav-link"><a href="/owners">Owners</a></li>
 				<li class="nav-link"><a href="/pets">Pets</a></li>
-				<li class="nav-link active"><a href="/vets">Vetss</a></li>
+				<li class="nav-link active"><a href="/vets">Vets</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
 			</ul>
 		</div>
@@ -25,17 +25,17 @@
 			<h2>Vet</h2>
 			<div class="row">
 				<div class="col-sm-8">
-					<div class="row pb-2">
+					<div class="row-fluid pb-2">
 						<span class="label">Name:&nbsp;</span><span
 							th:text="${vet.firstName}"></span>&nbsp;<span
 							th:text="${vet.lastName}"></span>
 					</div>
-					<div class="row pb-2">
+					<div class="row-fluid pb-2">
 						<span class="label">Email:&nbsp;</span><a
 							th:href="'mailto:'+${vet.email}"><span
 							th:text="${vet.email}"></span></a>
 					</div>
-					<div class="row pb-2">
+					<div class="row-fluid pb-2">
 						<span class="label">Phone:&nbsp;</span><a
 							th:href="'tel:'+${vet.phone}"><span
 							th:text="${vet.phone}"></span></a>

@@ -37,4 +37,8 @@ public class OwnerService {
 		return repository.findAll();
 	}
 
+	public List<Owner> findByFirstNameAndLastName(String firstName, String lastName) {
+		return repository.findByFirstNameAndLastName(firstName, lastName);
+	}
+
 }

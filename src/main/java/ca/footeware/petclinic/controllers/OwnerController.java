@@ -44,6 +44,20 @@ public class OwnerController {
 		Model model)
 			throws PersonException
 	{
+		List<Owner> firstNameAndLastName = ownerService.findByFirstNameAndLastName(firstName, lastName);
+		if(firstNameAndLastName.size() > 0) {
+			for (Owner owner : firstNameAndLastName) {
+				if (owner.getEmail().equals(email)) {
+					String message = "A person already exists by that name and email.";
+					model.addAttribute("errorMessage", message);
+					throw new PersonException(message);
+				} else if (owner.getPhone().equals(phone)) {
+					String message = "A person already exists by that name and phone number.";
+					model.addAttribute("errorMessage", message);
+					throw new PersonException(message);
+				}
+			}
+		}
 		Owner owner = new Owner(firstName, lastName, email, phone);
 		Owner savedOwner = ownerService.save(owner);
 		if (savedOwner == null) {

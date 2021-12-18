@@ -20,14 +20,39 @@
 				<li class="nav-link"><a href="/vets">Vets</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
 			</ul>
-			<li></li>
 		</div>
 	</nav>
 	<section class="container-sm">
 		<div class="jumbotron">
 			<h2>Oops! Something bad happened.</h2>
-			<div class="row pb-2" th:text="'Status: '+${status}"></div>
-			<div class="row pb-2" th:text="'Error: '+${error}"></div>
+			<div class="row-fluid pb-2">
+				<span class="label">Timestamp:&nbsp;</Span><span class="row-fluid pb-2"
+					th:text="${timestamp}"></span>
+			</div>
+			<div class="row-fluid pb-2">
+				<span class="label">Path:&nbsp;</Span><span class="row-fluid pb-2"
+					th:text="${path}"></span>
+			</div>
+			<div class="row-fluid pb-2">
+				<span class="label">Status:&nbsp;</Span><span class="row-fluid pb-2"
+					th:text="${status}"></span>
+			</div>
+			<div class="row-fluid pb-2">
+				<span class="label">Error:&nbsp;</Span><span class="row-fluid pb-2"
+					th:text="${error}"></span>
+			</div>
+			<div class="row-fluid pb-2">
+				<span class="label">Message:&nbsp;</Span><span class="row-fluid pb-2"
+					th:text="${message}"></span>
+			</div>
+			<div class="row-fluid pb-2">
+				<span class="label">Exception:&nbsp;</Span><span class="row-fluid pb-2"
+					th:text="${exception}"></span>
+			</div>
+			<div class="row-fluid pb-2">
+				<Span class="label">Trace:&nbsp;</Span><span class="row-fluid pb-2"
+					th:text="${trace}"></span>
+			</div>
 		</div>
 	</section>
 </body>

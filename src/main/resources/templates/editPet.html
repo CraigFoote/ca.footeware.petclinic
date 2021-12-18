@@ -27,38 +27,36 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<div class="row-fluid pb-2">
-							<input type="hidden" name="id" th:value="${pet.id}" /> <input
+							<input type="hidden" name="id" th:value="${pet.id}" /><label
+								for="name" class="label form-label">Name;</label> <input
 								type="text" name="name" maxlength="40" required="required"
 								placeholder="Name*" class="form-control" th:value="${pet.name}" />
 						</div>
 						<div class="row-fluid pb-2">
-						    <label for="speciesId" class="form-label">Species:&nbsp;</label>
+							<label for="speciesId" class="form-label label">Species:</label>
 							<select name="speciesId" class="form-control" required="required">
-								<option th:each="species : ${allSpecies}" th:value="${species.id}"
-									th:text="${species.name}"></option>
+								<option th:each="species : ${allSpecies}"
+									th:value="${species.id}" th:text="${species.name}"></option>
 							</select>
 						</div>
 						<div class="row-fluid pb-2">
-							<input class="form-control" type="number" name="weight" required="required"
-								placeholder="Weight in kgs" th:value="${pet.weight}" />
+							<label for="weight" class="form-label label">Weight
+								(kgs):</label> <input class="form-control" type="number" name="weight"
+								required="required" placeholder="Weight in kgs"
+								th:value="${pet.weight}" />
 						</div>
 						<div class="row-fluid pb-2 form-check">
-							<input type="radio" name="gender" value="MALE"
-								class="form-check-input" required="required" th:checked="${pet.gender == 'MALE'}"><label
-								for="gender">Male</label>&nbsp;&nbsp;&nbsp;<input type="radio"
-								name="gender" value="FEMALE" class="form-check-input" 
-								th:checked="${pet.gender == 'FEMALE'}"	required="required">
-								<label for="gender">Female</label>
+							<input type="radio" name="gender" id="male" value="MALE"
+								class="form-check-input" required="required"
+								th:checked="${pet.gender.name == 'MALE'}"><label for="male">Male</label><br />
+							<input type="radio" name="gender" id="female" value="FEMALE"
+								class="form-check-input" required="required"
+								th:checked="${pet.gender.name == 'FEMALE'}"> <label
+								for="female">Female</label>
 						</div>
 						<div class="row-fluid pb-2">
-							<label for="ownerId" class="form-label">Owner:&nbsp;</label> 
-							<select name="ownerId" size="5" required="required" class="form-control" th:if="${pet.owner == null}">
-								<option th:each="owner : ${allOwners}"
-									th:title="${owner.email}+','+${owner.phone}"
-									th:value="${owner.id}"
-									th:text="${owner.firstName}+' '+${owner.lastName}"></option>
-							</select>
-							<select name="ownerId" size="5" class="form-control" th:if="${pet.owner != null}">
+							<label for="ownerId" class="label form-label">Owner:</label>
+							<select name="ownerId" size="5" class="form-control">
 								<option th:each="owner : ${allOwners}"
 									th:title="${owner.email}+','+${owner.phone}"
 									th:value="${owner.id}"

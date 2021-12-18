@@ -16,7 +16,8 @@ html, body {
 }
 
 body {
-	background-color: #FFFAF0 !important;
+	background-color: #fffddf !important;
+	background-image: url("/images/prints.jpg");
 }
 
 nav {
@@ -60,6 +61,10 @@ nav a:focus {
 
 section {
 	margin-top: 100px;
+	background-color: white;
+	padding: 25px;
+	border: 2px solid #005757;
+	border-radius: 25px;
 }
 
 footer {

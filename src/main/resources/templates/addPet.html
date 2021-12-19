@@ -27,10 +27,12 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<div class="row-fluid pb-2">
-							<input id="name" class="form-control" type="text" name="name"
+							<label class="label form-label" for="name">Name:</label> <input
+								id="name" class="form-control" type="text" name="name"
 								required="required" autofocus="autofocus" placeholder="Name*" />
 						</div>
 						<div class="row-fluid pb-2">
+							<label class="label form-label" for="name">Species:</label><br />
 							<span th:if="${#lists.isEmpty(allSpecies)}">No species
 								found.</span> <select th:unless="${#lists.isEmpty(allSpecies)}"
 								name="speciesId" class="form-control" required="required">
@@ -39,22 +41,25 @@
 							</select>
 						</div>
 						<div class="row-fluid pb-2">
-							<input class="form-control" type="number" name="weight"
+							<label class="label form-label" for="weight">Weight:</label> <input
+								class="form-control" type="number" name="weight"
 								placeholder="Weight in kgs" />
 						</div>
 						<div class="row-fluid pb-2 form-check">
-							<input type="radio" name="gender" value="MALE"
+							<input
+								type="radio" name="gender" value="MALE" id="male"
 								class="form-check-input" required="required"><label
-								for="gender">Male</label>&nbsp;&nbsp;&nbsp;<input type="radio"
-								name="gender" value="FEMALE" class="form-check-input"
-								required="required"><label for="gender">Female</label>
+								for="male">Male</label><br />
+							<input type="radio" name="gender" value="FEMALE" id="female"
+								class="form-check-input" required="required"><label
+								for="female">Female</label>
 						</div>
 						<div class="row-fluid pb-2">
-							<label for="ownerId" class="form-label">Available Owners:</label>
-							<select name="ownerId" size="5" class="form-control"
+							<label for="ownerId" class="label form-label">Available
+								Owners:</label> <select name="ownerId" size="5" class="form-control"
 								required="required">
 								<option th:each="owner : ${owners}"
-									th:title="${owner.email} ?: ${owner.phone}"
+									th:title="${owner.email}+' '+${owner.phone}"
 									th:value="${owner.id}"
 									th:text="${owner.firstName}+' '+${owner.lastName}"></option>
 							</select>
@@ -69,8 +74,9 @@
 						<button class="btn-warning float-right" type="button"
 							onclick="window.location.href='/species/add'">Add a
 							Species</button>
-						<input th:unless="${#lists.isEmpty(allSpecies)}" type="submit"
-							class="btn-primary float-right" value="Add Pet" />
+						<input
+							th:unless="${#lists.isEmpty(allSpecies) || #lists.isEmpty(owners)}"
+							type="submit" class="btn-primary float-right" value="Add Pet" />
 					</div>
 				</div>
 			</form>

@@ -26,24 +26,33 @@
 			<form action="/owners/edit" method="post">
 				<div class="row">
 					<div class="col-sm-8">
-						<div class="row pb-2">
-							<input type="hidden" name="id" th:value="${owner.id}" /> <input
+						<div class="row-fluid pb-2">
+							<input type="hidden" name="id" th:value="${owner.id}" /><label
+								class="label form-label" for="firstName">First Name:</label><input
 								type="text" name="firstName" maxlength="40" required="required"
 								placeholder="First Name*" class="form-control"
 								th:value="${owner.firstName}" />
 						</div>
-						<div class="row pb-2">
+						<div class="row-fluid pb-2">
+							<label
+								class="label form-label" for="lastName">Last Name:</label>
 							<input type="text" name="lastName" maxlength="40"
 								required="required" placeholder="Last Name*"
 								class="form-control" th:value="${owner.lastName}" />
 						</div>
-						<div class="row pb-2">
-							<input type="email" name="email" placeholder="Email" required="required"
-								class="form-control" th:value="${owner.email}" />
+						<div class="row-fluid pb-2">
+							<label
+								class="label form-label" for="email">Email:</label>
+							<input type="email" name="email" placeholder="Email"
+								required="required" class="form-control"
+								th:value="${owner.email}" />
 						</div>
-						<div class="row pb-2">
-							<input type="text" name="phone" class="form-control" required="required"
-								maxlength="12" placeholder="Phone Number ###-###-####"
+						<div class="row-fluid pb-2">
+							<label
+								class="label form-label" for="phone">Phone:</label>
+							<input type="text" name="phone" class="form-control"
+								required="required" maxlength="12"
+								placeholder="Phone Number ###-###-####"
 								pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:value="${owner.phone}" />
 						</div>
 					</div>

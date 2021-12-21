@@ -121,3 +121,7 @@ ul.no-bullet {
 	float: right;
 }
 
+.error {
+	color: red;
+}
+

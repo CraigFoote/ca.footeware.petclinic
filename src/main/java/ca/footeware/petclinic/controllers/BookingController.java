@@ -5,6 +5,8 @@ package ca.footeware.petclinic.controllers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +38,13 @@ public class BookingController {
 
 	@Autowired
 	private BookingService bookingService;
-	
+
 	@Autowired
 	private PetService petService;
-	
+
 	@Autowired
 	private ProcedureService procedureService;
-	
+
 	@Autowired
 	private VetService vetService;
 
@@ -58,20 +60,17 @@ public class BookingController {
 	}
 
 	@PostMapping
-	public String createBooking(
-	    @RequestParam(name = "petId", required = true) String petId,
-	    @RequestParam(name = "vetId", required = true) String vetId,
-		@RequestParam(name = "procedureId", required = true) String procedureId,
-		@RequestParam(name = "date", required = true) String date,
-		Model model) throws BookingException
-	{
-	    Pet pet = petService.get(petId);
-	    Vet vet = vetService.get(vetId);
-	    Procedure procedure = procedureService.get(procedureId);
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-	    Booking booking = new Booking(pet, vet, procedure, dateTime);
-	    Booking savedBooking = bookingService.save(booking);
+	public String createBooking(@RequestParam(name = "petId", required = true) String petId,
+			@RequestParam(name = "vetId", required = true) String vetId,
+			@RequestParam(name = "procedureId", required = true) String procedureId,
+			@RequestParam(name = "date", required = true) String date, Model model) throws BookingException {
+		Pet pet = petService.get(petId);
+		Vet vet = vetService.get(vetId);
+		Procedure procedure = procedureService.get(procedureId);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+		Booking booking = new Booking(pet, vet, procedure, dateTime);
+		Booking savedBooking = bookingService.save(booking);
 		if (savedBooking == null) {
 			throw new BookingException("Saved booking not found.");
 		}
@@ -88,8 +87,13 @@ public class BookingController {
 	@GetMapping
 	String getBookings(Model model) {
 		List<Booking> bookings = bookingService.getAll();
-		// TODO Collections.reverseOrder()
-		bookings.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+		Comparator<Booking> comparator = new Comparator<Booking>() {
+			@Override
+			public int compare(Booking o1, Booking o2) {
+				return o1.getDate().compareTo(o2.getDate());
+			}
+		};
+		Collections.sort(bookings, Collections.reverseOrder(comparator));
 		model.addAttribute("bookings", bookings);
 		return "bookings";
 	}
@@ -108,26 +112,22 @@ public class BookingController {
 	}
 
 	@PostMapping("/edit")
-	String updateBooking(
-	    @RequestParam(name = "id", required = true) String id,
-	    @RequestParam(name = "petId", required = true) String petId,
-		@RequestParam(name = "vetId", required = true) String vetId,
-		@RequestParam(name = "procedureId", required = true) String procedureId,
-		@RequestParam(name = "date", required = true) String date,
-		Model model) throws BookingException
-	{
+	String updateBooking(@RequestParam(name = "id", required = true) String id,
+			@RequestParam(name = "petId", required = true) String petId,
+			@RequestParam(name = "vetId", required = true) String vetId,
+			@RequestParam(name = "procedureId", required = true) String procedureId,
+			@RequestParam(name = "date", required = true) String date, Model model) throws BookingException {
 		Booking booking = bookingService.get(id);
 		booking.setPet(petService.get(petId));
 		booking.setVet(vetService.get(vetId));
 		booking.setProcedure(procedureService.get(procedureId));
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-	    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+		LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
 		booking.setDate(dateTime);
 		Booking savedBooking = bookingService.save(booking);
-		if(savedBooking == null){
-		    throw new BookingException("Saved booking not found.");
+		if (savedBooking == null) {
+			throw new BookingException("Saved booking not found.");
 		}
 		return getBookings(model);
 	}
 }
-

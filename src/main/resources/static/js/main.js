@@ -1,15 +1,15 @@
 "use strict";
 
 /**
- * Delete a pet.
+ * Delete something.
  */
-function deletePet(id) {
-	if (confirm("Are you sure you want to delete this poor helpless pet?")) {
+function deleteById(name, id, path) {
+	if (confirm("Are you sure you want to delete '" + name + "'?")) {
 		$.ajax({
-			url: window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + '/pets/' + id,
+			url: getUrlPrefix() + path + "/" + id,
 			type: 'DELETE',
 			success: function(result) {
-				window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/pets";
+				window.location.href = getUrlPrefix() + path;
 			},
 			error: function(request, msg, error, status) {
 				alert(msg);
@@ -50,6 +50,10 @@ jQuery(document).ready(function($) {
 	});
 });
 
-function toggleSelected(elem){
+function toggleSelected(elem) {
 	elem.className = elem.className == "selected" ? "unselected" : "selected";
+}
+
+function getUrlPrefix() {
+	return window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/";
 }

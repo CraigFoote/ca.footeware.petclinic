@@ -30,7 +30,7 @@ public class OwnerController {
 	@Autowired
 	private OwnerService ownerService;
 
-	@GetMapping("/addOwner")
+	@GetMapping("/add")
 	public String getAddOwnerPage(Model model) {
 		return "addOwner";
 	}

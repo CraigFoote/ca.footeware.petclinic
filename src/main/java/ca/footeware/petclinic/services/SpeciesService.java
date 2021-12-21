@@ -33,4 +33,8 @@ public class SpeciesService {
 		repository.save(species);
 	}
 
+	public void delete(String id) {
+		repository.deleteById(id);
+	}
+
 }

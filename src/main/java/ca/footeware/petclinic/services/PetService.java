@@ -14,8 +14,8 @@ public class PetService {
 	@Autowired
 	private IPetRepository repository;
 
-	public void delete(Pet pet) {
-		repository.delete(pet);
+	public void delete(String id) {
+		repository.deleteById(id);
 	}
 
 	public Pet get(String id) {

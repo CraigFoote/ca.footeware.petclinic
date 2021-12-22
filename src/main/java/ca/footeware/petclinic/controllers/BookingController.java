@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,7 +88,7 @@ public class BookingController {
 	@GetMapping
 	String getBookings(Model model) {
 		List<Booking> bookings = bookingService.getAll();
-		Comparator<Booking> comparator = new Comparator<Booking>() {
+		Comparator<Booking> comparator = new Comparator<>() {
 			@Override
 			public int compare(Booking o1, Booking o2) {
 				return o1.getDate().compareTo(o2.getDate());
@@ -128,6 +129,12 @@ public class BookingController {
 		if (savedBooking == null) {
 			throw new BookingException("Saved booking not found.");
 		}
+		return getBookings(model);
+	}
+	
+	@DeleteMapping("/{id}")
+	public String deleteBooking(@PathVariable("id") String id, Model model) {
+		bookingService.delete(id);
 		return getBookings(model);
 	}
 }

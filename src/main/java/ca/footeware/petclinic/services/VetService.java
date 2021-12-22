@@ -33,4 +33,8 @@ public class VetService {
 		return repository.save(vet);
 	}
 
+	public void delete(String id) {
+		repository.deleteById(id);
+	}
+
 }

@@ -29,4 +29,12 @@ public class ProcedureService {
 		return repository.findAll();
 	}
 
+	public void delete(String id) {
+		repository.deleteById(id);
+	}
+
+	public Procedure save(Procedure procedure) {
+		return repository.save(procedure);
+	}
+
 }

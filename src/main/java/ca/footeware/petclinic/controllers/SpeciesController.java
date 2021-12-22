@@ -43,8 +43,8 @@ public class SpeciesController {
 		model.addAttribute("allSpecies", speciesService.getAll());
 		return "species";
 	}
-	
-	@DeleteMapping("{id}")
+
+	@DeleteMapping("/{id}")
 	public String deleteSpecies(@PathVariable("id") String id, Model model) {
 		speciesService.delete(id);
 		return getAllSpecies(model);

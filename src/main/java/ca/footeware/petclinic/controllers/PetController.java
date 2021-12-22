@@ -50,13 +50,6 @@ public class PetController {
 		return "pets";
 	}
 
-	@DeleteMapping("/{id}")
-	public String deletePet(@PathVariable("id") String id, Model model) {
-		Pet pet = petService.get(id);
-		petService.delete(pet);
-		return getPets(model);
-	}
-
 	@GetMapping("/add")
 	public String getAddPetPage(Model model) {
 		List<Owner> owners = ownerService.getAll();
@@ -72,7 +65,7 @@ public class PetController {
 	public String getPet(@PathVariable("id") String id, Model model) {
 		Pet pet = petService.get(id);
 		model.addAttribute("pet", pet);
-		return "pet";
+		return getPets(model);
 	}
 
 	@GetMapping("/{id}/edit")
@@ -137,6 +130,12 @@ public class PetController {
 		if (savedPet == null) {
 			throw new PetException("Saved pet not found.");
 		}
+		return getPets(model);
+	}
+
+	@DeleteMapping("/{id}")
+	public String deletePet(@PathVariable("id") String id, Model model) {
+		petService.delete(id);
 		return getPets(model);
 	}
 

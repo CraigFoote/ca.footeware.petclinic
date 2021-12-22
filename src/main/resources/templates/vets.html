@@ -13,12 +13,12 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="nav">
 				<li class="nav-link"><a href="/">Home</a></li>
-				<li class="nav-link"><a href="/owners">Owners</a></li>
 				<li class="nav-link"><a href="/pets">Pets</a></li>
+				<li class="nav-link"><a href="/owners">Owners</a></li>
 				<li class="nav-link active"><a href="/vets">Vets</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
 				<li class="nav-link"><a href="/species">Species</a></li>
-                <li class="nav-link"><a href="/procedures">Procedures</a></li>
+				<li class="nav-link"><a href="/procedures">Procedures</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -29,21 +29,27 @@
 				<span>No vets found.</span>
 			</div>
 			<div th:unless="${#lists.isEmpty(vets)}" class="row">
-				<table class="table table-striped table-hover"
-					title="Click a row to see its details.">
+				<table class="table table-striped table-hover">
 					<thead class="thead-dark">
 						<tr>
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Phone Number</th>
+							<th>Email</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="vet : ${vets}" class="clickable-row"
-							th:data-href="@{/vets/{id}(id=${vet.id})}">
+						<tr th:each="vet : ${vets}">
 							<td th:text="${vet.firstName}">First Name</td>
 							<td th:text="${vet.lastName}">Last Name</td>
 							<td th:text="${vet.phone}">Phone Number</td>
+							<td th:text="${vet.email}">Email</td>
+							<td><img src="/images/edit.png" alt="edit" title="Edit"
+								th:onclick="window.location='/vets/[(${vet.id})]/edit'" />&nbsp;<img
+								src="/images/delete.png" alt="delete" title="Delete"
+								th:onclick="deleteById([[${vet.firstName}]], [[${vet.id}]], 'vets')" />
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -51,8 +57,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<button class="btn-primary float-right"
-						onclick="window.location='/vets/add'">Add a
-						Vet</button>
+						onclick="window.location='/vets/add'">Add a Vet</button>
 				</div>
 			</div>
 		</div>

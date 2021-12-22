@@ -5,80 +5,84 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" style="background-color: #008080 !important">
-        <a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="nav">
-                <li class="nav-link"><a href="/">Home</a></li>
-                <li class="nav-link"><a href="/owners">Owners</a></li>
-                <li class="nav-link"><a href="/pets">Pets</a></li>
-                <li class="nav-link"><a href="/vets">Vets</a></li>
-                <li class="nav-link active"><a href="/bookings">Bookings</a></li>
-                <li class="nav-link"><a href="/species">Species</a></li>
-                <li class="nav-link"><a href="/procedures">Procedures</a></li>
-            </ul>
-        </div>
-    </nav>
-    <section class="container-sm">
-        <div class="jumbotron">
-            <h2>Add a Booking</h2>
-            <form action="/bookings" method="post">
-                <div class="col-sm-8">
-                    <div th:if="${#lists.isEmpty(pets)}" class="row pb-2">
-                        <span>No pets found.</span>
-                    </div>
-                    <div th:unless="${#lists.isEmpty(pets)}" class="row pb-2">
-                        <label for="petId" class="label form-label">Available Pets:</label>
-                        <select name="petId" class="form-control" required="required">
-                            <option th:each="pet : ${pets}" th:value="${pet.id}" 
-                                th:text="${pet.name}" th:title="${pet.owner.firstName+' '+pet.owner.lastName}">pet</option>
-                        </select>
-                    </div>
-                    <div th:if="${#lists.isEmpty(vets)}" class="row pb-2">
-                        <span>No vets found.</span>
-                    </div>
-                    <div th:unless="${#lists.isEmpty(vets)}" class="row pb-2">
-                        <label for="vetId" class="label form-label">Available Vets:</label>
-                        <select name="vetId" class="form-control" required="required">
-                            <option th:each="vet : ${vets}" th:value="${vet.id}" 
-                                th:text="${vet.firstName+' '+vet.lastName}">vet</option>
-                        </select>
-                    </div>
-                    <div th:if="${#lists.isEmpty(procedures)}" class="row pb-2">
-                        <span>No procedures found.</span>
-                    </div>
-                    <div th:unless="${#lists.isEmpty(procedures)}" class="row pb-2" required="required">
-                        <label for="procedureId" class="label form-label">Available Procedures:</label>
-                        <select name="procedureId" class="form-control" required="required">
-                            <option th:each="procedure : ${procedures}" th:value="${procedure.id}" 
-                                    th:text="${procedure.name}" th:title="${procedure.cost}">procedure</option>
-                        </select>
-                    </div>
-                    <div class="row pb-2">
-                        <label for="date" class="label form-label">Date:</label>
-                        <input name="date" type="datetime-local" required="required" />
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    image
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 btn-grp">
-                        <button class="btn-warning float-right" type="button"
-							    onclick="window.location.href='/pets/add'">Add a Pet</button>
-						<button class="btn-warning float-right" type="button"
-							    onclick="window.location.href='/vets/add'">Add a Vet</button>
-						<button class="btn-warning float-right" type="button"
-							    onclick="window.location.href='/procedures/add'">Add a Procedure</button>
-                        <input type="submit" class="btn-primary float-right" value="Add Booking" />
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
+		style="background-color: #008080 !important">
+		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="nav">
+				<li class="nav-link"><a href="/">Home</a></li>
+				<li class="nav-link"><a href="/pets">Pets</a></li>
+				<li class="nav-link"><a href="/owners">Owners</a></li>
+				<li class="nav-link"><a href="/vets">Vets</a></li>
+				<li class="nav-link active"><a href="/bookings">Bookings</a></li>
+				<li class="nav-link"><a href="/species">Species</a></li>
+				<li class="nav-link"><a href="/procedures">Procedures</a></li>
+			</ul>
+		</div>
+	</nav>
+	<section class="container-sm">
+		<div class="jumbotron">
+			<h2>Add a Booking</h2>
+			<form action="/bookings" method="post">
+				<div class="row">
+					<div class="col-sm-8">
+						<div th:if="${#lists.isEmpty(pets)}" class="row pb-2">
+							<span>No pets found.</span>
+						</div>
+						<div th:unless="${#lists.isEmpty(pets)}" class="row pb-2">
+							<label for="petId" class="label form-label">Available
+								Pets:</label> <select name="petId" class="form-control"
+								required="required">
+								<option th:each="pet : ${pets}" th:value="${pet.id}"
+									th:text="${pet.name}"
+									th:title="${pet.owner.firstName+' '+pet.owner.lastName}">pet</option>
+							</select>
+						</div>
+						<div th:if="${#lists.isEmpty(vets)}" class="row pb-2">
+							<span>No vets found.</span>
+						</div>
+						<div th:unless="${#lists.isEmpty(vets)}" class="row pb-2">
+							<label for="vetId" class="label form-label">Available
+								Vets:</label> <select name="vetId" class="form-control"
+								required="required">
+								<option th:each="vet : ${vets}" th:value="${vet.id}"
+									th:text="${vet.firstName+' '+vet.lastName}">vet</option>
+							</select>
+						</div>
+						<div th:if="${#lists.isEmpty(procedures)}" class="row pb-2">
+							<span>No procedures found.</span>
+						</div>
+						<div th:unless="${#lists.isEmpty(procedures)}" class="row pb-2">
+							<label for="procedureId" class="label form-label">Available
+								Procedures:</label> <select name="procedureId" class="form-control"
+								required="required">
+								<option th:each="procedure : ${procedures}"
+									th:value="${procedure.id}" th:text="${procedure.name}"
+									th:title="${procedure.cost}">procedure</option>
+							</select>
+						</div>
+						<div class="row pb-2">
+							<label for="date" class="label form-label">Date:</label> <input
+								name="date" type="datetime-local" required="required" />
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<img src="/images/puppy.png" alt="puppy" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 btn-grp">
+						<input type="submit" class="btn-primary float-right"
+							value="Add Booking" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
 </body>
 
 </html>

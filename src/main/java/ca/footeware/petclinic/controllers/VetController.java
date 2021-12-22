@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,7 +67,7 @@ public class VetController {
 
 	@GetMapping("/{id}/edit")
 	String editVet(@PathVariable String id, Model model) {
-		Person vet = vetService.get(id);
+		Vet vet = vetService.get(id);
 		model.addAttribute("vet", vet);
 		return "editVet";
 	}
@@ -86,6 +87,12 @@ public class VetController {
 		if (savedVet == null) {
 			throw new PersonException("Saved vet not found.");
 		}
+		return getVets(model);
+	}
+	
+	@DeleteMapping("/{id}")
+	public String deleteOwner(@PathVariable("id") String id, Model model) {
+		vetService.delete(id);
 		return getVets(model);
 	}
 

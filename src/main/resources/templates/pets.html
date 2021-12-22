@@ -13,12 +13,12 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="nav">
 				<li class="nav-link"><a href="/">Home</a></li>
-				<li class="nav-link"><a href="/owners">Owners</a></li>
 				<li class="nav-link active"><a href="/pets">Pets</a></li>
+				<li class="nav-link"><a href="/owners">Owners</a></li>
 				<li class="nav-link"><a href="/vets">Vets</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
 				<li class="nav-link"><a href="/species">Species</a></li>
-                <li class="nav-link"><a href="/procedures">Procedures</a></li>
+				<li class="nav-link"><a href="/procedures">Procedures</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -31,20 +31,31 @@
 					th:unless="${name}">No pets found.</span>
 			</div>
 			<div th:unless="${#lists.isEmpty(pets)}" class="row">
+				<span th:if="${name}" th:text="'Results of search for '+${name}"></span>
 				<table class="table table-striped table-hover"
-					title="Click a row to see its details."
 					th:unless="${#lists.isEmpty(pets)}">
 					<thead class="thead-dark">
 						<tr>
 							<th>Name</th>
 							<th>Species</th>
+							<th>Weight</th>
+							<th>Gender</th>
+							<th>Owner</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="pet : ${pets}" class="clickable-row"
-							th:data-href="@{/pets/{id}(id=${pet.id})}">
+						<tr th:each="pet : ${pets}">
 							<td th:text="${pet.name}">Name</td>
 							<td th:text="${pet.species.name}">Species</td>
+							<td th:text="${pet.weight}">Weight</td>
+							<td th:text="${pet.gender}" class="toLower">Gender</td>
+							<td th:text="${pet.owner.firstName+' '+pet.owner.lastName}">Owner</td>
+							<td><img src="/images/edit.png" alt="edit" title="Edit"
+								th:onclick="window.location='/pets/[(${pet.id})]/edit'" />&nbsp;<img
+								src="/images/delete.png" alt="delete" title="Delete"
+								th:onclick="deleteById([[${pet.name}]], [[${pet.id}]], 'pets')" />
+							</td>
 						</tr>
 					</tbody>
 				</table>

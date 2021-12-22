@@ -21,8 +21,8 @@ public class OwnerService {
 	@Autowired
 	private IOwnerRepository repository;
 
-	public void delete(Owner owner) {
-		repository.delete(owner);
+	public void delete(String id) {
+		repository.deleteById(id);
 	}
 
 	public Owner get(String id) {

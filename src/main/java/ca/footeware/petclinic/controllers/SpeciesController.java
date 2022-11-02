@@ -3,6 +3,10 @@
  */
 package ca.footeware.petclinic.controllers;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ca.footeware.petclinic.exceptions.SpeciesException;
 import ca.footeware.petclinic.models.Species;
 import ca.footeware.petclinic.services.SpeciesService;
 
@@ -27,26 +32,58 @@ public class SpeciesController {
 	@Autowired
 	private SpeciesService speciesService;
 
-	@GetMapping("/add")
-	String getAddSpeciesPage() {
-		return "addSpecies";
+	@PostMapping
+	public String createSpecies(@RequestParam(name = "name", required = true) String name, Model model)
+			throws SpeciesException {
+		Species saved = speciesService.save(new Species(name));
+		if (saved == null) {
+			throw new SpeciesException("'" + name + "' did not save");
+		}
+		return getAllSpecies(model);
 	}
 
-	@PostMapping
-	String createSpecies(@RequestParam(name = "name", required = true) String name, Model model) {
-		speciesService.save(new Species(name));
+	@DeleteMapping("/{id}")
+	public String deleteSpecies(@PathVariable("id") UUID id, Model model) {
+		speciesService.delete(id);
 		return getAllSpecies(model);
+	}
+
+	@GetMapping("/{id}")
+	public String editSpecies(@PathVariable UUID id, Model model) {
+		Species species = speciesService.get(id);
+		model.addAttribute("species", species);
+		return "editSpecies";
+	}
+
+	@GetMapping("/add")
+	public String getAddSpeciesPage() {
+		return "addSpecies";
 	}
 
 	@GetMapping
 	public String getAllSpecies(Model model) {
-		model.addAttribute("allSpecies", speciesService.getAll());
+		// FIXME, necessary to get accurate inventory
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Species> allSpecies = speciesService.getAll();
+		Collections.sort(allSpecies, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("allSpecies", allSpecies);
 		return "species";
 	}
 
-	@DeleteMapping("/{id}")
-	public String deleteSpecies(@PathVariable("id") String id, Model model) {
-		speciesService.delete(id);
+	@PostMapping("/update")
+	public String updateSpecies(@RequestParam(name = "id", required = true) UUID id,
+			@RequestParam(name = "name", required = true) String name, Model model) throws SpeciesException {
+		Species species = speciesService.get(id);
+		species.setName(name);
+		Species savedSpecies = speciesService.save(species);
+		if (savedSpecies == null) {
+			throw new SpeciesException("'" + name + "' did not save.");
+		}
 		return getAllSpecies(model);
 	}
 }

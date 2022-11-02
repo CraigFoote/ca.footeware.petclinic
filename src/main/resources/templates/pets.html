@@ -52,7 +52,7 @@
 							<td th:text="${pet.gender}" class="toLower">Gender</td>
 							<td th:text="${pet.owner.firstName+' '+pet.owner.lastName}">Owner</td>
 							<td><img src="/images/edit.png" alt="edit" title="Edit"
-								th:onclick="window.location='/pets/[(${pet.id})]/edit'" />&nbsp;<img
+								th:onclick="window.location='/pets/[(${pet.id})]'" />&nbsp;<img
 								src="/images/delete.png" alt="delete" title="Delete"
 								th:onclick="deleteById([[${pet.name}]], [[${pet.id}]], 'pets')" />
 							</td>

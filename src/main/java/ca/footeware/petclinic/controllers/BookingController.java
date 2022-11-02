@@ -5,9 +5,11 @@ package ca.footeware.petclinic.controllers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,9 +53,9 @@ public class BookingController {
 
 	@GetMapping("/add")
 	public String getAddBookingPage(Model model) {
-		List<Pet> pets = petService.getAll();
-		List<Vet> vets = vetService.getAll();
-		List<Procedure> procedures = procedureService.getAll();
+		Iterable<Pet> pets = petService.getAll();
+		Iterable<Vet> vets = vetService.getAll();
+		Iterable<Procedure> procedures = procedureService.getAll();
 		model.addAttribute("pets", pets);
 		model.addAttribute("vets", vets);
 		model.addAttribute("procedures", procedures);
@@ -61,9 +63,9 @@ public class BookingController {
 	}
 
 	@PostMapping
-	public String createBooking(@RequestParam(name = "petId", required = true) String petId,
-			@RequestParam(name = "vetId", required = true) String vetId,
-			@RequestParam(name = "procedureId", required = true) String procedureId,
+	public String createBooking(@RequestParam(name = "petId", required = true) UUID petId,
+			@RequestParam(name = "vetId", required = true) UUID vetId,
+			@RequestParam(name = "procedureId", required = true) UUID procedureId,
 			@RequestParam(name = "date", required = true) String date, Model model) throws BookingException {
 		Pet pet = petService.get(petId);
 		Vet vet = vetService.get(vetId);
@@ -79,7 +81,7 @@ public class BookingController {
 	}
 
 	@GetMapping("{id}")
-	String getBooking(@PathVariable String id, Model model) {
+	String getBooking(@PathVariable UUID id, Model model) {
 		Booking booking = bookingService.get(id);
 		model.addAttribute("booking", booking);
 		return "booking";
@@ -87,24 +89,28 @@ public class BookingController {
 
 	@GetMapping
 	String getBookings(Model model) {
-		List<Booking> bookings = bookingService.getAll();
+		Iterable<Booking> bookings = bookingService.getAll();
 		Comparator<Booking> comparator = new Comparator<>() {
 			@Override
 			public int compare(Booking o1, Booking o2) {
 				return o1.getDate().compareTo(o2.getDate());
 			}
 		};
-		Collections.sort(bookings, Collections.reverseOrder(comparator));
-		model.addAttribute("bookings", bookings);
+		List<Booking> bookingsList = new ArrayList<>();
+		for (Booking booking : bookings) {
+			bookingsList.add(booking);
+		}
+		Collections.sort(bookingsList, Collections.reverseOrder(comparator));
+		model.addAttribute("bookings", bookingsList);
 		return "bookings";
 	}
 
 	@GetMapping("/{id}/edit")
-	String editBooking(@PathVariable String id, Model model) {
+	String editBooking(@PathVariable UUID id, Model model) {
 		Booking booking = bookingService.get(id);
-		List<Pet> pets = petService.getAll();
-		List<Vet> vets = vetService.getAll();
-		List<Procedure> procedures = procedureService.getAll();
+		Iterable<Pet> pets = petService.getAll();
+		Iterable<Vet> vets = vetService.getAll();
+		Iterable<Procedure> procedures = procedureService.getAll();
 		model.addAttribute("booking", booking);
 		model.addAttribute("pets", pets);
 		model.addAttribute("vets", vets);
@@ -113,10 +119,10 @@ public class BookingController {
 	}
 
 	@PostMapping("/edit")
-	String updateBooking(@RequestParam(name = "id", required = true) String id,
-			@RequestParam(name = "petId", required = true) String petId,
-			@RequestParam(name = "vetId", required = true) String vetId,
-			@RequestParam(name = "procedureId", required = true) String procedureId,
+	String updateBooking(@RequestParam(name = "id", required = true) UUID id,
+			@RequestParam(name = "petId", required = true) UUID petId,
+			@RequestParam(name = "vetId", required = true) UUID vetId,
+			@RequestParam(name = "procedureId", required = true) UUID procedureId,
 			@RequestParam(name = "date", required = true) String date, Model model) throws BookingException {
 		Booking booking = bookingService.get(id);
 		booking.setPet(petService.get(petId));
@@ -131,9 +137,9 @@ public class BookingController {
 		}
 		return getBookings(model);
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public String deleteBooking(@PathVariable("id") String id, Model model) {
+	public String deleteBooking(@PathVariable("id") UUID id, Model model) {
 		bookingService.delete(id);
 		return getBookings(model);
 	}

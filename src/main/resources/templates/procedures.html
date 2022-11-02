@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments/head :: head">
 </head>
+
 <body>
-	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
-		style="background-color: #008080 !important">
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" style="background-color: #008080 !important">
 		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#collapsibleNavbar">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -33,30 +33,31 @@
 					<thead class="thead-dark">
 						<tr>
 							<th>Procedure Name</th>
-							<th>Cost</th>
+							<th>Cost (CAD)</th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="procedure : ${procedures}">
 							<td th:text="${procedure.name}">Name</td>
-							<td
-								th:text="${#numbers.formatDecimal(procedure.cost, 1, 'DEFAULT', 2, 'DEFAULT')}">Cost</td>
-							<td><img src="/images/delete.png" alt="delete"
-								title="Delete"
-								th:onclick="deleteById([[${procedure.name}]], [[${procedure.id}]], 'procedures')" /></td>
+							<td th:text="${#numbers.formatDecimal(procedure.cost, 1, 'DEFAULT', 2, 'DEFAULT')}">Cost</td>
+							<td><img src="/images/edit.png" alt="edit" title="Edit"
+									th:onclick="window.location='/procedures/[(${procedure.id})]'" />&nbsp;<img
+									src="/images/delete.png" alt="delete" title="Delete"
+									th:onclick="deleteById([[${procedure.name}]], [[${procedure.id}]], 'procedures')" />
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<button class="btn-primary float-right"
-						onclick="window.location='/procedures/add'">Add a
+					<button class="btn-primary float-right" onclick="window.location='/procedures/add'">Add a
 						Procedure</button>
 				</div>
 			</div>
 		</div>
 	</section>
 </body>
+
 </html>

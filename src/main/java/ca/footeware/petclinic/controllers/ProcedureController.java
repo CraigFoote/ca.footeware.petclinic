@@ -3,7 +3,9 @@
  */
 package ca.footeware.petclinic.controllers;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.footeware.petclinic.exceptions.ProcedureException;
 import ca.footeware.petclinic.models.Procedure;
-import ca.footeware.petclinic.models.Species;
 import ca.footeware.petclinic.services.ProcedureService;
 
 /**
@@ -31,11 +32,27 @@ public class ProcedureController {
 	@Autowired
 	private ProcedureService procedureService;
 
-	@GetMapping
-	public String getProcedures(Model model) {
-		List<Procedure> procedures = procedureService.getAll();
-		model.addAttribute("procedures", procedures);
-		return "procedures";
+	@PostMapping
+	public String createProcedure(@RequestParam(name = "name", required = true) String name,
+			@RequestParam(name = "cost", required = true) double cost, Model model) throws ProcedureException {
+		Procedure savedProcedure = procedureService.save(new Procedure(name, cost));
+		if (savedProcedure == null) {
+			throw new ProcedureException("'" + name + "' did not save");
+		}
+		return getProcedures(model);
+	}
+
+	@DeleteMapping("/{id}")
+	public String deleteSpecies(@PathVariable("id") UUID id, Model model) {
+		procedureService.delete(id);
+		return getProcedures(model);
+	}
+
+	@GetMapping("/{id}")
+	public String editProcedure(@PathVariable UUID id, Model model) {
+		Procedure procedure = procedureService.get(id);
+		model.addAttribute("procedure", procedure);
+		return "editProcedure";
 	}
 
 	@GetMapping("/add")
@@ -43,16 +60,29 @@ public class ProcedureController {
 		return "addProcedure";
 	}
 
-	@DeleteMapping("/{id}")
-	public String deleteSpecies(@PathVariable("id") String id, Model model) {
-		procedureService.delete(id);
-		return getProcedures(model);
+	@GetMapping
+	public String getProcedures(Model model) {
+		// FIXME, necessary to get accurate inventory
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Procedure> procedures = procedureService.getAll();
+		Collections.sort(procedures, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("procedures", procedures);
+		return "procedures";
 	}
 
-	@PostMapping
-	String createProcedure(@RequestParam(name = "name", required = true) String name,
+	@PostMapping("/update")
+	public String updateProcedure(@RequestParam(name = "id", required = true) UUID id,
+			@RequestParam(name = "name", required = true) String name,
 			@RequestParam(name = "cost", required = true) double cost, Model model) throws ProcedureException {
-		Procedure savedProcedure = procedureService.save(new Procedure(name, cost));
+		Procedure procedure = procedureService.get(id);
+		procedure.setName(name);
+		procedure.setCost(cost);
+		Procedure savedProcedure = procedureService.save(procedure);
 		if (savedProcedure == null) {
 			throw new ProcedureException("Saved procedure not found.");
 		}

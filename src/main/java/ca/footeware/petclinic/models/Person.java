@@ -14,7 +14,7 @@ import org.springframework.data.annotation.Id;
 public abstract class Person {
 
 	@Id
-	private String id = UUID.randomUUID().toString();
+	private UUID id = UUID.randomUUID();
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -28,7 +28,7 @@ public abstract class Person {
 	 * @param email     {@link String}
 	 * @param phone     {@link String}
 	 */
-	public Person(String firstName, String lastName, String email, String phone) {
+	protected Person(String firstName, String lastName, String email, String phone) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -52,7 +52,7 @@ public abstract class Person {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -87,7 +87,7 @@ public abstract class Person {
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

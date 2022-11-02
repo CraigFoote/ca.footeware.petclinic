@@ -5,7 +5,6 @@ package ca.footeware.petclinic.models;
 
 /**
  * @author <a href='http://Footeware.ca'>Footeware.ca</a>
- *
  */
 public class Owner extends Person {
 

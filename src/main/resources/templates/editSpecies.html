@@ -24,13 +24,14 @@
 	</nav>
 	<section class="container-sm">
 		<div class="jumbotron">
-			<h2>Add a Species</h2>
-			<form action="/species" method="post">
+			<h2>Edit Species</h2>
+			<form action="/species/update" method="post">
 				<div class="row">
 					<div class="col-sm-8">
+						<input type="hidden" name="id" th:value="${species.id}" />
 						<label for="name" class="label form-label">Name:</label>
 						<input name="name" type="text" class="form-control" required="required"
-							placeholder="Species Name" autofocus="autofocus" />
+							th:value="${species.name}" autofocus="autofocus" />
 					</div>
 					<div class="col-sm-4">
 						<img src="/images/pig.png" alt="pig" />
@@ -38,7 +39,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<input type="submit" class="btn-primary float-right" value="Add Species" />
+						<input type="submit" class="btn-primary float-right" value="Update Species" />
 					</div>
 				</div>
 			</form>

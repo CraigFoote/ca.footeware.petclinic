@@ -1,5 +1,5 @@
 /**
- *
+ * 
  */
 package ca.footeware.petclinic.exceptions;
 
@@ -7,7 +7,7 @@ package ca.footeware.petclinic.exceptions;
  * @author craig
  *
  */
-public class ProcedureException extends Exception {
+public class SpeciesException extends Exception {
 
 	/**
 	 *
@@ -17,28 +17,21 @@ public class ProcedureException extends Exception {
 	/**
 	 *
 	 */
-	public ProcedureException() {
+	public SpeciesException() {
 	}
 
 	/**
 	 * @param message
 	 */
-	public ProcedureException(String message) {
+	public SpeciesException(String message) {
 		super(message);
 	}
 
 	/**
-	 * @param cause
-	 */
-	public ProcedureException(Throwable cause) {
-		super(cause);
-	}
-
-	/**
 	 * @param message
 	 * @param cause
 	 */
-	public ProcedureException(String message, Throwable cause) {
+	public SpeciesException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
@@ -48,8 +41,15 @@ public class ProcedureException extends Exception {
 	 * @param enableSuppression
 	 * @param writableStackTrace
 	 */
-	public ProcedureException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public SpeciesException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
+	/**
+	 * @param cause
+	 */
+	public SpeciesException(Throwable cause) {
+		super(cause);
 	}
 
 }

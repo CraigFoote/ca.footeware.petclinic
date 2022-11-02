@@ -7,15 +7,19 @@ import java.util.Objects;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.data.couchbase.core.mapping.Field;
 
 /**
  * @author Footeware.ca
  *
  */
+@Document
 public class Species {
 
 	@Id
-	private String id = UUID.randomUUID().toString();
+	private UUID id = UUID.randomUUID();
+	@Field
 	private String name;
 
 	/**
@@ -30,14 +34,14 @@ public class Species {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

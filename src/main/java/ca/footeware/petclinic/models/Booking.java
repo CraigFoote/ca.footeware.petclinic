@@ -10,12 +10,11 @@ import org.springframework.data.annotation.Id;
 
 /**
  * @author Footeware.ca
- *
  */
 public class Booking {
 
 	@Id
-	private String id = UUID.randomUUID().toString();
+	private UUID id = UUID.randomUUID();
 	private Pet pet;
 	private Vet vet;
 	private Procedure procedure;
@@ -24,9 +23,9 @@ public class Booking {
 	/**
 	 * Constructor.
 	 *
-	 * @param pet    {@link Pet}
-	 * @param vet {@link Vet}
-	 * @param date     {@link LocalDateTime}
+	 * @param pet  {@link Pet}
+	 * @param vet  {@link Vet}
+	 * @param date {@link LocalDateTime}
 	 */
 	public Booking(Pet pet, Vet vet, Procedure procedure, LocalDateTime date) {
 		this.pet = pet;
@@ -43,7 +42,7 @@ public class Booking {
 		return vet;
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -59,7 +58,7 @@ public class Booking {
 		this.vet = vet;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -68,11 +67,11 @@ public class Booking {
 	}
 
 	public void setProcedure(Procedure procedure) {
-	    this.procedure = procedure;
+		this.procedure = procedure;
 	}
 
 	public Procedure getProcedure() {
-	    return procedure;
+		return procedure;
 	}
 
 }

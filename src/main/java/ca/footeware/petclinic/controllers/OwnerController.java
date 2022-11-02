@@ -3,7 +3,9 @@
  */
 package ca.footeware.petclinic.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,16 +39,12 @@ public class OwnerController {
 	}
 
 	@PostMapping
-	public String createOwner(
-	    @RequestParam(name = "firstName", required = true) String firstName,
-	    @RequestParam(name = "lastName", required = true) String lastName,
-		@RequestParam(name = "email", required = true) String email,
-		@RequestParam(name = "phone", required = true) String phone,
-		Model model)
-			throws PersonException
-	{
+	public String createOwner(@RequestParam(name = "firstName", required = true) String firstName,
+			@RequestParam(name = "lastName", required = true) String lastName,
+			@RequestParam(name = "email", required = true) String email,
+			@RequestParam(name = "phone", required = true) String phone, Model model) throws PersonException {
 		List<Owner> firstNameAndLastName = ownerService.findByFirstNameAndLastName(firstName, lastName);
-		if(firstNameAndLastName.size() > 0) {
+		if (firstNameAndLastName.size() > 0) {
 			for (Owner owner : firstNameAndLastName) {
 				if (owner.getEmail().equals(email)) {
 					String message = "A person already exists by that name and email.";
@@ -69,7 +67,7 @@ public class OwnerController {
 	}
 
 	@GetMapping("{id}")
-	String getOwner(@PathVariable String id, Model model) {
+	String getOwner(@PathVariable UUID id, Model model) {
 		Person owner = ownerService.get(id);
 		model.addAttribute("owner", owner);
 		return "owner";
@@ -77,42 +75,43 @@ public class OwnerController {
 
 	@GetMapping
 	String getOwners(Model model) {
-		List<Owner> owners = ownerService.getAll();
-		owners.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
-		model.addAttribute("owners", owners);
+		Iterable<Owner> owners = ownerService.getAll();
+		List<Owner> ownersList = new ArrayList<>();
+		for (Owner owner : owners) {
+			ownersList.add(owner);
+		}
+		ownersList.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
+		model.addAttribute("owners", ownersList);
 		return "owners";
 	}
 
 	@GetMapping("/{id}/edit")
-	String editOwner(@PathVariable String id, Model model) {
+	String editOwner(@PathVariable UUID id, Model model) {
 		Person owner = ownerService.get(id);
 		model.addAttribute("owner", owner);
 		return "editOwner";
 	}
 
 	@PostMapping("/edit")
-	String updateOwner(
-	    @RequestParam(name = "id", required = true) String id,
-	    @RequestParam(name = "firstName", required = true) String firstName,
-		@RequestParam(name = "lastName", required = true) String lastName,
-		@RequestParam(name = "email", required = true) String email,
-		@RequestParam(name = "phone", required = true) String phone,
-		Model model) throws PersonException
-	{
+	String updateOwner(@RequestParam(name = "id", required = true) UUID id,
+			@RequestParam(name = "firstName", required = true) String firstName,
+			@RequestParam(name = "lastName", required = true) String lastName,
+			@RequestParam(name = "email", required = true) String email,
+			@RequestParam(name = "phone", required = true) String phone, Model model) throws PersonException {
 		Owner owner = ownerService.get(id);
 		owner.setFirstName(firstName);
 		owner.setLastName(lastName);
 		owner.setEmail(email);
 		owner.setPhone(phone);
 		Owner savedOwner = ownerService.save(owner);
-		if (savedOwner == null){
-		    throw new PersonException("Saved owner not found.");
+		if (savedOwner == null) {
+			throw new PersonException("Saved owner not found.");
 		}
 		return getOwners(model);
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public String deleteOwner(@PathVariable("id") String id, Model model) {
+	public String deleteOwner(@PathVariable("id") UUID id, Model model) {
 		ownerService.delete(id);
 		return getOwners(model);
 	}

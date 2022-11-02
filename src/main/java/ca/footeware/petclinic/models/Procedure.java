@@ -14,7 +14,7 @@ import org.springframework.data.annotation.Id;
 public class Procedure {
 
 	@Id
-	private String id = UUID.randomUUID().toString();
+	private UUID id = UUID.randomUUID();
 	private String name;
 	private Double cost;
 
@@ -58,14 +58,14 @@ public class Procedure {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

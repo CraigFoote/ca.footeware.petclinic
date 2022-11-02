@@ -9,7 +9,6 @@ import org.springframework.data.annotation.Id;
 
 /**
  * @author Footeware.ca
- *
  */
 public class Pet {
 
@@ -18,7 +17,7 @@ public class Pet {
 	}
 
 	@Id
-	private String id = UUID.randomUUID().toString();
+	private UUID id = UUID.randomUUID();
 	private String name;
 	private Species species;
 	private int weight;
@@ -28,8 +27,11 @@ public class Pet {
 	/**
 	 * Constructor.
 	 *
-	 * @param name      {@link String}
+	 * @param name    {@link String}
 	 * @param species {@link Species}
+	 * @param weight  int
+	 * @param gender  {@link Gender}
+	 * @param owner   {@link Owner}
 	 */
 	public Pet(String name, Species species, int weight, Gender gender, Owner owner) {
 		this.name = name;
@@ -46,7 +48,7 @@ public class Pet {
 		return gender;
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -78,7 +80,7 @@ public class Pet {
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

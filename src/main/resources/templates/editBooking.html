@@ -31,10 +31,7 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<input type="hidden" name="id" th:value="${booking.id}" />
-						<div th:if="${#lists.isEmpty(pets)}" class="row pb-2">
-							<span>No pets found.</span>
-						</div>
-						<div th:unless="${#lists.isEmpty(pets)}" class="row pb-2">
+						<div class="row pb-2">
 							<label for="petId" class="label form-label">Available
 								Pets:</label> <select name="petId" class="form-control"
 								required="required">

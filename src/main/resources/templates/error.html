@@ -5,11 +5,9 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
-		style="background-color: #008080 !important">
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" style="background-color: #008080 !important">
 		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#collapsibleNavbar">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -20,42 +18,43 @@
 				<li class="nav-link"><a href="/vets">Vets</a></li>
 				<li class="nav-link"><a href="/bookings">Bookings</a></li>
 				<li class="nav-link"><a href="/species">Species</a></li>
-                <li class="nav-link"><a href="/procedures">Procedures</a></li>
+				<li class="nav-link"><a href="/procedures">Procedures</a></li>
 			</ul>
 		</div>
 	</nav>
 	<section class="container-sm">
 		<div class="jumbotron">
-			<h2>Oops! Something bad happened.</h2>
-			<div class="row-fluid pb-2">
-				<span class="label">Timestamp:&nbsp;</Span><span class="row-fluid pb-2"
-					th:text="${timestamp}"></span>
+			<h2>Oops! We've had a leak.</h2>
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="row-fluid pb-2">
+						<span class="label">Timestamp:&nbsp;</Span><span class="row-fluid pb-2"
+							th:text="${timestamp}"></span>
+					</div>
+					<div class="row-fluid pb-2">
+						<span class="label">Path:&nbsp;</Span><span class="row-fluid pb-2" th:text="${path}"></span>
+					</div>
+					<div class="row-fluid pb-2">
+						<span class="label">Status:&nbsp;</Span><span class="row-fluid pb-2" th:text="${status}"></span>
+					</div>
+					<div class="row-fluid pb-2">
+						<span class="label">Error:&nbsp;</Span><span class="row-fluid pb-2" th:text="${error}"></span>
+					</div>
+					<div class="row-fluid pb-2">
+						<span class="label">Message:&nbsp;</Span><span class="row-fluid pb-2"
+							th:text="${message}"></span>
+					</div>
+					<div class="row-fluid pb-2">
+						<Span class="label">Trace:&nbsp;</Span><span class="row-fluid pb-2" th:text="${trace}"></span>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<img src="/images/puddle.jpg" alt="puddle" />
+				</div>
 			</div>
-			<div class="row-fluid pb-2">
-				<span class="label">Path:&nbsp;</Span><span class="row-fluid pb-2"
-					th:text="${path}"></span>
-			</div>
-			<div class="row-fluid pb-2">
-				<span class="label">Status:&nbsp;</Span><span class="row-fluid pb-2"
-					th:text="${status}"></span>
-			</div>
-			<div class="row-fluid pb-2">
-				<span class="label">Error:&nbsp;</Span><span class="row-fluid pb-2"
-					th:text="${error}"></span>
-			</div>
-			<div class="row-fluid pb-2">
-				<span class="label">Message:&nbsp;</Span><span class="row-fluid pb-2"
-					th:text="${message}"></span>
-			</div>
-			<div class="row-fluid pb-2">
-				<span class="label">Exception:&nbsp;</Span><span class="row-fluid pb-2"
-					th:text="${exception}"></span>
-			</div>
-			<div class="row-fluid pb-2">
-				<Span class="label">Trace:&nbsp;</Span><span class="row-fluid pb-2"
-					th:text="${trace}"></span>
-			</div>
+
 		</div>
 	</section>
 </body>
+
 </html>

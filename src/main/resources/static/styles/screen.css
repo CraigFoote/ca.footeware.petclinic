@@ -11,13 +11,12 @@
 }
 
 html, body {
-	cursor: url("/images/paw.png"), default;
 	font-family: "decker";
+	height: 100%;
 }
 
 body {
-	background-color: #fffddf !important;
-	background-image: url("/images/prints.jpg");
+	background-color: silver !important;
 }
 
 nav {

@@ -43,18 +43,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="booking : ${bookings}"
-							th:data-href="@{/bookings/{id}(id=${booking.id})}">
-							<td th:text="${booking.pet.name}">Pet</td>
-							<td th:text="${booking.procedure.name}">Procedure</td>
-							<td th:text="${booking.vet.firstName+' '+booking.vet.lastName}">Vet</td>
+						<tr th:each="bookingDTO : ${bookings}"
+							th:data-href="@{/bookings/{id}(id=${bookingDTO.booking.id})}">
+							<td th:text="${bookingDTO.pet.name}">Pet</td>
+							<td th:text="${bookingDTO.procedure.name}">Procedure</td>
 							<td
-								th:text="${#numbers.formatDecimal(booking.procedure.cost, 1, 'DEFAULT', 2, 'DEFAULT')}">Cost</td>
-							<td th:text="${booking.date}">Date</td>
+								th:text="${bookingDTO.vet.firstName+' '+bookingDTO.vet.lastName}">Vet</td>
+							<td
+								th:text="${#numbers.formatDecimal(bookingDTO.procedure.cost, 1, 'DEFAULT', 2, 'DEFAULT')}">Cost</td>
+							<td th:text="${bookingDTO.booking.date}">Date</td>
 							<td><img src="/images/edit.png" alt="edit" title="Edit"
-								th:onclick="window.location='/bookings/[(${booking.id})]/edit'" />&nbsp;<img
+								th:onclick="window.location='/bookings/[(${bookingDTO.booking.id})]/edit'" />&nbsp;<img
 								src="/images/delete.png" alt="delete" title="Delete"
-								th:onclick="deleteById([[${booking.procedure.name}]], [[${booking.id}]], 'bookings')" /></td>
+								th:onclick="deleteById([[${bookingDTO.procedure.name}]], [[${bookingDTO.booking.id}]], 'bookings')" /></td>
 						</tr>
 					</tbody>
 				</table>

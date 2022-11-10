@@ -3,9 +3,7 @@
  */
 package ca.footeware.petclinic.repositories;
 
-import java.util.UUID;
-
-import org.springframework.data.couchbase.repository.CouchbaseRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import ca.footeware.petclinic.models.Vet;
 
@@ -13,5 +11,5 @@ import ca.footeware.petclinic.models.Vet;
  * @author Footeware.ca
  *
  */
-public interface IVetRepository extends CouchbaseRepository<Vet, UUID> {
+public interface IVetRepository extends CrudRepository<Vet, Integer> {
 }

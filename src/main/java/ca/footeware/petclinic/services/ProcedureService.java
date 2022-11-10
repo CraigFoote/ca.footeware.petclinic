@@ -3,9 +3,6 @@
  */
 package ca.footeware.petclinic.services;
 
-import java.util.List;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +19,15 @@ public class ProcedureService {
 	@Autowired
 	private IProcedureRepository repository;
 
-	public Procedure get(UUID id) {
+	public Procedure get(int id) {
 		return repository.findById(id).get();
 	}
 
-	public List<Procedure> getAll() {
+	public Iterable<Procedure> getAll() {
 		return repository.findAll();
 	}
 
-	public void delete(UUID id) {
+	public void delete(int id) {
 		repository.deleteById(id);
 	}
 

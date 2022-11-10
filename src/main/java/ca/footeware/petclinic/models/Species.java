@@ -4,23 +4,26 @@
 package ca.footeware.petclinic.models;
 
 import java.util.Objects;
-import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.couchbase.core.mapping.Document;
-import org.springframework.data.couchbase.core.mapping.Field;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Footeware.ca
  *
  */
-@Document
+@Entity
 public class Species {
 
 	@Id
-	private UUID id = UUID.randomUUID();
-	@Field
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private String name;
+
+	public Species() {
+	}
 
 	/**
 	 * Constructor.
@@ -34,15 +37,8 @@ public class Species {
 	/**
 	 * @return the id
 	 */
-	public UUID getId() {
+	public int getId() {
 		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	/**

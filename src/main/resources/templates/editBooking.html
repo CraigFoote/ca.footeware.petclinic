@@ -30,14 +30,14 @@
 			<form action="/bookings/edit" method="post">
 				<div class="row">
 					<div class="col-sm-8">
-						<input type="hidden" name="id" th:value="${booking.id}" />
+						<input type="hidden" name="id" th:value="${bookingDTO.booking.id}" />
 						<div class="row pb-2">
 							<label for="petId" class="label form-label">Available
 								Pets:</label> <select name="petId" class="form-control"
 								required="required">
-								<option th:each="pet : ${pets}" th:value="${pet.id}"
-									th:selected="${pet.id == booking.pet.id}" th:text="${pet.name}"
-									th:title="${pet.owner.firstName+' '+pet.owner.lastName}">pet</option>
+								<option th:each="petDTO : ${petDTOs}" th:value="${petDTO.pet.id}"
+									th:selected="${petDTO.pet.id == bookingDTO.pet.id}" th:text="${petDTO.pet.name}"
+									th:title="${petDTO.owner.firstName+' '+petDTO.owner.lastName}">pet</option>
 							</select>
 						</div>
 						<div th:if="${#lists.isEmpty(vets)}" class="row pb-2">
@@ -48,7 +48,7 @@
 								Vets:</label> <select name="vetId" class="form-control"
 								required="required">
 								<option th:each="vet : ${vets}" th:value="${vet.id}"
-									th:selected="${vet.id == booking.vet.id}"
+									th:selected="${vet.id == bookingDTO.vet.id}"
 									th:text="${vet.firstName+' '+vet.lastName}">vet</option>
 							</select>
 						</div>
@@ -61,14 +61,14 @@
 								required="required">
 								<option th:each="procedure : ${procedures}"
 									th:value="${procedure.id}" th:text="${procedure.name}"
-									th:selected="${procedure.id == booking.procedure.id}"
+									th:selected="${procedure.id == bookingDTO.procedure.id}"
 									th:title="${procedure.cost}">procedure</option>
 							</select>
 						</div>
 						<div class="row pb-2">
 							<label for="date" class="label form-label">Date:</label> <input
 								name="date" type="datetime-local"
-								th:value="${#temporals.format(booking.date, 'yyyy-MM-dd HH:mm')}"
+								th:value="${#temporals.format(bookingDTO.booking.date, 'yyyy-MM-dd HH:mm')}"
 								required="required" />
 						</div>
 					</div>

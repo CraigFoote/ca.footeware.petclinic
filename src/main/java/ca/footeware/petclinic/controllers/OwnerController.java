@@ -5,7 +5,6 @@ package ca.footeware.petclinic.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.footeware.petclinic.exceptions.PersonException;
 import ca.footeware.petclinic.models.Owner;
-import ca.footeware.petclinic.models.Person;
 import ca.footeware.petclinic.services.OwnerService;
 
 /**
@@ -67,8 +65,8 @@ public class OwnerController {
 	}
 
 	@GetMapping("{id}")
-	String getOwner(@PathVariable UUID id, Model model) {
-		Person owner = ownerService.get(id);
+	String getOwner(@PathVariable int id, Model model) {
+		Owner owner = ownerService.get(id);
 		model.addAttribute("owner", owner);
 		return "owner";
 	}
@@ -86,14 +84,14 @@ public class OwnerController {
 	}
 
 	@GetMapping("/{id}/edit")
-	String editOwner(@PathVariable UUID id, Model model) {
-		Person owner = ownerService.get(id);
+	String editOwner(@PathVariable int id, Model model) {
+		Owner owner = ownerService.get(id);
 		model.addAttribute("owner", owner);
 		return "editOwner";
 	}
 
 	@PostMapping("/edit")
-	String updateOwner(@RequestParam(name = "id", required = true) UUID id,
+	String updateOwner(@RequestParam(name = "id", required = true) int id,
 			@RequestParam(name = "firstName", required = true) String firstName,
 			@RequestParam(name = "lastName", required = true) String lastName,
 			@RequestParam(name = "email", required = true) String email,
@@ -111,7 +109,7 @@ public class OwnerController {
 	}
 
 	@DeleteMapping("/{id}")
-	public String deleteOwner(@PathVariable("id") UUID id, Model model) {
+	public String deleteOwner(@PathVariable("id") int id, Model model) {
 		ownerService.delete(id);
 		return getOwners(model);
 	}

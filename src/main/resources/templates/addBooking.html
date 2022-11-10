@@ -31,19 +31,19 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<div th:if="${#lists.isEmpty(pets)}" class="row pb-2">
-							<span>No pets found.</span>
+							<span>No pets found. Create one and come back.</span>
 						</div>
 						<div th:unless="${#lists.isEmpty(pets)}" class="row pb-2">
 							<label for="petId" class="label form-label">Available
 								Pets:</label> <select name="petId" class="form-control"
 								required="required">
-								<option th:each="pet : ${pets}" th:value="${pet.id}"
-									th:text="${pet.name}"
-									th:title="${pet.owner.firstName+' '+pet.owner.lastName}">pet</option>
+								<option th:each="petDTO : ${pets}" th:value="${petDTO.pet.id}"
+									th:text="${petDTO.pet.name}"
+									th:title="${petDTO.owner.firstName+' '+petDTO.owner.lastName}">pet</option>
 							</select>
 						</div>
 						<div th:if="${#lists.isEmpty(vets)}" class="row pb-2">
-							<span>No vets found.</span>
+							<span>No vets found. Create one and come back.</span>
 						</div>
 						<div th:unless="${#lists.isEmpty(vets)}" class="row pb-2">
 							<label for="vetId" class="label form-label">Available
@@ -54,7 +54,7 @@
 							</select>
 						</div>
 						<div th:if="${#lists.isEmpty(procedures)}" class="row pb-2">
-							<span>No procedures found.</span>
+							<span>No procedures found. Create one and come back.</span>
 						</div>
 						<div th:unless="${#lists.isEmpty(procedures)}" class="row pb-2">
 							<label for="procedureId" class="label form-label">Available

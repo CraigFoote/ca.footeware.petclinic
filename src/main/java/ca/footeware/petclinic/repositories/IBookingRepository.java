@@ -3,14 +3,12 @@
  */
 package ca.footeware.petclinic.repositories;
 
-import java.util.UUID;
-
-import org.springframework.data.couchbase.repository.CouchbaseRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import ca.footeware.petclinic.models.Booking;
 
 /**
  * @author Footeware.ca
  */
-public interface IBookingRepository extends CouchbaseRepository<Booking, UUID> {
+public interface IBookingRepository extends CrudRepository<Booking, Integer> {
 }

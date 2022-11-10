@@ -3,26 +3,32 @@
  */
 package ca.footeware.petclinic.models;
 
-import java.util.UUID;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Footeware.ca
  *
  */
+@Entity
 public class Procedure {
 
 	@Id
-	private UUID id = UUID.randomUUID();
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private String name;
-	private Double cost;
+	private double cost;
+
+	public Procedure() {
+	}
 
 	/**
-	 * @param name
-	 * @param cost
+	 * @param name {@link String}
+	 * @param cost double
 	 */
-	public Procedure(String name, Double cost) {
+	public Procedure(String name, double cost) {
 		this.name = name;
 		this.cost = cost;
 	}
@@ -30,7 +36,7 @@ public class Procedure {
 	/**
 	 * @return the cost
 	 */
-	public Double getCost() {
+	public double getCost() {
 		return cost;
 	}
 
@@ -44,7 +50,7 @@ public class Procedure {
 	/**
 	 * @param cost the cost to set
 	 */
-	public void setCost(Double cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 
@@ -58,15 +64,8 @@ public class Procedure {
 	/**
 	 * @return the id
 	 */
-	public UUID getId() {
+	public int getId() {
 		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 }

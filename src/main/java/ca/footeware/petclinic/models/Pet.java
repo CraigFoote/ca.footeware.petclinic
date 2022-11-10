@@ -3,52 +3,51 @@
  */
 package ca.footeware.petclinic.models;
 
-import java.util.UUID;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Footeware.ca
  */
+@Entity
 public class Pet {
 
-	public enum Gender {
-		MALE, FEMALE
-	}
-
 	@Id
-	private UUID id = UUID.randomUUID();
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private String name;
-	private Species species;
 	private int weight;
 	private Gender gender;
-	private Owner owner;
+	private int speciesId;
+	private int ownerId;
+
+	public Pet() {
+	}
 
 	/**
 	 * Constructor.
 	 *
-	 * @param name    {@link String}
-	 * @param species {@link Species}
-	 * @param weight  int
-	 * @param gender  {@link Gender}
-	 * @param owner   {@link Owner}
+	 * @param name
+	 * @param weight
+	 * @param gender
+	 * @param speciesId
+	 * @param ownerId
 	 */
-	public Pet(String name, Species species, int weight, Gender gender, Owner owner) {
+	public Pet(String name, int weight, Gender gender, int speciesId, int ownerId) {
 		this.name = name;
-		this.species = species;
 		this.weight = weight;
 		this.gender = gender;
-		this.owner = owner;
+		this.speciesId = speciesId;
+		this.ownerId = ownerId;
 	}
 
-	/**
-	 * @return the gender
-	 */
 	public Gender getGender() {
 		return gender;
 	}
 
-	public UUID getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -56,67 +55,36 @@ public class Pet {
 		return name;
 	}
 
-	/**
-	 * @return the owner
-	 */
-	public Owner getOwner() {
-		return owner;
+	public int getOwnerId() {
+		return ownerId;
 	}
 
-	/**
-	 * @return the weight
-	 */
+	public int getSpeciesId() {
+		return speciesId;
+	}
+
 	public int getWeight() {
 		return weight;
 	}
 
-	/**
-	 * @param gender the gender to set
-	 */
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @param owner the owner to set
-	 */
-	public void setOwner(Owner owner) {
-		this.owner = owner;
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
 	}
 
-	/**
-	 * @param weight the weight to set
-	 */
+	public void setSpeciesId(int speciesId) {
+		this.speciesId = speciesId;
+	}
+
 	public void setWeight(int weight) {
 		this.weight = weight;
-	}
-
-	/**
-	 * @return the species
-	 */
-	public Species getSpecies() {
-		return species;
-	}
-
-	/**
-	 * @param species the species to set
-	 */
-	public void setSpecies(Species species) {
-		this.species = species;
 	}
 
 }

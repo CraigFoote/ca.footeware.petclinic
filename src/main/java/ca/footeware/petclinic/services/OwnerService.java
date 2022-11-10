@@ -4,7 +4,6 @@
 package ca.footeware.petclinic.services;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +21,11 @@ public class OwnerService {
 	@Autowired
 	private IOwnerRepository repository;
 
-	public void delete(UUID id) {
+	public void delete(int id) {
 		repository.deleteById(id);
 	}
 
-	public Owner get(UUID id) {
+	public Owner get(int id) {
 		return repository.findById(id).get();
 	}
 
@@ -34,7 +33,7 @@ public class OwnerService {
 		return repository.save(owner);
 	}
 
-	public List<Owner> getAll() {
+	public Iterable<Owner> getAll() {
 		return repository.findAll();
 	}
 

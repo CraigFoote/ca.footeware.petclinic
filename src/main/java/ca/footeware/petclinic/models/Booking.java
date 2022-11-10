@@ -4,74 +4,79 @@
 package ca.footeware.petclinic.models;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Footeware.ca
  */
+@Entity
+@Table(name = "BOOKING")
 public class Booking {
 
 	@Id
-	private UUID id = UUID.randomUUID();
-	private Pet pet;
-	private Vet vet;
-	private Procedure procedure;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private int petId;
+	private int vetId;
+	private int procedureId;
 	private LocalDateTime date;
+
+	public Booking() {
+	}
 
 	/**
 	 * Constructor.
 	 *
-	 * @param pet  {@link Pet}
-	 * @param vet  {@link Vet}
-	 * @param date {@link LocalDateTime}
+	 * @param petId
+	 * @param vetId
+	 * @param procedureId
+	 * @param date
 	 */
-	public Booking(Pet pet, Vet vet, Procedure procedure, LocalDateTime date) {
-		this.pet = pet;
-		this.vet = vet;
-		this.procedure = procedure;
+	public Booking(int petId, int vetId, int procedureId, LocalDateTime date) {
+		this.petId = petId;
+		this.vetId = vetId;
+		this.procedureId = procedureId;
 		this.date = date;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public int getPetId() {
+		return petId;
+	}
+
+	public void setPetId(int petId) {
+		this.petId = petId;
+	}
+
+	public int getVetId() {
+		return vetId;
+	}
+
+	public void setVetId(int vetId) {
+		this.vetId = vetId;
+	}
+
+	public int getProcedureId() {
+		return procedureId;
+	}
+
+	public void setProcedureId(int procedureId) {
+		this.procedureId = procedureId;
 	}
 
 	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public Vet getVet() {
-		return vet;
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public Pet getPet() {
-		return pet;
-	}
-
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-
-	public void setVet(Vet vet) {
-		this.vet = vet;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	public void setPet(Pet pet) {
-		this.pet = pet;
-	}
-
-	public void setProcedure(Procedure procedure) {
-		this.procedure = procedure;
-	}
-
-	public Procedure getProcedure() {
-		return procedure;
-	}
-
 }

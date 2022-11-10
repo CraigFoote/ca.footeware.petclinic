@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments/head :: head">
 </head>
+
 <body>
-	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
-		style="background-color: #008080 !important">
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" style="background-color: #008080 !important">
 		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#collapsibleNavbar">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -26,14 +26,12 @@
 		<div class="jumbotron">
 			<h2>Pets</h2>
 			<div th:if="${#lists.isEmpty(pets)}" class="row">
-				<span th:if="${name}"
-					th:text="'No pets found matching \'' + ${name} + '\'.'"></span> <span
+				<span th:if="${name}" th:text="'No pets found matching \'' + ${name} + '\'.'"></span> <span
 					th:unless="${name}">No pets found.</span>
 			</div>
 			<div th:unless="${#lists.isEmpty(pets)}" class="row">
 				<span th:if="${name}" th:text="'Results of search for '+${name}"></span>
-				<table class="table table-striped table-hover"
-					th:unless="${#lists.isEmpty(pets)}">
+				<table class="table table-striped table-hover" th:unless="${#lists.isEmpty(pets)}">
 					<thead class="thead-dark">
 						<tr>
 							<th>Name</th>
@@ -45,16 +43,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="pet : ${pets}">
-							<td th:text="${pet.name}">Name</td>
-							<td th:text="${pet.species.name}">Species</td>
-							<td th:text="${pet.weight}">Weight</td>
-							<td th:text="${pet.gender}" class="toLower">Gender</td>
-							<td th:text="${pet.owner.firstName+' '+pet.owner.lastName}">Owner</td>
+						<tr th:each="dto : ${pets}">
+							<td th:text="${dto.pet.name}">Name</td>
+							<td th:text="${dto.species.name}">Species</td>
+							<td th:text="${dto.pet.weight}">Weight</td>
+							<td th:text="${dto.pet.gender}" class="toLower">Gender</td>
+							<td th:text="${dto.owner.firstName+' '+dto.owner.lastName}">Owner</td>
 							<td><img src="/images/edit.png" alt="edit" title="Edit"
-								th:onclick="window.location='/pets/[(${pet.id})]'" />&nbsp;<img
-								src="/images/delete.png" alt="delete" title="Delete"
-								th:onclick="deleteById([[${pet.name}]], [[${pet.id}]], 'pets')" />
+									th:onclick="window.location='/pets/[(${dto.pet.id})]'" />&nbsp;<img
+									src="/images/delete.png" alt="delete" title="Delete"
+									th:onclick="deleteById([[${dto.pet.name}]], [[${dto.pet.id}]], 'pets')" />
 							</td>
 						</tr>
 					</tbody>
@@ -62,11 +60,11 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<button class="btn-primary float-right"
-						onclick="window.location='/pets/add'">Add a Pet</button>
+					<button class="btn-primary float-right" onclick="window.location='/pets/add'">Add a Pet</button>
 				</div>
 			</div>
 		</div>
 	</section>
 </body>
+
 </html>

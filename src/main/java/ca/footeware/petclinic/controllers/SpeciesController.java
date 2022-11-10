@@ -3,9 +3,9 @@
  */
 package ca.footeware.petclinic.controllers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,13 +43,13 @@ public class SpeciesController {
 	}
 
 	@DeleteMapping("/{id}")
-	public String deleteSpecies(@PathVariable("id") UUID id, Model model) {
+	public String deleteSpecies(@PathVariable("id") int id, Model model) {
 		speciesService.delete(id);
 		return getAllSpecies(model);
 	}
 
 	@GetMapping("/{id}")
-	public String editSpecies(@PathVariable UUID id, Model model) {
+	public String editSpecies(@PathVariable int id, Model model) {
 		Species species = speciesService.get(id);
 		model.addAttribute("species", species);
 		return "editSpecies";
@@ -69,14 +69,18 @@ public class SpeciesController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<Species> allSpecies = speciesService.getAll();
-		Collections.sort(allSpecies, (o1, o2) -> o1.getName().compareTo(o2.getName()));
-		model.addAttribute("allSpecies", allSpecies);
+		Iterable<Species> allSpecies = speciesService.getAll();
+		List<Species> allSpeciesList = new ArrayList<>();
+		for (Species species : allSpecies) {
+			allSpeciesList.add(species);
+		}
+		Collections.sort(allSpeciesList, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("allSpecies", allSpeciesList);
 		return "species";
 	}
 
 	@PostMapping("/update")
-	public String updateSpecies(@RequestParam(name = "id", required = true) UUID id,
+	public String updateSpecies(@RequestParam(name = "id", required = true) int id,
 			@RequestParam(name = "name", required = true) String name, Model model) throws SpeciesException {
 		Species species = speciesService.get(id);
 		species.setName(name);

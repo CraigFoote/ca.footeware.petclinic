@@ -1,13 +1,12 @@
 package ca.footeware.petclinic.repositories;
 
 import java.util.List;
-import java.util.UUID;
 
-import org.springframework.data.couchbase.repository.CouchbaseRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import ca.footeware.petclinic.models.Pet;
 
-public interface IPetRepository extends CouchbaseRepository<Pet, UUID> {
+public interface IPetRepository extends CrudRepository<Pet, Integer> {
 
 	List<Pet> findAllByNameIgnoreCase(String name);
 

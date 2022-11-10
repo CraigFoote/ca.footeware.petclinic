@@ -3,9 +3,9 @@
  */
 package ca.footeware.petclinic.controllers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,13 +43,13 @@ public class ProcedureController {
 	}
 
 	@DeleteMapping("/{id}")
-	public String deleteSpecies(@PathVariable("id") UUID id, Model model) {
+	public String deleteSpecies(@PathVariable("id") int id, Model model) {
 		procedureService.delete(id);
 		return getProcedures(model);
 	}
 
 	@GetMapping("/{id}")
-	public String editProcedure(@PathVariable UUID id, Model model) {
+	public String editProcedure(@PathVariable int id, Model model) {
 		Procedure procedure = procedureService.get(id);
 		model.addAttribute("procedure", procedure);
 		return "editProcedure";
@@ -69,14 +69,18 @@ public class ProcedureController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<Procedure> procedures = procedureService.getAll();
-		Collections.sort(procedures, (o1, o2) -> o1.getName().compareTo(o2.getName()));
-		model.addAttribute("procedures", procedures);
+		Iterable<Procedure> procedures = procedureService.getAll();
+		List<Procedure> proceduresList = new ArrayList<>();
+		for (Procedure procedure : procedures) {
+			proceduresList.add(procedure);
+		}
+		Collections.sort(proceduresList, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("procedures", proceduresList);
 		return "procedures";
 	}
 
 	@PostMapping("/update")
-	public String updateProcedure(@RequestParam(name = "id", required = true) UUID id,
+	public String updateProcedure(@RequestParam(name = "id", required = true) int id,
 			@RequestParam(name = "name", required = true) String name,
 			@RequestParam(name = "cost", required = true) double cost, Model model) throws ProcedureException {
 		Procedure procedure = procedureService.get(id);

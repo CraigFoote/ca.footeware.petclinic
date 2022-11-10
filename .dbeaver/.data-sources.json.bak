@@ -1,0 +1,32 @@
+{
+	"folders": {},
+	"connections": {
+		"h2_server-1845df0356c-21264c3a5bd3c58": {
+			"provider": "h2",
+			"driver": "h2_server",
+			"name": "localhost",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "9092",
+				"url": "jdbc:h2:tcp://192.168.1.101:9092//home/craig/petclinic",
+				"configurationType": "URL",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

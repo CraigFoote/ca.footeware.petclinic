@@ -4,16 +4,15 @@
 package ca.footeware.petclinic.repositories;
 
 import java.util.List;
-import java.util.UUID;
 
-import org.springframework.data.couchbase.repository.CouchbaseRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import ca.footeware.petclinic.models.Owner;
 
 /**
  * @author Footeware.ca
  */
-public interface IOwnerRepository extends CouchbaseRepository<Owner, UUID> {
+public interface IOwnerRepository extends CrudRepository<Owner, Integer> {
 
 	List<Owner> findByFirstNameAndLastName(String firstName, String lastName);
 }

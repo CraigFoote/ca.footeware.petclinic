@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments/head :: head">
 </head>
+
 <body>
-	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
-		style="background-color: #008080 !important">
-		<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="nav">
-				<li class="nav-link active"><a href="/">Home</a></li>
-				<li class="nav-link"><a href="/pets">Pets</a></li>
-				<li class="nav-link"><a href="/owners">Owners</a></li>
-				<li class="nav-link"><a href="/vets">Vets</a></li>
-				<li class="nav-link"><a href="/bookings">Bookings</a></li>
-				<li class="nav-link"><a href="/species">Species</a></li>
-                <li class="nav-link"><a href="/procedures">Procedures</a></li>
-			</ul>
-		</div>
-	</nav>
-	<section class="container-sm">
-		<div class="jumbotron">
-			<div class="row">
-				<div class="col col-sm-4">
-					<img src="/images/catndog.png" alt="cat and dog" />
-				</div>
-				<div class="col col-sm-8">
-					<form action="/pets/search" method="POST">
-						<div class="input-group">
-							<input type="search" placeholder="Pet Name" name="name"
-								required="required" maxlength="40" autofocus="autofocus"
-								class="form-control" />
-							<div class="input-group-append">
-								<button class="btn btn-success" type="submit">Search</button>
-							</div>
-						</div>
-					</form>
-				</div>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" style="background-color: #008080 !important">
+		<div class="container-fluid">
+			<a class="navbar-brand title" href="#">Shady Farms Pet Clinic</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+				aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-link active"><a href="/">Home</a></li>
+					<li class="nav-link"><a href="/pets">Pets</a></li>
+					<li class="nav-link"><a href="/owners">Owners</a></li>
+					<li class="nav-link"><a href="/vets">Vets</a></li>
+					<li class="nav-link"><a href="/bookings">Bookings</a></li>
+					<li class="nav-link"><a href="/species">Species</a></li>
+					<li class="nav-link"><a href="/procedures">Procedures</a></li>
+				</ul>
 			</div>
 		</div>
-	</section>
+	</nav>
+ 	<section class="container-sm"> 
+ 		<div class="jumbotron"> 
+ 			<div class="row"> 
+ 				<div class="col col-sm-4"> 
+ 					<img src="/images/catndog.png" alt="cat and dog" /> 
+ 				</div> 
+ 				<div class="col col-sm-8"> 
+ 					<form action="/pets/search" method="POST"> 
+ 						<div class="input-group"> 
+ 							<input type="search" placeholder="Pet Name" name="name" 
+ 								required="required" maxlength="40" autofocus="autofocus" 
+ 								class="form-control" /> 
+ 							<div class="input-group-append"> 
+ 								<button class="btn btn-success" type="submit">Search</button> 
+ 							</div> 
+ 						</div> 
+ 					</form> 
+ 				</div> 
+ 			</div> 
+ 		</div> 
+ 	</section> 
 </body>
+
 </html>

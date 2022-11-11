@@ -25,20 +25,20 @@ public class OwnerService {
 		repository.deleteById(id);
 	}
 
-	public Owner get(int id) {
-		return repository.findById(id).get();
+	public List<Owner> findByFirstNameAndLastName(String firstName, String lastName) {
+		return repository.findByFirstNameAndLastName(firstName, lastName);
 	}
 
-	public Owner save(Owner owner) {
-		return repository.save(owner);
+	public Owner get(int id) {
+		return repository.findById(id).get();
 	}
 
 	public Iterable<Owner> getAll() {
 		return repository.findAll();
 	}
 
-	public List<Owner> findByFirstNameAndLastName(String firstName, String lastName) {
-		return repository.findByFirstNameAndLastName(firstName, lastName);
+	public Owner save(Owner owner) {
+		return repository.save(owner);
 	}
 
 }

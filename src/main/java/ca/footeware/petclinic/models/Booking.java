@@ -44,6 +44,10 @@ public class Booking {
 		this.date = date;
 	}
 
+	public LocalDateTime getDate() {
+		return date;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -52,31 +56,27 @@ public class Booking {
 		return petId;
 	}
 
-	public void setPetId(int petId) {
-		this.petId = petId;
+	public int getProcedureId() {
+		return procedureId;
 	}
 
 	public int getVetId() {
 		return vetId;
 	}
 
-	public void setVetId(int vetId) {
-		this.vetId = vetId;
+	public void setDate(LocalDateTime date) {
+		this.date = date;
 	}
 
-	public int getProcedureId() {
-		return procedureId;
+	public void setPetId(int petId) {
+		this.petId = petId;
 	}
 
 	public void setProcedureId(int procedureId) {
 		this.procedureId = procedureId;
 	}
 
-	public LocalDateTime getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setVetId(int vetId) {
+		this.vetId = vetId;
 	}
 }

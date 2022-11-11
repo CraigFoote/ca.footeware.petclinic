@@ -41,6 +41,13 @@ public class Procedure {
 	}
 
 	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
 	 * @return the name
 	 */
 	public String getName() {
@@ -59,13 +66,6 @@ public class Procedure {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
 	}
 
 }

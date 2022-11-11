@@ -62,37 +62,6 @@ public class BookingController {
 	@Autowired
 	private OwnerService ownerService;
 
-	@GetMapping("/add")
-	public String getAddBookingPage(Model model) {
-		Iterable<Pet> pets = petService.getAll();
-		List<PetDTO> petsList = new ArrayList<>();
-		for (Pet pet : pets) {
-			Species species = speciesService.get(pet.getSpeciesId());
-			Owner owner = ownerService.get(pet.getOwnerId());
-			petsList.add(new PetDTO(pet, species, owner));
-		}
-		petsList.sort((o1, o2) -> o1.getPet().getName().compareTo(o2.getPet().getName()));
-		model.addAttribute("pets", petsList);
-
-		Iterable<Vet> vets = vetService.getAll();
-		List<Vet> vetsList = new ArrayList<>();
-		for (Vet vet : vets) {
-			vetsList.add(vet);
-		}
-		vetsList.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
-		model.addAttribute("vets", vetsList);
-
-		Iterable<Procedure> procedures = procedureService.getAll();
-		List<Procedure> proceduresList = new ArrayList<>();
-		for (Procedure procedure : procedures) {
-			proceduresList.add(procedure);
-		}
-		proceduresList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
-		model.addAttribute("procedures", proceduresList);
-
-		return "addBooking";
-	}
-
 	@PostMapping
 	public String createBooking(@RequestParam(name = "petId", required = true) int petId,
 			@RequestParam(name = "vetId", required = true) int vetId,
@@ -108,28 +77,10 @@ public class BookingController {
 		return getBookings(model);
 	}
 
-	@GetMapping("{id}")
-	String getBooking(@PathVariable int id, Model model) {
-		Booking booking = bookingService.get(id);
-		model.addAttribute("booking", booking);
-		return "booking";
-	}
-
-	@GetMapping
-	String getBookings(Model model) {
-		Iterable<Booking> bookings = bookingService.getAll();
-		Comparator<BookingDTO> comparator = (o1, o2) -> o1.getBooking().getDate().compareTo(o2.getBooking().getDate());
-		List<BookingDTO> bookingsList = new ArrayList<>();
-		for (Booking booking : bookings) {
-			Pet pet = petService.get(booking.getPetId());
-			Vet vet = vetService.get(booking.getVetId());
-			Procedure procedure = procedureService.get(booking.getProcedureId());
-			BookingDTO dto = new BookingDTO(booking, pet, vet, procedure);
-			bookingsList.add(dto);
-		}
-		Collections.sort(bookingsList, Collections.reverseOrder(comparator));
-		model.addAttribute("bookings", bookingsList);
-		return "bookings";
+	@DeleteMapping("/{id}")
+	public String deleteBooking(@PathVariable("id") int id, Model model) {
+		bookingService.delete(id);
+		return getBookings(model);
 	}
 
 	@GetMapping("/{id}/edit")
@@ -168,6 +119,61 @@ public class BookingController {
 		return "editBooking";
 	}
 
+	@GetMapping("/add")
+	public String getAddBookingPage(Model model) {
+		Iterable<Pet> pets = petService.getAll();
+		List<PetDTO> petsList = new ArrayList<>();
+		for (Pet pet : pets) {
+			Species species = speciesService.get(pet.getSpeciesId());
+			Owner owner = ownerService.get(pet.getOwnerId());
+			petsList.add(new PetDTO(pet, species, owner));
+		}
+		petsList.sort((o1, o2) -> o1.getPet().getName().compareTo(o2.getPet().getName()));
+		model.addAttribute("pets", petsList);
+
+		Iterable<Vet> vets = vetService.getAll();
+		List<Vet> vetsList = new ArrayList<>();
+		for (Vet vet : vets) {
+			vetsList.add(vet);
+		}
+		vetsList.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
+		model.addAttribute("vets", vetsList);
+
+		Iterable<Procedure> procedures = procedureService.getAll();
+		List<Procedure> proceduresList = new ArrayList<>();
+		for (Procedure procedure : procedures) {
+			proceduresList.add(procedure);
+		}
+		proceduresList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("procedures", proceduresList);
+
+		return "addBooking";
+	}
+
+	@GetMapping("{id}")
+	String getBooking(@PathVariable int id, Model model) {
+		Booking booking = bookingService.get(id);
+		model.addAttribute("booking", booking);
+		return "booking";
+	}
+
+	@GetMapping
+	String getBookings(Model model) {
+		Iterable<Booking> bookings = bookingService.getAll();
+		Comparator<BookingDTO> comparator = (o1, o2) -> o1.getBooking().getDate().compareTo(o2.getBooking().getDate());
+		List<BookingDTO> bookingsList = new ArrayList<>();
+		for (Booking booking : bookings) {
+			Pet pet = petService.get(booking.getPetId());
+			Vet vet = vetService.get(booking.getVetId());
+			Procedure procedure = procedureService.get(booking.getProcedureId());
+			BookingDTO dto = new BookingDTO(booking, pet, vet, procedure);
+			bookingsList.add(dto);
+		}
+		Collections.sort(bookingsList, Collections.reverseOrder(comparator));
+		model.addAttribute("bookings", bookingsList);
+		return "bookings";
+	}
+
 	@PostMapping("/edit")
 	String updateBooking(@RequestParam(name = "id", required = true) int id,
 			@RequestParam(name = "petId", required = true) int petId,
@@ -185,12 +191,6 @@ public class BookingController {
 		if (savedBooking == null) {
 			throw new BookingException("Saved booking not found.");
 		}
-		return getBookings(model);
-	}
-
-	@DeleteMapping("/{id}")
-	public String deleteBooking(@PathVariable("id") int id, Model model) {
-		bookingService.delete(id);
 		return getBookings(model);
 	}
 }

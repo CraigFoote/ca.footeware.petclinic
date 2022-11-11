@@ -63,25 +63,6 @@ public class PetController {
 		return getPets(model);
 	}
 
-	@GetMapping("/add")
-	public String getAddPetPage(Model model) {
-		Iterable<Owner> owners = ownerService.getAll();
-		List<Owner> ownersList = new ArrayList<>();
-		for (Owner owner : owners) {
-			ownersList.add(owner);
-		}
-		ownersList.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
-		model.addAttribute("owners", ownersList);
-		Iterable<Species> allSpecies = speciesService.getAll();
-		List<Species> allSpeciesList = new ArrayList<>();
-		for (Species species : allSpecies) {
-			allSpeciesList.add(species);
-		}
-		allSpeciesList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
-		model.addAttribute("allSpecies", allSpecies);
-		return "addPet";
-	}
-
 	@GetMapping("/{id}")
 	public String editPet(@PathVariable("id") int id, Model model) {
 		Pet pet = petService.get(id);
@@ -104,6 +85,25 @@ public class PetController {
 		model.addAttribute("allOwners", allOwnersList);
 		model.addAttribute("allSpecies", allSpeciesList);
 		return "editPet";
+	}
+
+	@GetMapping("/add")
+	public String getAddPetPage(Model model) {
+		Iterable<Owner> owners = ownerService.getAll();
+		List<Owner> ownersList = new ArrayList<>();
+		for (Owner owner : owners) {
+			ownersList.add(owner);
+		}
+		ownersList.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
+		model.addAttribute("owners", ownersList);
+		Iterable<Species> allSpecies = speciesService.getAll();
+		List<Species> allSpeciesList = new ArrayList<>();
+		for (Species species : allSpecies) {
+			allSpeciesList.add(species);
+		}
+		allSpeciesList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+		model.addAttribute("allSpecies", allSpecies);
+		return "addPet";
 	}
 
 	@GetMapping

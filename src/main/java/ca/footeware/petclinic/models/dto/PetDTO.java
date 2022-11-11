@@ -30,28 +30,28 @@ public class PetDTO {
 		this.owner = owner;
 	}
 
-	public Pet getPet() {
-		return pet;
+	public Owner getOwner() {
+		return owner;
 	}
 
-	public void setPet(Pet pet) {
-		this.pet = pet;
+	public Pet getPet() {
+		return pet;
 	}
 
 	public Species getSpecies() {
 		return species;
 	}
 
-	public void setSpecies(Species species) {
-		this.species = species;
-	}
-
-	public Owner getOwner() {
-		return owner;
-	}
-
 	public void setOwner(Owner owner) {
 		this.owner = owner;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
+
+	public void setSpecies(Species species) {
+		this.species = species;
 	}
 
 }

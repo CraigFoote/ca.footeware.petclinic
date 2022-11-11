@@ -28,13 +28,6 @@ public class ProcedureException extends Exception {
 	}
 
 	/**
-	 * @param cause
-	 */
-	public ProcedureException(Throwable cause) {
-		super(cause);
-	}
-
-	/**
 	 * @param message
 	 * @param cause
 	 */
@@ -50,6 +43,13 @@ public class ProcedureException extends Exception {
 	 */
 	public ProcedureException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
+	/**
+	 * @param cause
+	 */
+	public ProcedureException(Throwable cause) {
+		super(cause);
 	}
 
 }

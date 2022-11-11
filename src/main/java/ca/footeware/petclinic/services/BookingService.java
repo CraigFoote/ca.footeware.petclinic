@@ -19,20 +19,20 @@ public class BookingService {
 	@Autowired
 	private IBookingRepository repository;
 
-	public Booking get(int id) {
-		return repository.findById(id).get();
+	public void delete(int id) {
+		repository.deleteById(id);
 	}
 
-	public Booking save(Booking booking) {
-		return repository.save(booking);
+	public Booking get(int id) {
+		return repository.findById(id).get();
 	}
 
 	public Iterable<Booking> getAll() {
 		return repository.findAll();
 	}
 
-	public void delete(int id) {
-		repository.deleteById(id);
+	public Booking save(Booking booking) {
+		return repository.save(booking);
 	}
 
 }

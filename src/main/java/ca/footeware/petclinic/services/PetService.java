@@ -26,12 +26,12 @@ public class PetService {
 		return repository.findAll();
 	}
 
-	public Pet save(Pet pet) {
-		return repository.save(pet);
-	}
-
 	public List<Pet> getByName(String name) {
 		return repository.findAllByNameIgnoreCase(name);
+	}
+
+	public Pet save(Pet pet) {
+		return repository.save(pet);
 	}
 
 }

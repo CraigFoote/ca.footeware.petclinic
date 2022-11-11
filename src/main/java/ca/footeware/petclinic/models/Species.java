@@ -34,6 +34,18 @@ public class Species {
 		this.name = name;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if ((obj == null) || (getClass() != obj.getClass())) {
+			return false;
+		}
+		Species other = (Species) obj;
+		return Objects.equals(name, other.name);
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -48,28 +60,16 @@ public class Species {
 		return name;
 	}
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(name);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if ((obj == null) || (getClass() != obj.getClass())) {
-			return false;
-		}
-		Species other = (Species) obj;
-		return Objects.equals(name, other.name);
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

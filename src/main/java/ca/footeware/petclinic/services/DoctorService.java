@@ -23,12 +23,12 @@ public class DoctorService {
 		return repository.findById(id).get();
 	}
 
-	public Vet save(Vet vet) {
-		return repository.save(vet);
-	}
-
 	public Iterable<Vet> getAll() {
 		return repository.findAll();
+	}
+
+	public Vet save(Vet vet) {
+		return repository.save(vet);
 	}
 
 }

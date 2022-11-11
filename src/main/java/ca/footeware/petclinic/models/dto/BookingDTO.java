@@ -36,32 +36,32 @@ public class BookingDTO {
 		return booking;
 	}
 
-	public void setBooking(Booking booking) {
-		this.booking = booking;
-	}
-
 	public Pet getPet() {
 		return pet;
-	}
-
-	public void setPet(Pet pet) {
-		this.pet = pet;
-	}
-
-	public Vet getVet() {
-		return vet;
-	}
-
-	public void setVet(Vet vet) {
-		this.vet = vet;
 	}
 
 	public Procedure getProcedure() {
 		return procedure;
 	}
 
+	public Vet getVet() {
+		return vet;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
+
 	public void setProcedure(Procedure procedure) {
 		this.procedure = procedure;
+	}
+
+	public void setVet(Vet vet) {
+		this.vet = vet;
 	}
 
 }

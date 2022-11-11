@@ -19,21 +19,21 @@ public class SpeciesService {
 	@Autowired
 	private ISpeciesRepository repository;
 
-	public Iterable<Species> getAll() {
-		return repository.findAll();
+	public void delete(int id) {
+		repository.deleteById(id);
 	}
 
 	public Species get(int id) {
 		return repository.findById(id).get();
 	}
 
+	public Iterable<Species> getAll() {
+		return repository.findAll();
+	}
+
 	public Species save(Species species) {
 		Species saved = repository.save(species);
 		return saved;
-	}
-
-	public void delete(int id) {
-		repository.deleteById(id);
 	}
 
 }

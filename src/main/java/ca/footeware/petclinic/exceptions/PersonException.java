@@ -28,13 +28,6 @@ public class PersonException extends Exception {
 	}
 
 	/**
-	 * @param cause
-	 */
-	public PersonException(Throwable cause) {
-		super(cause);
-	}
-
-	/**
 	 * @param message
 	 * @param cause
 	 */
@@ -50,6 +43,13 @@ public class PersonException extends Exception {
 	 */
 	public PersonException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
+	/**
+	 * @param cause
+	 */
+	public PersonException(Throwable cause) {
+		super(cause);
 	}
 
 }

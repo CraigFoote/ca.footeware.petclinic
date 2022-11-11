@@ -31,11 +31,6 @@ public class VetController {
 	@Autowired
 	private VetService vetService;
 
-	@GetMapping("/add")
-	public String getAddVetPage(Model model) {
-		return "addVet";
-	}
-
 	@PostMapping
 	public String createVet(@RequestParam(name = "firstName", required = true) String firstName,
 			@RequestParam(name = "lastName", required = true) String lastName,
@@ -48,6 +43,24 @@ public class VetController {
 		}
 		model.addAttribute("vets", vetService.getAll());
 		return "vets";
+	}
+
+	@DeleteMapping("/{id}")
+	public String deleteOwner(@PathVariable("id") int id, Model model) {
+		vetService.delete(id);
+		return getVets(model);
+	}
+
+	@GetMapping("/{id}/edit")
+	String editVet(@PathVariable int id, Model model) {
+		Vet vet = vetService.get(id);
+		model.addAttribute("vet", vet);
+		return "editVet";
+	}
+
+	@GetMapping("/add")
+	public String getAddVetPage(Model model) {
+		return "addVet";
 	}
 
 	@GetMapping("{id}")
@@ -69,13 +82,6 @@ public class VetController {
 		return "vets";
 	}
 
-	@GetMapping("/{id}/edit")
-	String editVet(@PathVariable int id, Model model) {
-		Vet vet = vetService.get(id);
-		model.addAttribute("vet", vet);
-		return "editVet";
-	}
-
 	@PostMapping("/edit")
 	String updateVet(@RequestParam(name = "id", required = true) int id,
 			@RequestParam(name = "firstName", required = true) String firstName,
@@ -91,12 +97,6 @@ public class VetController {
 		if (savedVet == null) {
 			throw new PersonException("Saved vet not found.");
 		}
-		return getVets(model);
-	}
-
-	@DeleteMapping("/{id}")
-	public String deleteOwner(@PathVariable("id") int id, Model model) {
-		vetService.delete(id);
 		return getVets(model);
 	}
 

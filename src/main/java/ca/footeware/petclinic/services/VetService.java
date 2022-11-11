@@ -19,6 +19,10 @@ public class VetService {
 	@Autowired
 	private IVetRepository repository;
 
+	public void delete(int id) {
+		repository.deleteById(id);
+	}
+
 	public Vet get(int vetId) {
 		return repository.findById(vetId).get();
 	}
@@ -29,10 +33,6 @@ public class VetService {
 
 	public Vet save(Vet vet) {
 		return repository.save(vet);
-	}
-
-	public void delete(int id) {
-		repository.deleteById(id);
 	}
 
 }

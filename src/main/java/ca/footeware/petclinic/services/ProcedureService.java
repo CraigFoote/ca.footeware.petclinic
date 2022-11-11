@@ -19,16 +19,16 @@ public class ProcedureService {
 	@Autowired
 	private IProcedureRepository repository;
 
+	public void delete(int id) {
+		repository.deleteById(id);
+	}
+
 	public Procedure get(int id) {
 		return repository.findById(id).get();
 	}
 
 	public Iterable<Procedure> getAll() {
 		return repository.findAll();
-	}
-
-	public void delete(int id) {
-		repository.deleteById(id);
 	}
 
 	public Procedure save(Procedure procedure) {

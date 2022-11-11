@@ -31,11 +31,6 @@ public class OwnerController {
 	@Autowired
 	private OwnerService ownerService;
 
-	@GetMapping("/add")
-	public String getAddOwnerPage(Model model) {
-		return "addOwner";
-	}
-
 	@PostMapping
 	public String createOwner(@RequestParam(name = "firstName", required = true) String firstName,
 			@RequestParam(name = "lastName", required = true) String lastName,
@@ -64,6 +59,24 @@ public class OwnerController {
 		return "owners";
 	}
 
+	@DeleteMapping("/{id}")
+	public String deleteOwner(@PathVariable("id") int id, Model model) {
+		ownerService.delete(id);
+		return getOwners(model);
+	}
+
+	@GetMapping("/{id}/edit")
+	String editOwner(@PathVariable int id, Model model) {
+		Owner owner = ownerService.get(id);
+		model.addAttribute("owner", owner);
+		return "editOwner";
+	}
+
+	@GetMapping("/add")
+	public String getAddOwnerPage(Model model) {
+		return "addOwner";
+	}
+
 	@GetMapping("{id}")
 	String getOwner(@PathVariable int id, Model model) {
 		Owner owner = ownerService.get(id);
@@ -83,13 +96,6 @@ public class OwnerController {
 		return "owners";
 	}
 
-	@GetMapping("/{id}/edit")
-	String editOwner(@PathVariable int id, Model model) {
-		Owner owner = ownerService.get(id);
-		model.addAttribute("owner", owner);
-		return "editOwner";
-	}
-
 	@PostMapping("/edit")
 	String updateOwner(@RequestParam(name = "id", required = true) int id,
 			@RequestParam(name = "firstName", required = true) String firstName,
@@ -105,12 +111,6 @@ public class OwnerController {
 		if (savedOwner == null) {
 			throw new PersonException("Saved owner not found.");
 		}
-		return getOwners(model);
-	}
-
-	@DeleteMapping("/{id}")
-	public String deleteOwner(@PathVariable("id") int id, Model model) {
-		ownerService.delete(id);
 		return getOwners(model);
 	}
 

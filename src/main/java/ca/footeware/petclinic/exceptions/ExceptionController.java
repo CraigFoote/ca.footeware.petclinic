@@ -2,19 +2,19 @@ package ca.footeware.petclinic.exceptions;
 
 import java.time.LocalDateTime;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 class ExceptionController {
 
-	@ExceptionHandler(value = DataIntegrityViolationException.class)
-	public String ConstraintViolationExceptionHandler(HttpServletRequest req, DataIntegrityViolationException t,
+	@ExceptionHandler(value = MaxUploadSizeExceededException.class)
+	public String constraintViolationExceptionHandler(HttpServletRequest req, MaxUploadSizeExceededException t,
 			Model model) {
 		model.addAttribute("timestamp", LocalDateTime.now());
 		model.addAttribute("path", req.getRequestURL());
